@@ -11,7 +11,7 @@ interface ButtonProps {
 const Button: FC<ButtonProps> = (props) => {
   const {
     children,
-    variant = "primaty",
+    variant = "primary",
     onClick,
     canSubmit = false,
   } = props;

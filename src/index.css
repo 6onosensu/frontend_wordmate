@@ -1,0 +1,13 @@
+@font-face {
+  font-family: "Omnes-Bold";
+  src: url("./assets/fonts/Omnes-Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Omnes-Medium";
+  src: url("./assets/fonts/Omnes-Medium.ttf") format("truetype");
+}
+
+body {
+  font-family: "Omnes-Medium", sans-serif;
+}

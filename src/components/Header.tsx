@@ -4,7 +4,7 @@ import Logo from "../assets/BookWordMate.svg";
 
 const Header: FC = () => {
   return (
-    <AppBar position="fixed">
+    <AppBar position="fixed" color="secondary">
       <Toolbar sx={{ justifyContent: "center" }}>
         <Box
           sx={{

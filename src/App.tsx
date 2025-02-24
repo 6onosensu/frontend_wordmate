@@ -1,21 +1,17 @@
-import Header from "./components/Header";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
+
+import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
+import Login from "./pages/Login";
+import Header from "./components/Header";
+import theme from "./theme/theme";
 
 function App() {
-
-  const theme = createTheme({
-    palette: {
-      primary: {
-        main: "#FFFFFFF", 
-      },
-    },
-  });
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Header />
+      <Login />
     </ThemeProvider>
   )
 }
