@@ -1,16 +1,30 @@
-import { Container, Typography, Box, TextField, Button} from "@mui/material";
-import { FormEvent, useState } from "react";
+import { Container, Typography, Box, TextField, Button, CircularProgress} from "@mui/material";
+import { FormEvent, useState, useEffect } from "react";
 import CustomButton from "../components/CustomButton";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string>("");
+  const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/dashboard");
+    }
+  }, [navigate]);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+
+    setLoading(true);
+    setError("");
     try {
-      const response = await fetch("http://localhost:5000/auth/login", {
+      const response = await fetch("http://localhost:3000/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -26,15 +40,29 @@ const Login = () => {
 
       console.log("Login successful:", data);
       localStorage.setItem("token", data.token);
-      window.location.href = "/dashboard";
+      navigate("/dashboard");
     }
     catch (error: any) {
       setError(error.message);
+    }
+    finally {
+      setLoading(false);
     }
   };
 
   return (
     <Container maxWidth="xs">
+      <Box 
+      sx={{
+        textAlign: "center", 
+        mb: 2 
+      }}
+    >
+      <Typography variant="h4">Welcome to WordMate!</Typography>
+      <Typography variant="body1">
+        Please log in to access your account.
+      </Typography>
+    </Box>
       <Box 
         sx={{
           border: "1px solid #ccc",
@@ -79,15 +107,17 @@ const Login = () => {
             required
           />
           <Box sx={{ mt: 2, display: "flex", justifyContent: "center"}}>
-            <CustomButton className="submit" type="submit">Login</CustomButton>
+            <CustomButton className="submit" type="submit" disabled={loading}>
+              {loading ? <CircularProgress size={24} color="inherit" /> : "Login"}
+              </CustomButton>
           </Box>
         </form>
         
         <Box sx={{ mt: 2, display: "flex", flexDirection: "column", alignItems: "center" }}>
-          <Button variant="text" href="/forgot-password">
+          <Button variant="text" onClick={() => navigate("/forgot-password")}>
             Forgot password?
           </Button>
-          <Button variant="text" href="/register">
+          <Button variant="text" onClick={() => navigate("/register")}>
             Don't have an account? Sign up
           </Button>
         </Box>
