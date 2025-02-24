@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { AppBar, Toolbar, Box, Link} from "@mui/material";
-import Logo from "../../assets/BookWordMate.svg";
+import Logo from "../assets/BookWordMate.svg";
 
 const Header: FC = () => {
   return (

@@ -1,4 +1,4 @@
-import Header from "./components/Header/Header";
+import Header from "./components/Header";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 
@@ -14,9 +14,9 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-    <CssBaseline />
-    <Header />
-  </ThemeProvider>
+      <CssBaseline />
+      <Header />
+    </ThemeProvider>
   )
 }
 
