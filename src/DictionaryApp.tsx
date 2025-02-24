@@ -21,30 +21,29 @@ const DictionaryApp: React.FC = () => {
     };
 
     return (
-        <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
+        <div>
             <h1>Dictionary App</h1>
             <input
                 type="text"
                 value={word}
                 onChange={(e) => setWord(e.target.value)}
                 placeholder="Введите слово"
-                style={{ padding: "10px", marginRight: "10px", width: "300px" }}
             />
-            <button onClick={searchWord} style={{ padding: "10px 20px" }}>
+            <button onClick={searchWord}>
                 Найти
             </button>
 
             {error && (
-                <div style={{ color: "red", marginTop: "20px" }}>
+                <div>
                     <strong>Ошибка:</strong> {error}
                 </div>
             )}
 
             {result && (
-                <div style={{ marginTop: "20px" }}>
+                <div>
                     <h2>Результаты для: {word}</h2>
                     {result[0]?.meanings.map((meaning: any, index: number) => (
-                        <div key={index} style={{ marginBottom: "10px" }}>
+                        <div key={index}>
                             <strong>Часть речи:</strong> {meaning.partOfSpeech}
                             <ul>
                                 {meaning.definitions.map(
