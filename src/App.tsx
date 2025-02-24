@@ -1,18 +1,22 @@
-import styles from "./App.module.css"
-import Button from './components/Button/Button'
+import Header from "./components/Header/Header";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
 
 function App() {
 
-  const handleClick = () => {
-    alert("Button Clicked!");
-  }
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: "#FFFFFFF", 
+      },
+    },
+  });
 
   return (
-    <div className={styles.app}>
-      <Button variant="primary" onClick={handleClick}>Primary Button</Button>
-      <Button variant="secondary">Secondary Button</Button>
-      <Button variant="submit" canSubmit>Submit Button</Button>
-    </div>
+    <ThemeProvider theme={theme}>
+    <CssBaseline />
+    <Header />
+  </ThemeProvider>
   )
 }
 
