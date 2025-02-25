@@ -1,7 +1,9 @@
 import { Container, Typography, Box, TextField, Button, CircularProgress, FormControlLabel, Checkbox } from "@mui/material";
-import { FormEvent, useState, useEffect } from "react";
+import { FormEvent, useState } from "react";
 import MyButton from "../components/CustomButton";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
+import { authUser } from "../services/authService";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -10,12 +12,8 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
 
+  const { login } = useAuth();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const token = localStorage.getItem("token") || sessionStorage.getItem("token");
-    if (token) navigate("/dashboard");
-  }, [navigate]);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -23,23 +21,8 @@ const Login = () => {
     setError("");
 
     try {
-      const response = await fetch("http://localhost:3000/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
-      
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.message || "Login failed");
-
-      if (rememberMe) {
-        localStorage.setItem("token", data.token);
-      } else {
-        sessionStorage.setItem("token", data.token);
-      }
-
+      const data = await authUser(email, password, "login");
+      login(data.token, rememberMe);
       navigate("/dashboard");
     }
     catch (error: any) {
@@ -56,6 +39,7 @@ const Login = () => {
         <Typography variant="h4">Welcome to WordMate!</Typography>
         <Typography variant="body1">Please log in to access your account.</Typography>
       </Box>
+      
       <Box 
         sx={{
           border: "1px solid #ccc",

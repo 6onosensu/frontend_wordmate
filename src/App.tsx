@@ -8,8 +8,7 @@ import theme from "./theme/theme";
 import globalStyles from "./theme/globalStyles";
 import { Route, BrowserRouter, Routes } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
-import MyButton from "./components/CustomButton";
-import Button from "./components/Button/Button";
+import { AuthProvider } from "./context/AuthContext";
 
 
 function App() {
@@ -18,26 +17,27 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       {globalStyles}
-
-      <BrowserRouter>
-        <Header />
-        <Routes>
-          <Route 
-            path="/" 
-            element={
-              <Login />
-            } 
-          />
-          <Route 
-            path="/dashboard" 
-            element={
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-            } 
-          />
-        </Routes>
-      </BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
+          <Header />
+          <Routes>
+            <Route 
+              path="/" 
+              element={
+                <Login />
+              } 
+            />
+            <Route 
+              path="/dashboard" 
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              } 
+            />
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
     </ThemeProvider>
   )
 }
