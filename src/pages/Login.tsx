@@ -3,7 +3,7 @@ import { FormEvent, useState } from "react";
 import MyButton from "../components/CustomButton";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-import { authUser } from "../services/authService";
+import { loginUser } from "../services/authService";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -21,7 +21,7 @@ const Login = () => {
     setError("");
 
     try {
-      const data = await authUser(email, password, "login");
+      const data = await loginUser(email, password);
       login(data.token, rememberMe);
       navigate("/dashboard");
     }
@@ -39,7 +39,7 @@ const Login = () => {
         <Typography variant="h4">Welcome to WordMate!</Typography>
         <Typography variant="body1">Please log in to access your account.</Typography>
       </Box>
-      
+
       <Box 
         sx={{
           border: "1px solid #ccc",

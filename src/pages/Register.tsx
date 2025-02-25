@@ -1,22 +1,41 @@
-import { Box, Button, CircularProgress, Container, TextField, Typography } from "@mui/material";
-import { FormEvent, useState } from "react";
-import MyButton from "../components/CustomButton";
-import { authUser } from "../services/authService";
+import { Box, Button,  Container, Typography } from "@mui/material";
+import { useState } from "react";
+import { registerUser } from "../services/authService";
 import { useNavigate } from "react-router-dom";
+import StepOne from "../components/register/StepOne";
+import StepTwo from "../components/register/StepTwo";
 
 const Register = () => {
+  const [step, setStep] = useState(1);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [email, setEmail] = useState<string>("");
-  const [loading, setLoading] = useState(false);
+
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [country, setCountry] = useState("");
+  const [profilePicture, setProfilePicture] = useState<File | null>(null);
 
   const navigate = useNavigate();
 
-  const handleSubmit = async (e: FormEvent) => {
+  const nextStep = () => {
+    if (!email || !password || password !== confirmPassword) {
+      setError("Please fill out all fields correctly!");
+      return;
+    }
+    setError("");
+    setStep(2);
+  }
+
+  const prevStep = () => setStep(1);
+
+  const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
-      setError("Passwords do not match");
+    if (!name.trim()) {
+      setError("Please enter a valid name!");
       return;
     }
 
@@ -24,14 +43,47 @@ const Register = () => {
     setError("");
 
     try {
-      await authUser(email, password, "register");
+      const profilePictureUrl = profilePicture ? URL.createObjectURL(profilePicture) : "";
+      await registerUser(email, password, name, phone, country, profilePictureUrl);
       navigate("/");
     } catch (error: any) {
       setError(error.message);
     } finally {
       setLoading(false);
     }
-  };
+  }
+  
+  let content;
+  if (step === 1) {
+    content = (
+      <StepOne
+        email={email} 
+        password={password} 
+        confirmPassword={confirmPassword} 
+        setEmail={setEmail} 
+        setPassword={setPassword} 
+        setConfirmPassword={setConfirmPassword} 
+        nextStep={nextStep} 
+        error={error} 
+      />
+    );
+  } else {
+    content = (
+      <StepTwo 
+        name={name} 
+        phone={phone} 
+        country={country} 
+        profilePicture={profilePicture} 
+        setName={setName} 
+        setPhone={setPhone} 
+        setCountry={setCountry} 
+        setProfilePicture={setProfilePicture} 
+        prevStep={prevStep} 
+        handleRegister={handleRegister} 
+        loading={loading} 
+      />
+    );
+  }
 
   return (
     <Container maxWidth="xs">
@@ -53,54 +105,19 @@ const Register = () => {
           width: "100%",
         }}
       >
-        <Typography variant="h3" gutterBottom>Register</Typography>
+      <Typography variant="h3" gutterBottom>Register</Typography>
 
-        {error && (
-          <Typography color="error" sx={{ mt: 2}}>
-            {error}
-          </Typography>
-        )}
-
-        <form onSubmit={handleSubmit} style={{ width: "100%" }}>
-          <TextField
-            label="Email"
-            type="email"
-            fullWidth
-            margin="normal"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <TextField
-            label="Password"
-            type="password"
-            fullWidth
-            margin="normal"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-          <TextField
-            label="Confirm Password"
-            type="password"
-            fullWidth
-            margin="normal"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-          />
-
-          <Box sx={{ mt: 2, display: "flex", justifyContent: "center" }}>
-            <MyButton customVariant="primary" type="submit" disabled={loading}>
-              {loading ? <CircularProgress size={24} color="inherit" /> : "Sign Up"}
-            </MyButton>
-          </Box>
-        </form>
-        <Box sx={{ mt: 2, display: "flex", flexDirection: "column", alignItems: "center" }}>
-          <Button variant="text" onClick={() => navigate("/")}>
-            Already have an account? Login
-          </Button>
-        </Box>
+      {error && (
+        <Typography color="error" sx={{ mt: 2}}>
+          {error}
+        </Typography>
+      )}
+      {content}
+      <Box sx={{ mt: 2, display: "flex", justifyContent: "center" }}>
+        <Button variant="text" onClick={() => navigate("/")}>
+          Already have an account? Login
+        </Button>
+      </Box>
       </Box>
     </Container>
   );

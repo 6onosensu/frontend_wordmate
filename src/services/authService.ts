@@ -1,9 +1,7 @@
 const API_BASE_URL = "http://localhost:3000/auth";
 
-export const authUser = async (email: string, password: string, mode: "login" | "register") => {
-  const endpoint = mode === "login" ? "login" : "register";
-
-  const response = await fetch(`${API_BASE_URL}/${endpoint}`, {
+export const loginUser = async (email: string, password: string) => {
+  const response = await fetch(`${API_BASE_URL}/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -12,7 +10,29 @@ export const authUser = async (email: string, password: string, mode: "login" | 
   });
 
   const data = await response.json();
-  if (!response.ok) throw new Error(data.message || `${mode} failed`);
+  if (!response.ok) throw new Error(data.message || "Login failed");
+
+  return data;
+};
+
+export const registerUser = async (
+  email: string,
+  password: string,
+  name: string,
+  phone?: string,
+  country?: string,
+  profilePictureUrl?: string
+) => {
+  const response = await fetch(`${API_BASE_URL}/register`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email, password, name, phone, country, profilePictureUrl }),
+  });
+
+  const data = await response.json();
+  if (!response.ok) throw new Error(data.message || "Registration failed");
 
   return data;
 };
