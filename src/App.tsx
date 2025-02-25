@@ -1,14 +1,14 @@
 
 import { ThemeProvider } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
-import Login from "./pages/login";
+import CssBaseline from "@mui/material/CssBaseline"
 import Dashboard from "./pages/Dashboard";
 import Header from "./components/Header";
 import theme from "./theme/theme";
 import globalStyles from "./theme/globalStyles";
-import { Route, BrowserRouter, Routes } from "react-router-dom";
+import {  BrowserRouter, } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { AuthProvider } from "./context/AuthContext";
+import AppRoutes from "./routes/AppRoutes";
 
 
 function App() {
@@ -17,25 +17,11 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       {globalStyles}
+
       <AuthProvider>
         <BrowserRouter>
           <Header />
-          <Routes>
-            <Route 
-              path="/" 
-              element={
-                <Login />
-              } 
-            />
-            <Route 
-              path="/dashboard" 
-              element={
-                <ProtectedRoute>
-                  <Dashboard />
-                </ProtectedRoute>
-              } 
-            />
-          </Routes>
+          <AppRoutes />
         </BrowserRouter>
       </AuthProvider>
     </ThemeProvider>
