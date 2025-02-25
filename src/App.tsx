@@ -8,6 +8,9 @@ import theme from "./theme/theme";
 import globalStyles from "./theme/globalStyles";
 import { Route, BrowserRouter, Routes } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
+import MyButton from "./components/CustomButton";
+import Button from "./components/Button/Button";
+
 
 function App() {
 
@@ -15,6 +18,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       {globalStyles}
+
       <BrowserRouter>
         <Header />
         <Routes>

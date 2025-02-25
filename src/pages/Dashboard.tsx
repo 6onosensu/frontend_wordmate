@@ -1,7 +1,7 @@
-import { Button, Container, Typography } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import CustomButton from "../components/CustomButton";
+import MyButton from "../components/CustomButton";
 
 
 const Dashboard = () => {
@@ -25,9 +25,9 @@ const Dashboard = () => {
       <Typography variant="body1" sx={{ mb: 3 }}>
         Welcome to your dashboard! You are logged in.
       </Typography>
-      <CustomButton color="secondary" onClick={handleLogout}>
+      <MyButton customVariant="secondary" onClick={handleLogout}>
         Logout
-      </CustomButton>
+      </MyButton>
     </Container>
   );
 };
