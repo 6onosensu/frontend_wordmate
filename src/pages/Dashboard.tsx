@@ -1,6 +1,7 @@
-import { Button, Container, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import OverviewSection from "../components/dashboard/OverviewSection/OverviewSection";
 
 
 const Dashboard = () => {
@@ -13,21 +14,19 @@ const Dashboard = () => {
     }
   }, [navigate]);
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    sessionStorage.removeItem("token");
-    navigate("/");
-  };
   return (
-    <Container maxWidth="md" sx={{ textAlign: "center", mt: 5 }}>
+    <Box maxWidth="xl" sx={{ 
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+    }}>
       <Typography variant="h3">Dashboard</Typography>
       <Typography variant="body1" sx={{ mb: 3 }}>
         Welcome to your dashboard! You are logged in.
       </Typography>
-      <Button variant="contained" color="secondary" onClick={handleLogout}>
-        Logout
-      </Button>
-    </Container>
+      <OverviewSection />
+    </Box>
   );
 };
 

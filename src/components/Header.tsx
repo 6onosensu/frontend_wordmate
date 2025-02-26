@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { AppBar, Toolbar, Box, Link} from "@mui/material";
 import Logo from "../assets/BookWordMate.svg";
-
+//<Logo />
 const Header: FC = () => {
   return (
     <AppBar position="fixed" color="secondary" >

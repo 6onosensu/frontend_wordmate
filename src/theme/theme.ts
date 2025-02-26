@@ -28,8 +28,21 @@ const theme = createTheme({
   typography: {
     fontFamily: "'Omnes-Medium', sans-serif",
   },
-  
   components: {
+    MuiContainer: {
+      styleOverrides: {
+        root: {
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          border: "1px solid #ccc",
+          borderRadius: "10px",
+          padding: "30px",
+          boxShadow: "0px 5px 10px rgba(0,0,0,0.1)",
+          margin: "0 auto",
+        }
+      }
+    },
     MuiButton: {
       styleOverrides: {
         text: {
@@ -43,6 +56,7 @@ const theme = createTheme({
           position: "relative",
           userSelect: "none",
           touchAction: "manipulation",
+          minWidth: "125px",
         },
         containedPrimary: {
           backgroundColor: "#000",
