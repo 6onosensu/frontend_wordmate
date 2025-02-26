@@ -1,6 +1,6 @@
-import { TextField, MenuItem, Box, Typography } from "@mui/material";
-import MyButton from "../CustomButton";
+import { TextField, MenuItem, Box, Typography, Button } from "@mui/material";
 import { countries } from "../../utils/countries";
+import { ChangeEvent } from "react";
 
 type SetState<T> = (value: T) => void;
 
@@ -31,6 +31,12 @@ const StepTwo = ({
   handleRegister, 
   loading
 } : StepTwoProps) => {
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setProfilePicture(e.target.files[0]);
+    }
+  };
+
   return (
     <form onSubmit={handleRegister} style={{ width: "100%" }}>
       <TextField 
@@ -66,12 +72,50 @@ const StepTwo = ({
         ))}
       </TextField>
 
-      <input 
-        type="file" 
-        accept="image/*" 
-        onChange={(e) => setProfilePicture(e.target.files?.[0] || null)} 
-        style={{ marginTop: "16px" }} 
-      />
+      <Box 
+        sx={{ 
+          mt: 2, 
+          alignItems: "center",
+          display: "flex",
+          border: "1px solid #ccc",
+          borderRadius: "4px",
+          padding: "8px 8px",
+          width: "100%",
+        }}
+      >
+        <input
+          type="file"
+          id="file-upload"
+          accept="image/*"
+          onChange={handleFileChange}
+          style={{ display: "none" }} 
+        />
+        <label htmlFor="file-upload">
+          <Button 
+            variant="contained" 
+            color="info" 
+            sx={{ 
+              margin: 0, 
+              flexShrink: 0,
+              minWidth: "141px",
+              }} 
+            component="span"
+          > Upload Image
+          </Button>
+        </label>
+        <Typography 
+          variant="body2" 
+          sx={{ 
+            ml: 1, 
+            flexGrow: 1, 
+            overflow: "hidden", 
+            textOverflow: "ellipsis", 
+            whiteSpace: "nowrap"
+          }}
+        > {profilePicture ? profilePicture.name : "No file selected"}
+        </Typography>
+      </Box>
+
       {profilePicture && (
         <Box sx={{ mt: 2, textAlign: "center" }}>
           <Typography variant="body2">Preview:</Typography>
@@ -86,12 +130,12 @@ const StepTwo = ({
       )}
 
       <Box sx={{ mt: 2, display: "flex", justifyContent: "space-between" }}>
-        <MyButton customVariant="secondary" onClick={prevStep}>
+        <Button variant="contained" color="secondary" onClick={prevStep}>
           Back
-        </MyButton>
-        <MyButton customVariant="primary" type="submit" disabled={loading}>
+        </Button>
+        <Button variant="contained" type="submit" disabled={loading}>
           {loading ? "Loading..." : "Register"}
-        </MyButton>
+        </Button>
       </Box>
     </form>
   );

@@ -1,5 +1,4 @@
-import { TextField, Box } from "@mui/material";
-import MyButton from "../CustomButton";
+import { TextField, Box, Button } from "@mui/material";
 
 type SetState<T> = (value: T) => void;
 
@@ -66,9 +65,9 @@ const StepOne = ({
       />
 
       <Box sx={{ mt: 2, display: "flex", justifyContent: "center" }}>
-        <MyButton customVariant="primary" onClick={nextStep}>
+        <Button variant="contained" color="primary" onClick={nextStep}>
           Next
-        </MyButton>
+        </Button>
       </Box>
     </form>
   );

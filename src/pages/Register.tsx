@@ -1,4 +1,4 @@
-import { Box, Button,  Container, Typography } from "@mui/material";
+import { Box, Button, Container, Typography } from "@mui/material";
 import { useState } from "react";
 import { registerUser } from "../services/authService";
 import { useNavigate } from "react-router-dom";
@@ -92,19 +92,17 @@ const Register = () => {
         <Typography variant="body1">Sign up to start using WordMate!</Typography>
       </Box>
 
-      <Box 
-        sx={{
-          border: "1px solid #ccc",
-          borderRadius: "10px",
-          padding: "50px",
-          boxShadow: "0px 5px 10px rgba(0,0,0,0.1)",
-          display: "flex",
-          alignItems: "center",
-          flexDirection: "column",
-          maxWidth: "400px",
-          width: "100%",
-        }}
-      >
+      <Box sx={{
+        border: "1px solid #ccc",
+        borderRadius: "10px",
+        padding: "50px",
+        boxShadow: "0px 5px 10px rgba(0,0,0,0.1)",
+        display: "flex",
+        alignItems: "center",
+        flexDirection: "column",
+        maxWidth: "400px",
+        width: "100%",
+      }}>
       <Typography variant="h3" gutterBottom>Register</Typography>
 
       {error && (

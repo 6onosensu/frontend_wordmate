@@ -1,6 +1,5 @@
 import { Container, Typography, Box, TextField, Button, CircularProgress, FormControlLabel, Checkbox } from "@mui/material";
 import { FormEvent, useState } from "react";
-import MyButton from "../components/CustomButton";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { loginUser } from "../services/authService";
@@ -93,9 +92,9 @@ const Login = () => {
           />
 
           <Box sx={{ mt: 2, display: "flex", justifyContent: "center"}}>
-            <MyButton customVariant="primary" type="submit" disabled={loading}>
-              {loading ? <CircularProgress size={24} color="inherit" /> : "Login"}
-            </MyButton>
+            <Button variant="contained" color="primary" type="submit" disabled={loading}>
+              {loading ? <CircularProgress size={24} color="primary" /> : "Login"}
+            </Button>
           </Box>
         </form>
         
