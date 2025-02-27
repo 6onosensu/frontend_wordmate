@@ -9,12 +9,14 @@ interface AuthContextType {
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [token, setToken] = useState<string | null>(null);
+  const [token, setToken] = useState<string | null>(
+    localStorage.getItem("token") || sessionStorage.getItem("token")
+  );
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token") || sessionStorage.getItem("token");
-    if (storedToken) setToken(storedToken);
-  }, []);
+    if (storedToken !== token) setToken(storedToken);
+  }, [token]);
 
   const login = (token: string, rememberMe: boolean) => {
     setToken(token);

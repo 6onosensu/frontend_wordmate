@@ -1,4 +1,4 @@
-import { Container, Typography, Box, TextField, Button, CircularProgress, FormControlLabel, Checkbox } from "@mui/material";
+import { Typography, Box, TextField, Button, CircularProgress, FormControlLabel, Checkbox } from "@mui/material";
 import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
@@ -20,8 +20,9 @@ const Login = () => {
     setError("");
 
     try {
-      const data = await loginUser(email, password);
-      login(data.token, rememberMe);
+      const token = await loginUser(email, password);
+      console.log("Token received:", token);
+      login(token, rememberMe);
       navigate("/dashboard");
     }
     catch (error: any) {

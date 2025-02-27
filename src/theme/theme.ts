@@ -35,7 +35,6 @@ const theme = createTheme({
         root: {
           display: "flex",
           justifyContent: "space-between",
-          alignItems: "center",
           border: "1px solid #ccc",
           borderRadius: "10px",
           padding: "30px",
