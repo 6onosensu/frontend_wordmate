@@ -86,7 +86,11 @@ const Register = () => {
   }
 
   return (
-    <Container maxWidth="xs">
+    <Box sx={{
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+    }}>
       <Box sx={{ textAlign: "center", mb: 2}}>
         <Typography variant="h4">Create an Account</Typography>
         <Typography variant="body1">Sign up to start using WordMate!</Typography>
@@ -117,7 +121,7 @@ const Register = () => {
         </Button>
       </Box>
       </Box>
-    </Container>
+    </Box>
   );
 };
 

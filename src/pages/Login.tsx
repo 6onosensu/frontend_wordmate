@@ -33,7 +33,11 @@ const Login = () => {
   };
 
   return (
-    <Container maxWidth="xs">
+    <Box maxWidth="xs" sx={{
+      display: "flex",
+      alignItems: "center",
+      flexDirection: "column",
+    }}>
       <Box sx={{ textAlign: "center", mb: 2 }}>
         <Typography variant="h4">Welcome to WordMate!</Typography>
         <Typography variant="body1">Please log in to access your account.</Typography>
@@ -107,7 +111,7 @@ const Login = () => {
           </Button>
         </Box>
       </Box>
-    </Container>
+    </Box>
   );
 };
 

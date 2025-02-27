@@ -19,7 +19,6 @@ const Dashboard = () => {
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
-      justifyContent: "center",
     }}>
       <Typography variant="h3">Dashboard</Typography>
       <Typography variant="body1" sx={{ mb: 3 }}>

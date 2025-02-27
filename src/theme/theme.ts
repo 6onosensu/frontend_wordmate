@@ -29,6 +29,7 @@ const theme = createTheme({
     fontFamily: "'Omnes-Medium', sans-serif",
   },
   components: {
+    
     MuiContainer: {
       styleOverrides: {
         root: {
