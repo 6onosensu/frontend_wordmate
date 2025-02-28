@@ -2,6 +2,7 @@ import { Avatar, Box, CircularProgress, Typography } from "@mui/material";
 import { useAuth } from "../../../hooks/useAuth";
 import { useFetch } from "../../../hooks/useFetch";
 import { fetchUserData } from "../../../services/apiService";
+import { useCallback } from "react";
 
 interface User {
   name: string;
@@ -14,37 +15,12 @@ interface User {
 const UserInfo = () => {
   const { token } = useAuth();
   
-  const { data: user, loading, error } = useFetch<User>(() => fetchUserData(token!));
+  const fetchUser = useCallback(() => fetchUserData(token!), [token]);
+
+  const { data: user, loading, error } = useFetch<User>(fetchUser);
 
   if (loading) return <CircularProgress color="primary" />;
   if (error) return <Typography color="error">{error}</Typography>;
-  //const [user, setUser] = useState<User | null>(null);
-  //const [loading, setLoading] = useState(true);
-  //const [error, setError] = useState<string | null>(null);
-  
-  /*useEffect(() => {
-    const fetchUser = async () => {
-      if (!token) return;
-
-      try {
-        const response = await fetch("http://localhost:3000/users/me", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        const data: User = await response.json();
-        setUser(data);
-        
-      } catch (error) {
-        setError((error as Error).message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchUser();
-  }, [token]);*/
 
   return (
     <Box sx={{ display: "flex", gap: 2,  }}>
