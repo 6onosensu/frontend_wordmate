@@ -32,15 +32,24 @@ const UserInfo = () => {
 
         const data: User = await response.json();
         setUser(data);
+
         if (data.picture) {
-          if (typeof data.picture === "string" && data.picture.startsWith("data:image")) {
-            setImageSrc(data.picture);
-          } else if (typeof data.picture === "string") {
-            setImageSrc(data.picture);
-          } else {
-            const buffer = new Uint8Array(data.picture as ArrayBuffer);
-            const base64String = btoa(String.fromCharCode(...buffer));
-            setImageSrc(`data:image/png;base64,${base64String}`);
+          if (typeof data.picture === "string") {
+            if (data.picture.startsWith("http") || data.picture.startsWith("data:image")) {
+              setImageSrc(data.picture);
+            } else {
+              setImageSrc(`data:image/png;base64,${data.picture}`);
+            }
+          } else if (data.picture instanceof Object) {
+            try {
+              const buffer = new Uint8Array(data.picture);
+              const base64String = btoa(
+                buffer.reduce((data, byte) => data + String.fromCharCode(byte), "")
+              );
+              setImageSrc(`data:image/png;base64,${base64String}`);
+            } catch (error) {
+              console.error("Error converting buffer to Base64:", error);
+            }
           }
         } else {
           setImageSrc("/default-avatar.png");
