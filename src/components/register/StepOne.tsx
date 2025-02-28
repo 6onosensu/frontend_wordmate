@@ -10,7 +10,6 @@ interface StepOneProps {
   setPassword: SetState<string>;
   setConfirmPassword: SetState<string>;
   nextStep: () => void;
-  error: string;
 }
 
 const StepOne = ({
@@ -21,21 +20,12 @@ const StepOne = ({
     setPassword, 
     setConfirmPassword, 
     nextStep, 
-    error 
   }: StepOneProps) => {
   return (
     <form 
       onSubmit={(e) => e.preventDefault()} 
       style={{ width: "100%" }}
     >
-      {error && <Box sx={{ 
-        color: "red", 
-        textAlign: "center", 
-        mb: 2 
-      }}>
-        {error}
-      </Box>}
-
       <TextField 
         label="Email" 
         type="email" 
