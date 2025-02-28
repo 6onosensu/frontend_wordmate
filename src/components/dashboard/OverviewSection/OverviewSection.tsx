@@ -22,7 +22,7 @@ const OverviewSection = () => {
   };
 
   return (
-    <Container>
+    <Container maxWidth="xl">
       <UserInfo />
       <LearningGoals />
       <LearningStatictics />
@@ -30,9 +30,7 @@ const OverviewSection = () => {
       <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center"}}>
         <Button variant="contained" color="secondary" onClick={handleEditProfile}>Edit Profile</Button>
         <Button variant="contained" color="secondary"  onClick={handleSettings}>Settings</Button>
-        <Button variant="contained" color="secondary" onClick={handleLogout}>
-          Logout
-        </Button>
+        <Button variant="contained" color="secondary" onClick={handleLogout}>Logout</Button>
       </Box>
     </Container>
   )

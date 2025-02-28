@@ -1,7 +1,9 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
+import Stack from '@mui/material/Stack';
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import OverviewSection from "../components/dashboard/OverviewSection/OverviewSection";
+import WordSearch from "../components/dashboard/WordSearch/WordSearch";
 
 
 const Dashboard = () => {
@@ -15,17 +17,15 @@ const Dashboard = () => {
   }, [navigate]);
 
   return (
-    <Box maxWidth="xl" sx={{ 
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-    }}>
-      <Typography variant="h3">Dashboard</Typography>
-      <Typography variant="body1" sx={{ mb: 3 }}>
-        Welcome to your dashboard! You are logged in.
-      </Typography>
-      <OverviewSection />
-    </Box>
+    <Stack sx={{alignContent: "center", }}>
+      <Box>
+        <OverviewSection />
+      </Box>
+      <Box>
+        <WordSearch />
+      </Box>
+    </Stack>
+
   );
 };
 

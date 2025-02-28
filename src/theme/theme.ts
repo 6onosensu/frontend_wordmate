@@ -29,7 +29,13 @@ const theme = createTheme({
     fontFamily: "'Omnes-Medium', sans-serif",
   },
   components: {
-    
+    MuiStack: {
+      styleOverrides: {
+        root: {
+          alignItems: "center"
+        }
+      }
+    },
     MuiContainer: {
       styleOverrides: {
         root: {
@@ -39,7 +45,7 @@ const theme = createTheme({
           borderRadius: "10px",
           padding: "30px",
           boxShadow: "0px 5px 10px rgba(0,0,0,0.1)",
-          margin: "0 auto",
+          margin: "20px 10px 20px 10px",
         }
       }
     },
