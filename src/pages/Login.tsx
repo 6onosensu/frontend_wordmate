@@ -98,7 +98,7 @@ const Login = () => {
 
           <Box sx={{ mt: 2, display: "flex", justifyContent: "center"}}>
             <Button variant="contained" color="primary" type="submit" disabled={loading}>
-              {loading ? <CircularProgress size={24} color="primary" /> : "Login"}
+              {loading ? <CircularProgress size={24} color="secondary" /> : "Login"}
             </Button>
           </Box>
         </form>
