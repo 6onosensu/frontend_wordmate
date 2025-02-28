@@ -13,6 +13,14 @@ const OverviewSection = () => {
     navigate("/");
   };
 
+  const handleSettings = () => {
+    
+  };
+
+  const handleEditProfile = () => {
+
+  };
+
   return (
     <Container>
       <UserInfo />
@@ -20,8 +28,8 @@ const OverviewSection = () => {
         <LearningStatictics />
 
         <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center"}}>
-          <Button variant="contained" color="secondary">Edit Profile</Button>
-          <Button variant="contained" color="secondary">Settings</Button>
+          <Button variant="contained" color="secondary" onClick={handleEditProfile}>Edit Profile</Button>
+          <Button variant="contained" color="secondary"  onClick={handleSettings}>Settings</Button>
           <Button variant="contained" color="secondary" onClick={handleLogout}>
             Logout
           </Button>
