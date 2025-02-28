@@ -3,9 +3,7 @@ const API_BASE_URL = "http://localhost:3000/auth";
 export const loginUser = async (email: string, password: string) => {
   const response = await fetch(`${API_BASE_URL}/login`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password }),
   });
 
@@ -23,16 +21,14 @@ export const registerUser = async (
   country?: string,
   pictureUrl?: string,
 ) => {
-  const requestBody: Record<string, any> = {
+  const requestBody = {
     email, password, 
     name, phone, country, pictureUrl
   };
 
   const response = await fetch(`${API_BASE_URL}/register`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(requestBody), 
   });
 
