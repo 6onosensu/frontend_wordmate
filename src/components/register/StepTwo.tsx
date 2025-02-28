@@ -8,11 +8,11 @@ interface StepTwoProps {
   name: string;
   phone: string;
   country: string;
-  profilePicture: File | null;
+  pictureUrl: string;
   setName: SetState<string>;
   setPhone: SetState<string>;
   setCountry: SetState<string>;
-  setProfilePicture: SetState<File | null>;
+  setPictureUrl: SetState<string>;
   prevStep: () => void;
   handleRegister: (e: React.FormEvent) => void;
   loading: boolean;
@@ -22,19 +22,18 @@ const StepTwo = ({
   name, 
   phone, 
   country, 
-  profilePicture, 
+  pictureUrl, 
   setName, 
   setPhone, 
   setCountry, 
-  setProfilePicture, 
+  setPictureUrl,
   prevStep, 
   handleRegister, 
   loading
 } : StepTwoProps) => {
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      setProfilePicture(e.target.files[0]);
-    }
+
+  const handleUrlChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setPictureUrl(e.target.value);
   };
 
   return (
@@ -62,8 +61,7 @@ const StepTwo = ({
         fullWidth 
         margin="normal" 
         value={country} 
-        onChange={(e) => setCountry(e.target.value)} 
-        required
+        onChange={(e) => setCountry(e.target.value)}
       >
         {countries.map((option) => (
           <MenuItem key={option} value={option}>
@@ -72,59 +70,24 @@ const StepTwo = ({
         ))}
       </TextField>
 
-      <Box 
-        sx={{ 
-          mt: 2, 
-          alignItems: "center",
-          display: "flex",
-          border: "1px solid #ccc",
-          borderRadius: "4px",
-          padding: "8px 8px",
-          width: "100%",
-        }}
-      >
-        <input
-          type="file"
-          id="file-upload"
-          accept="image/*"
-          onChange={handleFileChange}
-          style={{ display: "none" }} 
-        />
-        <label htmlFor="file-upload">
-          <Button 
-            variant="contained" 
-            color="info" 
-            sx={{ 
-              margin: 0, 
-              flexShrink: 0,
-              minWidth: "141px",
-              }} 
-            component="span"
-          > Upload Image
-          </Button>
-        </label>
-        <Typography 
-          variant="body2" 
-          sx={{ 
-            ml: 1, 
-            flexGrow: 1, 
-            overflow: "hidden", 
-            textOverflow: "ellipsis", 
-            whiteSpace: "nowrap"
-          }}
-        > {profilePicture ? profilePicture.name : "No file selected"}
-        </Typography>
-      </Box>
+      <TextField
+        label="Image URL"
+        type="text"
+        fullWidth
+        margin="normal"
+        value={pictureUrl}
+        onChange={handleUrlChange}
+      />
 
-      {profilePicture && (
+      {pictureUrl && (
         <Box sx={{ mt: 2, textAlign: "center" }}>
           <Typography variant="body2">Preview:</Typography>
           <img 
-            src={URL.createObjectURL(profilePicture)} 
+            src={pictureUrl} 
             alt="Profile Preview" 
             width={100} 
             height={100} 
-            style={{ borderRadius: "50%" }} 
+            style={{ borderRadius: "50%", objectFit: "cover" }} 
           />
         </Box>
       )}

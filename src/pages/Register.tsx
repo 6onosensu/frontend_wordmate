@@ -17,7 +17,7 @@ const Register = () => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [country, setCountry] = useState("");
-  const [profilePicture, setProfilePicture] = useState<File | null>(null);
+  const [pictureUrl, setPictureUrl] = useState("");
 
   const navigate = useNavigate();
 
@@ -41,10 +41,8 @@ const Register = () => {
 
     setLoading(true);
     setError("");
-
     try {
-      const profilePictureUrl = profilePicture ? URL.createObjectURL(profilePicture) : "";
-      await registerUser(email, password, name, phone, country, profilePictureUrl);
+      await registerUser(email, password, name, phone, country, pictureUrl);
       navigate("/");
     } catch (error: any) {
       setError(error.message);
@@ -64,7 +62,6 @@ const Register = () => {
         setPassword={setPassword} 
         setConfirmPassword={setConfirmPassword} 
         nextStep={nextStep} 
-        error={error} 
       />
     );
   } else {
@@ -73,11 +70,11 @@ const Register = () => {
         name={name} 
         phone={phone} 
         country={country} 
-        profilePicture={profilePicture} 
+        pictureUrl={pictureUrl} 
         setName={setName} 
         setPhone={setPhone} 
         setCountry={setCountry} 
-        setProfilePicture={setProfilePicture} 
+        setPictureUrl={setPictureUrl}
         prevStep={prevStep} 
         handleRegister={handleRegister} 
         loading={loading} 
@@ -108,12 +105,13 @@ const Register = () => {
         width: "100%",
       }}>
       <Typography variant="h3" gutterBottom>Register</Typography>
-
-      {error && (
-        <Typography color="error" sx={{ mt: 2}}>
-          {error}
-        </Typography>
-      )}
+      {error && <Box sx={{ 
+        color: "red", 
+        textAlign: "center", 
+        mb: 2 
+      }}>
+        {error}
+      </Box>}
       {content}
       <Box sx={{ mt: 2, display: "flex", justifyContent: "center" }}>
         <Button variant="text" onClick={() => navigate("/")}>

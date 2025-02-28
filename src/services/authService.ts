@@ -21,19 +21,23 @@ export const registerUser = async (
   name: string,
   phone?: string,
   country?: string,
-  profilePictureUrl?: string
+  pictureUrl?: string,
 ) => {
+  const requestBody: Record<string, any> = {
+    email, password, 
+    name, phone, country, pictureUrl
+  };
+
   const response = await fetch(`${API_BASE_URL}/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ email, password, name, phone, country, profilePictureUrl }),
+    body: JSON.stringify(requestBody), 
   });
 
   const data = await response.json();
   if (!response.ok) throw new Error(data.message || "Registration failed");
-
   return data.access_token;
 };
 

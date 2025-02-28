@@ -4,7 +4,7 @@ import { useAuth } from "../../../hooks/useAuth";
 
 interface User {
   name: string;
-  picture?: string | ArrayBuffer;
+  pictureUrl?: string;
   countryName?: string;
   number?: string;
   email?: string;
@@ -15,7 +15,6 @@ const UserInfo = () => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [imageSrc, setImageSrc] = useState<string | null>(null);
   
   useEffect(() => {
     const fetchUser = async () => {
@@ -28,32 +27,9 @@ const UserInfo = () => {
           },
         });
 
-        if (!response.ok) throw new Error("Failed to fetch user data");
-
         const data: User = await response.json();
         setUser(data);
-
-        if (data.picture) {
-          if (typeof data.picture === "string") {
-            if (data.picture.startsWith("http") || data.picture.startsWith("data:image")) {
-              setImageSrc(data.picture);
-            } else {
-              setImageSrc(`data:image/png;base64,${data.picture}`);
-            }
-          } else if (data.picture instanceof Object) {
-            try {
-              const buffer = new Uint8Array(data.picture);
-              const base64String = btoa(
-                buffer.reduce((data, byte) => data + String.fromCharCode(byte), "")
-              );
-              setImageSrc(`data:image/png;base64,${base64String}`);
-            } catch (error) {
-              console.error("Error converting buffer to Base64:", error);
-            }
-          }
-        } else {
-          setImageSrc("/default-avatar.png");
-        }
+        
       } catch (error) {
         setError((error as Error).message);
       } finally {
@@ -64,12 +40,12 @@ const UserInfo = () => {
     fetchUser();
   }, [token]);
 
-  if (loading) return <CircularProgress />;
+  if (loading) return <CircularProgress color="primary"/>;
   if (error) return <Typography color="error">{error}</Typography>;
 
   return (
     <Box sx={{ display: "flex", gap: 2,  }}>
-      <Avatar src={imageSrc || "/default-avatar.png"} sx={{ width: 64, height: 64, marginTop: "10px" }} />
+      <Avatar src={user?.pictureUrl || "/default-avatar.png"} sx={{ width: 74, height: 74, marginTop: "10px" }} />
       <Box>
         <Typography variant="h6">{user?.name || "Unknown User"}</Typography>
         <Typography variant="body2" color="text.secondary">
