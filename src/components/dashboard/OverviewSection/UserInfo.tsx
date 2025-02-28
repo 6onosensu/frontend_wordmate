@@ -1,6 +1,7 @@
 import { Avatar, Box, CircularProgress, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
 import { useAuth } from "../../../hooks/useAuth";
+import { useFetch } from "../../../hooks/useFetch";
+import { fetchUserData } from "../../../services/apiService";
 
 interface User {
   name: string;
@@ -12,11 +13,16 @@ interface User {
 
 const UserInfo = () => {
   const { token } = useAuth();
-  const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   
-  useEffect(() => {
+  const { data: user, loading, error } = useFetch<User>(() => fetchUserData(token!));
+
+  if (loading) return <CircularProgress color="primary" />;
+  if (error) return <Typography color="error">{error}</Typography>;
+  //const [user, setUser] = useState<User | null>(null);
+  //const [loading, setLoading] = useState(true);
+  //const [error, setError] = useState<string | null>(null);
+  
+  /*useEffect(() => {
     const fetchUser = async () => {
       if (!token) return;
 
@@ -38,14 +44,14 @@ const UserInfo = () => {
     };
 
     fetchUser();
-  }, [token]);
-
-  if (loading) return <CircularProgress color="primary"/>;
-  if (error) return <Typography color="error">{error}</Typography>;
+  }, [token]);*/
 
   return (
     <Box sx={{ display: "flex", gap: 2,  }}>
-      <Avatar src={user?.pictureUrl || "/default-avatar.png"} sx={{ width: 74, height: 74, marginTop: "10px" }} />
+      <Avatar 
+        src={user?.pictureUrl || "/default-avatar.png"} 
+        sx={{ width: 74, height: 74, marginTop: "10px" }} 
+      />
       <Box>
         <Typography variant="h6">{user?.name || "Unknown User"}</Typography>
         <Typography variant="body2" color="text.secondary">
