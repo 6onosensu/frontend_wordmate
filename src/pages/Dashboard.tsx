@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 import Stack from '@mui/material/Stack';
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import OverviewSection from "../components/dashboard/OverviewSection/OverviewSection";
+import OverviewProfileSection from "../components/dashboard/OverviewSection/OverviewProfileSection";
 import WordSearch from "../components/dashboard/WordSearch/WordSearch";
 
 
@@ -17,9 +17,9 @@ const Dashboard = () => {
   }, [navigate]);
 
   return (
-    <Stack sx={{alignContent: "center", }}>
+    <Stack>
       <Box>
-        <OverviewSection />
+        <OverviewProfileSection />
       </Box>
       <Box>
         <WordSearch />

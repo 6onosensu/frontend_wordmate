@@ -29,10 +29,21 @@ const theme = createTheme({
     fontFamily: "'Omnes-Medium', sans-serif",
   },
   components: {
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          mt: 2, 
+          display: "flex", 
+          alignItems: "center", 
+          gap: "3vh",
+          backgroundColor: "transparent",
+        }
+      }
+    },
     MuiStack: {
       styleOverrides: {
         root: {
-          alignItems: "center"
+          alignItems: "center",
         }
       }
     },
@@ -46,7 +57,10 @@ const theme = createTheme({
           padding: "30px",
           boxShadow: "0px 5px 10px rgba(0,0,0,0.1)",
           margin: "20px 10px 20px 10px",
-        }
+          width: "170vh",
+          gap: "3vh",
+          mt: "2",
+        },
       }
     },
     MuiButton: {

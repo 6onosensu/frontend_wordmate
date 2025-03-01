@@ -5,7 +5,7 @@ import LearningStatictics from "./LearningStatistics";
 import LearningGoals from "./LearningGoals";
 import UserInfo from "./UserInfo";
 
-const OverviewSection = () => {
+const OverviewProfileSection = () => {
   const navigate = useNavigate();
   
   const handleLogout = () => {
@@ -22,11 +22,10 @@ const OverviewSection = () => {
   };
 
   return (
-    <Container maxWidth="xl">
+    <Container className="container-secondary">
       <UserInfo />
       <LearningGoals />
       <LearningStatictics />
-
       <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center"}}>
         <Button variant="contained" color="secondary" onClick={handleEditProfile}>Edit Profile</Button>
         <Button variant="contained" color="secondary"  onClick={handleSettings}>Settings</Button>
@@ -36,4 +35,4 @@ const OverviewSection = () => {
   )
 }
 
-export default OverviewSection;
+export default OverviewProfileSection;
