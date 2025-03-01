@@ -7,6 +7,7 @@ const WordSearch: FC = () => {
   const [word, setWord] = useState("");
   const [data, setData] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
+  const [savedDefinitions, setSavedDefinitions] = useState<string[]>([]);
 
   const handleSearch = async () => {
     if (!word) return;
@@ -25,17 +26,27 @@ const WordSearch: FC = () => {
     }
   };
  
+  const handleAddDefinition = (definition: string) => {
+    setSavedDefinitions((prev) => [...prev, definition]);
+    console.log(`Added definition: ${definition}`);
+  };
+
   return (
     <Container className="container-primary">
       <Paper elevation={0}>
-        <Typography variant="h4" gutterBottom>Word Search</Typography>
+        <Typography variant="h4"  sx={{
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          minWidth: '200px',
+          display: 'block',
+        }} >Word Search</Typography>
 
         <TextField
           label="Enter a word"
           variant="outlined"
+          fullWidth
           value={word}
           onChange={(e) => setWord(e.target.value)}
-          sx={{  width: "80vh"}}
         />
 
         <Button variant="contained" color="primary" onClick={handleSearch}>
@@ -47,7 +58,7 @@ const WordSearch: FC = () => {
         {data && (
           <>
             <WordHeader data={data} />
-            <WordTable meanings={data.meanings} />
+            <WordTable meanings={data.meanings} onAddDefinition={handleAddDefinition}/>
           </>
         )}
       </Box>

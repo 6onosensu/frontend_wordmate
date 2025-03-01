@@ -32,11 +32,11 @@ const theme = createTheme({
     MuiPaper: {
       styleOverrides: {
         root: {
-          mt: 2, 
           display: "flex", 
-          alignItems: "center", 
+          alignItems: "center",
           gap: "3vh",
           backgroundColor: "transparent",
+          width: "100%",
         }
       }
     },
