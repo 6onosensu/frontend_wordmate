@@ -1,8 +1,17 @@
 import { FC } from "react";
-import { AppBar, Toolbar, Box, Link} from "@mui/material";
+import { AppBar, Toolbar, Box } from "@mui/material";
 import Logo from "../assets/BookWordMate.svg";
-//<Logo />
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
+
 const Header: FC = () => {
+  const navigate = useNavigate();
+  const { token } = useAuth();
+
+  const handleLogoClick = () => {
+    navigate(token ? "/dashboard" : "/");
+  };
+
   return (
     <AppBar position="fixed" color="secondary" >
       <Toolbar sx={{ justifyContent: "center" }}>
@@ -16,13 +25,12 @@ const Header: FC = () => {
             overflow: "hidden",
           }}
         >
-          <Link href="/" sx={{ display: "flex", alignItems: "center" }}>
-            <img
-              src={Logo}
-              alt="WordMate Logo"
-              style={{ cursor: "pointer" }}
-            />
-          </Link>
+          <img
+            src={Logo}
+            alt="WordMate Logo"
+            style={{ cursor: "pointer" }}
+            onClick={handleLogoClick}
+          />
         </Box>
       </Toolbar>
     </AppBar>
