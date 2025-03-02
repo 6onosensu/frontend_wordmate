@@ -8,11 +8,15 @@ export const fetchWithAuth = async (endpoint: string, token: string) => {
     },
   });
 
-  if (!response.ok) throw new Error("Failed to fetch user data");
+  if (!response.ok) throw new Error("Failed to fetch data");
 
   return response.json();
 };
 
 export const fetchUserData = (token: string) => fetchWithAuth("/users/me", token);
 
-//export const fetchUserGoalsData = (token: string) => fetchWithAuth("/user-goals/me", token);
+export const fetchUserWords = (status: string, token: string) => 
+  fetchWithAuth(`/user-words?status=${status}`, token);
+
+export const fetchUserWordDetails = (wordId: number, token: string) => 
+  fetchWithAuth(`/user-words/${wordId}`, token);
