@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 import { Typography, Box } from "@mui/material";
 import soundIcon from "../../../assets/sound.svg"; 
 import SvgButton from "../../SvgButton";
@@ -7,7 +7,7 @@ interface WordHeaderProps {
   data: any;
 }
 
-const WordHeader: React.FC<WordHeaderProps> = ({ data }) => {
+const WordHeader: FC<WordHeaderProps> = ({ data }) => {
   const playAudio = (audioUrl: string) => {
     const audio = new Audio(audioUrl);
     audio.play();
