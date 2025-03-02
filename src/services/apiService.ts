@@ -15,8 +15,6 @@ export const fetchWithAuth = async (endpoint: string, token: string) => {
 
 export const fetchUserData = (token: string) => fetchWithAuth("/users/me", token);
 
-export const fetchUserWords = (status: string, token: string) => 
-  fetchWithAuth(`/user-words?status=${status}`, token);
+export const fetchUserWordsByStatus = (status: string, token: string) => 
+  fetchWithAuth(`/user-words?status=${status}&due=true`, token);
 
-export const fetchUserWordDetails = (wordId: number, token: string) => 
-  fetchWithAuth(`/user-words/${wordId}`, token);

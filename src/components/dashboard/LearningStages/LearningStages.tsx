@@ -3,10 +3,10 @@ import { Stage } from "./Stage"
 
 export const LearningStages = () => {
   return (
-    <Box>
-      <Stage />
-      <Stage />
-      <Stage />
+    <Box sx={{ display: "flex" }}>
+      <Stage stage="To Learn" title="Learn!"/>
+      <Stage stage="To Repeat" title="Review!"/>
+      <Stage stage="Learned" title="Recall!"/>
     </Box>
   )
 }

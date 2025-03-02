@@ -13,7 +13,10 @@ const AppRoutes = () => {
         path="/dashboard"
         element={
           <ProtectedRoute>
-            <Dashboard />
+            <Routes>
+              <Route path="" element={<Dashboard />} />
+              
+            </Routes>
           </ProtectedRoute>
         }
       />

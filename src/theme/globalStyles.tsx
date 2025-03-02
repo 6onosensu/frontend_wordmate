@@ -13,10 +13,7 @@ const globalStyles = (
       ".container-secondary": {
         alignItems: "top",  
         flexDirection: "row",
-      },
-      ".container-outlined": {
-        border: "2px solid red",
-      },
+      }
     }}
   />
 );

@@ -1,6 +1,7 @@
 import { Navigate } from "react-router-dom";
 import { ReactNode } from "react";
 import { useAuth } from "../hooks/useAuth";
+import { WordProvider } from "../context/WordContext";
 
 interface ProtectedRouteProps {
   children: ReactNode;
@@ -8,8 +9,14 @@ interface ProtectedRouteProps {
 
 const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const { token } = useAuth();
-
-  return token ? <>{children}</> : <Navigate to="/" replace />;
+  if (!token) {
+    return <Navigate to="/" replace />;
+  }
+  return (
+    <WordProvider> 
+      {children}
+    </WordProvider>
+  );
 };
 
 export default ProtectedRoute;

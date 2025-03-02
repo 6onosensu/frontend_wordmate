@@ -3,14 +3,14 @@ import { FC } from "react"
 import SvgButton from "../../SvgButton";
 import soundIcon from "../../../assets/sound.svg";
 
-interface wordMeaning {
+interface Word {
   word: string;
   audio?: string;
   definition: string;
 }
 
 interface UserWordTableProps {
-  data?: wordMeaning[];
+  data: Word[];
 }
 
 export const UserWordTable: FC<UserWordTableProps> = ({ data }) => {
@@ -19,21 +19,15 @@ export const UserWordTable: FC<UserWordTableProps> = ({ data }) => {
     <TableContainer sx={{ mt: 3 }}>
       <Table>
         <TableBody>
-          <TableRow>
-            <TableCell>
-              Word
-            </TableCell>
-            <TableCell>
-              Definition
-            </TableCell>
-            <TableCell>
-              <SvgButton
-                iconSrc={soundIcon}
-                altText="Play Sound"
-              >
-              </SvgButton>
-            </TableCell>
-          </TableRow>
+          {data.map((word, index) => (
+            <TableRow key={index}>
+              <TableCell>{word.word}</TableCell>
+              <TableCell>{word.definition}</TableCell>
+              <TableCell>
+                {word.audio && <SvgButton iconSrc={soundIcon} altText="Play Sound" />}
+              </TableCell>
+            </TableRow>
+          ))}
         </TableBody>
       </Table>
     </TableContainer>

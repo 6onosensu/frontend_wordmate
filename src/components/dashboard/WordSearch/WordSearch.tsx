@@ -7,7 +7,7 @@ const WordSearch: FC = () => {
   const [word, setWord] = useState("");
   const [data, setData] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
-  const [savedDefinitions, setSavedDefinitions] = useState<string[]>([]);
+  const [, setSavedDefinitions] = useState<string[]>([]);
 
   const handleSearch = async () => {
     if (!word) return;

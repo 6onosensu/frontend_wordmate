@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import OverviewProfileSection from "../components/dashboard/OverviewSection/OverviewProfileSection";
 import WordSearch from "../components/dashboard/WordSearch/WordSearch";
+import { LearningStages } from "../components/dashboard/LearningStages/LearningStages";
 
 
 const Dashboard = () => {
@@ -23,6 +24,9 @@ const Dashboard = () => {
       </Box>
       <Box>
         <WordSearch />
+      </Box>
+      <Box>
+        <LearningStages />
       </Box>
     </Stack>
 
