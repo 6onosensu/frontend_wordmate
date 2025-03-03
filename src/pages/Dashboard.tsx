@@ -29,7 +29,6 @@ const Dashboard = () => {
         <LearningStages />
       </Box>
     </Stack>
-
   );
 };
 

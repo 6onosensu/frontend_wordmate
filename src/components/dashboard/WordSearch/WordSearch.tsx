@@ -32,7 +32,7 @@ const WordSearch: FC = () => {
   };
 
   return (
-    <Container className="container-primary">
+    <Container className="container-primary" id="searchword">
       <Paper elevation={0}>
         <Typography variant="h4"  sx={{
           overflow: 'hidden',

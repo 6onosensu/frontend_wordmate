@@ -3,6 +3,7 @@ import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { loginUser } from "../services/authService";
+import { Welcome } from "../components/Welcome";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -39,12 +40,9 @@ const Login = () => {
       alignItems: "center",
       flexDirection: "column",
     }}>
-      <Box sx={{ textAlign: "center", mb: 2 }}>
-        <Typography variant="h4">Welcome to WordMate!</Typography>
-        <Typography variant="body1">Please log in to access your account.</Typography>
-      </Box>
+      <Welcome />
 
-      <Box 
+      <Box id="login"
         sx={{
           border: "1px solid #ccc",
           borderRadius: "10px",

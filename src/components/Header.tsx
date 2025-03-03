@@ -13,7 +13,7 @@ const Header: FC = () => {
   };
 
   return (
-    <AppBar position="fixed" color="secondary" >
+    <AppBar position="relative" color="secondary" sx={{ marginBottom: "5vh"}}>
       <Toolbar sx={{ justifyContent: "center" }}>
         <Box
           sx={{

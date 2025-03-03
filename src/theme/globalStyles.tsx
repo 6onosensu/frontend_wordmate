@@ -4,7 +4,9 @@ const globalStyles = (
   <GlobalStyles
     styles={{
       "body": {
-        paddingTop: 120,
+        display: "flex",
+        flexDirection: "column", 
+        minHeight: "100vh",
       },
       ".container-primary": {
         alignItems: "center",  
