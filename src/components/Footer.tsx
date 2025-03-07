@@ -1,14 +1,14 @@
 import { FC } from "react";
 import { AppBar, Toolbar, Box, Typography, Button } from "@mui/material";
-import { useAuth } from "../hooks/useAuth";
+import { useAuth } from "@/context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import Logo from "../assets/BookTwoWords.svg";
-import { logoutUser } from "../services/authService";
+import Logo from "@/assets/BookTwoWords.svg";
+import { logoutUser } from "@/services/authService";
 import SvgButton from "./SvgButton";
-import CopyEmail from "../assets/emailCircle.svg";
-import github from "../assets/githubCircle.svg";
-import linkedin from "../assets/linkedinCircle.svg";
-import telegram from "../assets/telegramCircle.svg";
+import CopyEmail from "@/assets/emailCircle.svg";
+import github from "@/assets/githubCircle.svg";
+import linkedin from "@/assets/linkedinCircle.svg";
+import telegram from "@/assets/telegramCircle.svg";
 
 const Footer: FC = () => {
   const { token, logout } = useAuth();

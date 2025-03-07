@@ -1,7 +1,7 @@
 import { Avatar, Box, CircularProgress, Typography } from "@mui/material";
-import { useAuth } from "../../../hooks/useAuth";
-import { useFetch } from "../../../hooks/useFetch";
-import { fetchUserData } from "../../../services/apiService";
+import { useAuth } from "@/context/AuthContext";
+import { useFetch } from "@/hooks/useFetch";
+import { fetchUserData } from "@/services/apiService";
 import { useCallback } from "react";
 
 interface User {

@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 import { ReactNode } from "react";
-import { useAuth } from "../hooks/useAuth";
-import { WordProvider } from "../context/WordContext";
+import { useAuth } from "@/context/AuthContext";
+import { WordProvider } from "@/context/WordContext";
 
 interface ProtectedRouteProps {
   children: ReactNode;

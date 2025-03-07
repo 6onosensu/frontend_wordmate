@@ -1,5 +1,5 @@
 import { Box, Button, Container } from "@mui/material"
-import { logoutUser } from "../../../services/authService"
+import { logoutUser } from "@/services/authService";
 import { useNavigate } from "react-router-dom";
 import LearningStatictics from "./LearningStatistics";
 import LearningGoals from "./LearningGoals";

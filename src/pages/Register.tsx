@@ -1,9 +1,9 @@
 import { Box, Button, Typography } from "@mui/material";
 import { useState } from "react";
-import { registerUser } from "../services/authService";
+import { registerUser } from "@/services/authService";
 import { useNavigate } from "react-router-dom";
-import StepOne from "../components/register/StepOne";
-import StepTwo from "../components/register/StepTwo";
+import StepOne from "@/components/register/StepOne";
+import StepTwo from "@/components/register/StepTwo";
 
 const Register = () => {
   const [step, setStep] = useState(1);

@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { AppBar, Toolbar, Box } from "@mui/material";
-import Logo from "../assets/BookWordMate.svg";
+import Logo from "@/assets/BookWordMate.svg";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth";
+import { useAuth } from "@/context/AuthContext";
 
 const Header: FC = () => {
   const navigate = useNavigate();

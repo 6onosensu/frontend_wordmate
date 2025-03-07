@@ -1,7 +1,7 @@
 import { Table, TableBody, TableCell, TableContainer, TableRow } from "@mui/material"
 import { FC } from "react"
-import SvgButton from "../../SvgButton";
-import soundIcon from "../../../assets/sound.svg";
+import SvgButton from "@/components/SvgButton";
+import soundIcon from "@/assets/sound.svg";
 
 interface Word {
   word: string;

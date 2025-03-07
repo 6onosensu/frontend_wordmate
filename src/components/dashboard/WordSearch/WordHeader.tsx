@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Typography, Box } from "@mui/material";
-import soundIcon from "../../../assets/sound.svg"; 
-import SvgButton from "../../SvgButton";
+import soundIcon from "@/assets/sound.svg"; 
+import SvgButton from "@/components/SvgButton";
 
 interface WordHeaderProps {
   data: any;

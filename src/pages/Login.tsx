@@ -1,9 +1,9 @@
 import { Typography, Box, TextField, Button, CircularProgress, FormControlLabel, Checkbox } from "@mui/material";
 import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth";
-import { loginUser } from "../services/authService";
-import { Welcome } from "../components/Welcome";
+import { useAuth } from "@/context/AuthContext";
+import { loginUser } from "@/services/authService";
+import { Welcome } from "@/components/Welcome";
 
 const Login = () => {
   const [email, setEmail] = useState("");

@@ -2,9 +2,10 @@ import { Box } from "@mui/material";
 import Stack from '@mui/material/Stack';
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import OverviewProfileSection from "../components/dashboard/OverviewSection/OverviewProfileSection";
-import WordSearch from "../components/dashboard/WordSearch/WordSearch";
-import { LearningStages } from "../components/dashboard/LearningStages/LearningStages";
+import OverviewProfileSection from "@/components/dashboard/OverviewSection/OverviewProfileSection";
+import WordSearch from "@/components/dashboard/WordSearch/WordSearch";
+import { LearningStages } from "@/components/dashboard/LearningStages/LearningStages";
+import { WordProvider } from "@/context/WordContext";
 
 
 const Dashboard = () => {
@@ -19,14 +20,16 @@ const Dashboard = () => {
 
   return (
     <Stack>
-      <Box>
-        <OverviewProfileSection />
-      </Box>
+      <WordProvider>
+        <Box>
+          <OverviewProfileSection />
+        </Box>
+        <Box>
+          <LearningStages />
+        </Box>
+      </WordProvider>
       <Box>
         <WordSearch />
-      </Box>
-      <Box>
-        <LearningStages />
       </Box>
     </Stack>
   );

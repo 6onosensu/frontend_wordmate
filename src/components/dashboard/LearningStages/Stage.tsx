@@ -1,7 +1,7 @@
 import { Box, Button, Container, Typography } from "@mui/material"
 import { UserWordTable } from "./UserWordTable";
 import { FC, useEffect } from "react";
-import { useWords } from "../../../hooks/useWords";
+import { useWords } from "@/context/WordContext";
 
 interface StageProps {
   stage: string;

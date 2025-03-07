@@ -1,5 +1,5 @@
 import { TextField, MenuItem, Box, Typography, Button } from "@mui/material";
-import { countries } from "../../utils/countries";
+import { countries } from "@/utils/countries";
 import { ChangeEvent } from "react";
 
 type SetState<T> = (value: T) => void;

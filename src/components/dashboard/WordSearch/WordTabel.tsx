@@ -4,8 +4,8 @@ import {
   TableCell, TableContainer, 
   TableHead, TableRow, Typography, 
 } from "@mui/material";
-import addIcon from "../../../assets/add.svg";
-import SvgButton from "../../SvgButton";
+import addIcon from "@/assets/add.svg";
+import SvgButton from "@/components/SvgButton";
 
 interface Definition {
   definition: string;
