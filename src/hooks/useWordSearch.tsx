@@ -1,3 +1,5 @@
+import { saveUserWord } from "@/services/apiService";
+import { DictionaryAPIResponse } from "@/types/wordType";
 import { useState } from "react";
 
 export const useWordSearch = () => {
@@ -27,8 +29,42 @@ export const useWordSearch = () => {
     }
   };
 
-  const handleAddDefinition = (definition: string) => {
-    console.log(`Added definition: ${definition}`);
+  const handleAddDefinition = async (
+    meaning: DictionaryAPIResponse["meanings"][number],
+    definition: DictionaryAPIResponse["meanings"][number]["definitions"][number]
+  ) => {
+    if (!data) return;
+
+    const word = data.word;
+
+    let audio = null;
+    if (data.phonetics) {
+      for (const phonetic of data.phonetics) {
+        if (phonetic.audio && phonetic.audio.trim() !== "") {
+          audio = phonetic.audio;
+          break; 
+        }
+      }
+    }
+    
+    const formattedData = {
+      word: word,
+      audio: audio,
+      meaning: {
+        partOfSpeech: meaning.partOfSpeech,
+        definition: definition.definition,
+        example: definition.example || null,
+        synonyms: definition.synonyms || [],
+        antonyms: definition.antonyms || []
+      }
+    };
+
+    try {
+      await saveUserWord(formattedData, localStorage.getItem("token") || "");
+      console.log("Word saved successfully!");
+    } catch (err) {
+      console.error("Error saving word:", err);
+    }
   };
 
   return { word, setWord, data, error, loading, handleSearch, handleAddDefinition };
