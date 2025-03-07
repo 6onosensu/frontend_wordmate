@@ -1,35 +1,11 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { Container, TextField, Button, Typography, Box, Paper } from "@mui/material";
 import WordHeader from "./WordHeader";
 import WordTable from "./WordTabel";
+import { useWordSearch } from "@/hooks/useWordSearch";
 
 const WordSearch: FC = () => {
-  const [word, setWord] = useState("");
-  const [data, setData] = useState<any>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [, setSavedDefinitions] = useState<string[]>([]);
-
-  const handleSearch = async () => {
-    if (!word) return;
-    setError(null);
-    setData(null);
-
-    try {
-      const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
-      if (!response.ok) {
-        throw new Error("Word not found");
-      }
-      const result = await response.json();
-      setData(result[0]);
-    } catch (err) {
-      setError("Word not found, try another one.");
-    }
-  };
- 
-  const handleAddDefinition = (definition: string) => {
-    setSavedDefinitions((prev) => [...prev, definition]);
-    console.log(`Added definition: ${definition}`);
-  };
+  const { word, setWord, data, error, loading, handleSearch, handleAddDefinition } = useWordSearch();
 
   return (
     <Container className="container-primary" id="searchword">
@@ -49,8 +25,8 @@ const WordSearch: FC = () => {
           onChange={(e) => setWord(e.target.value)}
         />
 
-        <Button variant="contained" color="primary" onClick={handleSearch}>
-          Search
+        <Button variant="contained" color="primary" onClick={handleSearch} disabled={loading}>
+          {loading ? "Searching..." : "Search"}
         </Button>
       </Paper>
       <Box>

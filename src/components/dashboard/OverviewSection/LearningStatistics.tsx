@@ -10,16 +10,16 @@ const LearningStatictics = () => {
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell>To Learn</TableCell>
-            <TableCell>To Repeat</TableCell>
-            <TableCell>Learned</TableCell>
+            <TableCell>To Explore</TableCell>
+            <TableCell>To Refresh</TableCell>
+            <TableCell>Retained</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           <TableRow>
-            <TableCell>{words["to learn"]?.length || 0}</TableCell>
-            <TableCell>{words["to repeat"]?.length || 0}</TableCell>
-            <TableCell>{words["learned"]?.length || 0}</TableCell>
+            <TableCell>{words["To Explore"]?.length || 0}</TableCell>
+            <TableCell>{words["To Refresh"]?.length || 0}</TableCell>
+            <TableCell>{words["Retained"]?.length || 0}</TableCell>
           </TableRow>
         </TableBody>
       </Table>
