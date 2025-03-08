@@ -1,3 +1,4 @@
+import { useAuth } from "@/context/AuthContext";
 import { saveUserWord } from "@/services/apiService";
 import { DictionaryAPIResponse } from "@/types/wordType";
 import { useState } from "react";
@@ -7,6 +8,8 @@ export const useWordSearch = () => {
   const [data, setData] = useState<DictionaryAPIResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  
+  const { token } = useAuth();
 
   const handleSearch = async () => {
     if (!word) return;
@@ -33,7 +36,11 @@ export const useWordSearch = () => {
     meaning: DictionaryAPIResponse["meanings"][number],
     definition: DictionaryAPIResponse["meanings"][number]["definitions"][number]
   ) => {
-    const token = localStorage.getItem("token") || "";
+    if (!token) {
+      console.error("No token found! User is not authenticated.");
+      return;
+    }
+
     if (!data) return;
 
     const word = data.word;
@@ -51,15 +58,13 @@ export const useWordSearch = () => {
     const formattedData = {
       word: word,
       audio: audio,
-      meaning: {
-        partOfSpeech: meaning.partOfSpeech,
-        definition: definition.definition,
-        example: definition.example || null,
-        synonyms: definition.synonyms || [],
-        antonyms: definition.antonyms || []
-      }
+      partOfSpeech: meaning.partOfSpeech, 
+      definition: definition.definition, 
+      example: definition.example || null,
+      synonyms: definition.synonyms || [],
+      antonyms: definition.antonyms || []
     };
-    console.log(formattedData, token);
+
     try {
       await saveUserWord(formattedData, token);
       console.log("Word saved successfully!");

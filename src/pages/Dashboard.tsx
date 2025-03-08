@@ -5,16 +5,17 @@ import { useNavigate } from "react-router-dom";
 import OverviewProfileSection from "@/components/dashboard/OverviewSection/OverviewProfileSection";
 import WordSearch from "@/components/dashboard/WordSearch/WordSearch";
 import { LearningStages } from "@/components/dashboard/LearningStages/LearningStages";
+import { useAuth } from "@/context/AuthContext";
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const { token } = useAuth();
 
   useEffect(() => {
-    const token = localStorage.getItem("token") || sessionStorage.getItem("token");
     if (!token) {
       navigate("/");
     }
-  }, [navigate]);
+  }, [navigate, token]);
 
   return (
     <Stack>

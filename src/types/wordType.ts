@@ -15,11 +15,9 @@ export interface DictionaryAPIResponse {
 export interface FormattedDataType {
   word: string;
   audio?: string | null;
-  meaning: {
-    partOfSpeech: string;
-    definition: string;
-    example?: string | null;
-    synonyms?: string[];
-    antonyms?: string[];
-  };
+  partOfSpeech: string;
+  definition: string;
+  example?: string | null;
+  synonyms?: string[];
+  antonyms?: string[];
 }

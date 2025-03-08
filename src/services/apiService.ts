@@ -8,18 +8,20 @@ export const fetchWithAuth = async (
   method: string = "GET",
   body?: any,
 ) => {
-  const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+  const options: RequestInit = {
     method,
     headers: {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
-    body: body ? JSON.stringify(body) : undefined,
-  });
+    ...(body ? { body: JSON.stringify(body) } : {}), 
+  };
 
-  console.log(response)
+  const response = await fetch(`${API_BASE_URL}${endpoint}`, options);
 
-  if (!response.ok) throw new Error("Failed to fetch data");
+  if (!response.ok) {
+    throw new Error("Failed to fetch data");
+  }
 
   return response.json();
 };
@@ -32,8 +34,9 @@ export const fetchUserWordsByStatus = (status: string, token: string) =>
     token
   );
 
-export const saveUserWord = async (
-  wordData: FormattedDataType, 
-  token: string
-) =>
-  fetchWithAuth("/userWords", token, "POST", wordData);
+  export const saveUserWord = async (
+    wordData: FormattedDataType, 
+    token: string
+  ) => {
+    return fetchWithAuth("/userWords/", token, "POST", wordData);
+  };

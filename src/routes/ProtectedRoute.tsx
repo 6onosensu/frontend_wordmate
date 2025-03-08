@@ -13,7 +13,7 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
     return <Navigate to="/" replace />;
   }
   return (
-    <WordProvider> 
+    <WordProvider status="To Explore"> 
       {children}
     </WordProvider>
   );
