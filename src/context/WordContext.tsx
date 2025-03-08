@@ -20,13 +20,13 @@ interface WordContextProps {
 
 export const WordContext = createContext<WordContextProps | undefined>(undefined);
 
-export const WordProvider: FC<{ children: ReactNode }> = ({ children }) => {
+export const WordProvider: FC<{ children: ReactNode; status: string }> = ({ children, status }) => {
   const { token } = useAuth();
 
   const fetchWords = useCallback(() => {
     if (!token) return Promise.resolve({});
-    return fetchUserWordsByStatus("to learn", token); 
-  }, [token]);
+    return fetchUserWordsByStatus(status, token); 
+  }, [token, status]);
 
   const { data: words, loading, error } = useFetch(fetchWords);
 

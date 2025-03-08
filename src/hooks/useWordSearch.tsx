@@ -4,7 +4,7 @@ import { useState } from "react";
 
 export const useWordSearch = () => {
   const [word, setWord] = useState("");
-  const [data, setData] = useState<any>(null);
+  const [data, setData] = useState<DictionaryAPIResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -20,7 +20,7 @@ export const useWordSearch = () => {
       if (!response.ok) {
         throw new Error("Word not found");
       }
-      const result = await response.json();
+      const result: DictionaryAPIResponse[] = await response.json();
       setData(result[0]);
     } catch (err) {
       setError("Word not found, try another one.");
@@ -33,6 +33,7 @@ export const useWordSearch = () => {
     meaning: DictionaryAPIResponse["meanings"][number],
     definition: DictionaryAPIResponse["meanings"][number]["definitions"][number]
   ) => {
+    const token = localStorage.getItem("token") || "";
     if (!data) return;
 
     const word = data.word;
@@ -58,9 +59,9 @@ export const useWordSearch = () => {
         antonyms: definition.antonyms || []
       }
     };
-
+    console.log(formattedData, token);
     try {
-      await saveUserWord(formattedData, localStorage.getItem("token") || "");
+      await saveUserWord(formattedData, token);
       console.log("Word saved successfully!");
     } catch (err) {
       console.error("Error saving word:", err);

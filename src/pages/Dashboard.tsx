@@ -5,8 +5,6 @@ import { useNavigate } from "react-router-dom";
 import OverviewProfileSection from "@/components/dashboard/OverviewSection/OverviewProfileSection";
 import WordSearch from "@/components/dashboard/WordSearch/WordSearch";
 import { LearningStages } from "@/components/dashboard/LearningStages/LearningStages";
-import { WordProvider } from "@/context/WordContext";
-
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -20,14 +18,12 @@ const Dashboard = () => {
 
   return (
     <Stack>
-      <WordProvider>
-        <Box>
-          <OverviewProfileSection />
-        </Box>
-        <Box>
-          <LearningStages />
-        </Box>
-      </WordProvider>
+      <Box>
+        <OverviewProfileSection />
+      </Box>
+      <Box>
+        <LearningStages />
+      </Box>
       <Box>
         <WordSearch />
       </Box>

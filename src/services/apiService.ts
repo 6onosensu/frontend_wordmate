@@ -1,3 +1,5 @@
+import { FormattedDataType } from "@/types/wordType";
+
 const API_BASE_URL = "http://localhost:3000";
 
 export const fetchWithAuth = async (
@@ -15,6 +17,8 @@ export const fetchWithAuth = async (
     body: body ? JSON.stringify(body) : undefined,
   });
 
+  console.log(response)
+
   if (!response.ok) throw new Error("Failed to fetch data");
 
   return response.json();
@@ -23,8 +27,13 @@ export const fetchWithAuth = async (
 export const fetchUserData = (token: string) => fetchWithAuth("/users/me", token);
 
 export const fetchUserWordsByStatus = (status: string, token: string) => 
-  fetchWithAuth(`/user-words?status=${status}&due=true`, token);
+  fetchWithAuth(
+    `/userWords/status?status=${encodeURIComponent(status)}&due=true`, 
+    token
+  );
 
-export const saveUserWord = async (wordData: any, token: string) => {
-  return fetchWithAuth("/userWords", token, "POST", wordData);
-};
+export const saveUserWord = async (
+  wordData: FormattedDataType, 
+  token: string
+) =>
+  fetchWithAuth("/userWords", token, "POST", wordData);
