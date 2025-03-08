@@ -1,10 +1,11 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { 
-  Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, 
+  Table, TableBody, TableCell, TableContainer, TableRow, Typography, 
 } from "@mui/material";
 import addIcon from "@/assets/add.svg";
 import SvgButton from "@/components/SvgButton";
 import { DictionaryAPIResponse } from "@/types/wordType";
+import DefinitionDetails from "./DefinitionDetails";
 
 interface WordTableProps {
   meanings: DictionaryAPIResponse["meanings"];
@@ -15,56 +16,46 @@ interface WordTableProps {
 }
 
 const WordTable: FC<WordTableProps> = ({ meanings, onAddDefinition }) => {
+  const [selectedDefinition, setSelectedDefinition] = useState<{ 
+    meaning: any, 
+    definition: any 
+  } | null>(null);
+
+  const handleRowClick = (meaning: any, definition: any) => {
+    setSelectedDefinition((previousSelectedDefinition) => {
+      if (
+        previousSelectedDefinition &&
+        previousSelectedDefinition.definition === definition
+      ) {
+        return null;
+      } else {
+        return {
+          meaning: meaning,
+          definition: definition,
+        };
+      }
+    });
+  };
+
   return (
     <TableContainer sx={{ mt: 3 }}>
       <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell sx={{ width: "21vh" }}>
-              <Typography variant="h6">Part of Speech</Typography>
-            </TableCell>
-            <TableCell sx={{ width: "70vh" }}>
-              <Typography variant="h6">Definitions</Typography>
-              </TableCell>
-            <TableCell><Typography variant="h6">Synonyms</Typography></TableCell>
-            <TableCell><Typography variant="h6">Antonyms</Typography></TableCell>
-            <TableCell></TableCell>
-          </TableRow>
-        </TableHead>
         <TableBody>
           {meanings.map((meaning, index) => (
             meaning.definitions.map((def, i) => (
-              <TableRow key={`${index}-${i}`}>
-                {i === 0 ? (
-                  <TableCell rowSpan={meaning.definitions.length}>
-                    {meaning.partOfSpeech}
-                  </TableCell>
-                ) : null}
-
-                <TableCell>
-                  <Typography variant="body2">
-                    {def.definition}
-                  </Typography>
-                </TableCell>
-
-                <TableCell>
-                  {def.synonyms.length > 0 ? (
-                    <Stack spacing={1}>
-                      {def.synonyms.map((syn, i) => (
-                        <Typography key={i} variant="body2">{syn}</Typography>
-                      ))}
-                    </Stack>
-                  ) : "—"}
-                </TableCell>
-                
-                <TableCell>
-                  {def.antonyms.length > 0 ? (
-                    <Stack spacing={1}>
-                      {def.antonyms.map((ant, i) => (
-                        <Typography key={i} variant="body2">{ant}</Typography>
-                      ))}
-                    </Stack>
-                  ) : "—"}
+              <TableRow 
+                key={`${index}-${i}`}
+                hover
+              >
+                <TableCell
+                  sx={{ cursor: "pointer", width: "140vh", }} 
+                  onClick={() => handleRowClick(meaning, def)}
+                >
+                  {selectedDefinition?.definition === def ? (
+                    <DefinitionDetails meaning={meaning} definition={def} />
+                  ) : (
+                    <Typography>{def.definition}</Typography>
+                  )}
                 </TableCell>
                 <TableCell>
                   <SvgButton
