@@ -2,6 +2,7 @@ import { Box, Button, Container, Typography } from "@mui/material"
 import { UserWordTable } from "./UserWordTable";
 import { FC, useEffect } from "react";
 import { useWords } from "@/context/WordContext";
+import { FormattedWord, UserWord } from "@/types/wordType";
 
 interface StageProps {
   stage: string;
@@ -14,6 +15,20 @@ export const Stage: FC<StageProps> = ({ stage, title }) => {
   useEffect(() => {
     loadWords(stage);
   }, [stage]);
+  
+ const formattedWords: FormattedWord[] = Object.values(words)
+    .flat()
+    .map((userWord: UserWord): FormattedWord => ({
+      id: userWord.id,
+      word: userWord.meaning.word.word ?? "Word is undefined",
+      audio: userWord?.meaning.word.audio ?? null,
+      definition: userWord.meaning.definition ?? "Definition is undefined",
+      partOfSpeech: userWord.meaning.partOfSpeech.title ?? "Part of speech is undefined",
+      synonyms: userWord?.meaning.synonyms ?? [],
+      antonyms: userWord?.meaning.antonyms ?? [],
+      example: userWord?.meaning.example ?? "No example available",
+    }));
+
   const handleClick = () => {
 
   }
@@ -24,7 +39,7 @@ export const Stage: FC<StageProps> = ({ stage, title }) => {
         <Typography variant="h4">{stage}</Typography>
       </Box>
       <Box>
-        <UserWordTable data={words[stage] || []}/>
+        <UserWordTable data={formattedWords} />
       </Box>
       <Box>
         <Button variant="contained" color="primary" onClick={handleClick}>

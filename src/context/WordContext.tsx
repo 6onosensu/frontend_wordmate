@@ -2,17 +2,10 @@ import { createContext, FC, ReactNode, useCallback, useContext } from "react";
 import { fetchUserWordsByStatus} from "@/services/apiService"; 
 import { useAuth } from "@/context/AuthContext";
 import { useFetch } from "@/hooks/useFetch";
-
-interface Word {
-  id: number;
-  word: string;
-  audio?: string;
-  definition: string;
-  fullData?: any; 
-}
+import { UserWord } from "@/types/wordType";
 
 interface WordContextProps {
-  words: Record<string, Word[]>; 
+  words: Record<string, UserWord[]>; 
   loadWords: (status: string) => void; 
   loading: boolean;
   error: string;
@@ -29,7 +22,7 @@ export const WordProvider: FC<{ children: ReactNode; status: string }> = ({ chil
   }, [token, status]);
 
   const { data: words, loading, error } = useFetch(fetchWords);
-
+  console.log(words);
   return (
     <WordContext.Provider value={{ words: words || {}, loadWords: fetchWords, loading, error }}>
       {children}

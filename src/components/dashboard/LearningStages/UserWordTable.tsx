@@ -1,35 +1,33 @@
-import { Table, TableBody, TableCell, TableContainer, TableRow } from "@mui/material"
+import { Table, TableBody, TableCell, TableContainer, TableRow, Typography } from "@mui/material"
 import { FC } from "react"
 import SvgButton from "@/components/SvgButton";
 import soundIcon from "@/assets/sound.svg";
-
-interface Word {
-  word: string;
-  audio?: string;
-  definition: string;
-}
+import { FormattedWord } from "@/types/wordType";
 
 interface UserWordTableProps {
-  data: Word[];
+  data: FormattedWord[];
 }
 
 export const UserWordTable: FC<UserWordTableProps> = ({ data }) => {
-  
   return (
     <TableContainer sx={{ mt: 3 }}>
-      <Table>
-        <TableBody>
-          {data.map((word, index) => (
-            <TableRow key={index}>
-              <TableCell>{word.word}</TableCell>
-              <TableCell>{word.definition}</TableCell>
-              <TableCell>
-                {word.audio && <SvgButton iconSrc={soundIcon} altText="Play Sound" />}
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+      {data.length === 0 ? (
+        <Typography variant="h6" align="center">No words to display!</Typography>
+      ) : (
+        <Table>
+          <TableBody>
+            {data.map((wordData, index) => (
+              <TableRow key={index}>
+                <TableCell>{wordData.word}</TableCell> 
+                <TableCell>{wordData.definition}</TableCell>
+                <TableCell>
+                  {wordData.audio && <SvgButton iconSrc={soundIcon} altText="Play Sound" />}
+                </TableCell>
+              </TableRow>
+            ))};
+          </TableBody>
+        </Table>
+      )}
     </TableContainer>
-  )
+  );
 }

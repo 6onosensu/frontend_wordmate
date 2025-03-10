@@ -21,3 +21,62 @@ export interface FormattedDataType {
   synonyms?: string[];
   antonyms?: string[];
 }
+
+interface User {
+  id: number;
+  email: string;
+  password: string;
+  countryName: string;
+  number: string;
+  pictureUrl: string;
+}
+
+interface Status {
+  id: number;
+  status: string;
+}
+
+interface PartOfSpeech {
+  id: number;
+  title: string;
+}
+
+interface Word {
+  id: number;
+  word: string;
+  audio?: string | null;
+}
+
+interface Meaning {
+  id: number;
+  definition: string;
+  example?: string | null;
+  synonyms?: number[] | null;
+  antonyms?: number[] | null;
+  partOfSpeech: PartOfSpeech;
+  word: Word; 
+}
+
+export interface UserWord {
+  id: number;
+  createdAt: string;
+  updatedAt: string;
+  repetitionDate: string;
+  due: boolean;
+  repetitionCount: number;
+  intervalRepetitions: number;
+  meaning: Meaning; 
+  status: Status;
+  user: User;
+}
+
+export interface FormattedWord {
+  id: number;
+  word: string;
+  audio?: string | null;
+  definition: string;
+  partOfSpeech: string;
+  synonyms?: number[] | null;
+  antonyms?: number[] | null;
+  example?: string | null;
+}
