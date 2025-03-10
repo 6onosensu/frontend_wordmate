@@ -22,7 +22,7 @@ export const WordProvider: FC<{ children: ReactNode; status: string }> = ({ chil
   }, [token, status]);
 
   const { data: words, loading, error } = useFetch(fetchWords);
-  console.log(words);
+
   return (
     <WordContext.Provider value={{ words: words || {}, loadWords: fetchWords, loading, error }}>
       {children}

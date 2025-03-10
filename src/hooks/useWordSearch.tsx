@@ -34,7 +34,7 @@ export const useWordSearch = () => {
 
   const handleAddDefinition = async (
     meaning: DictionaryAPIResponse["meanings"][number],
-    definition: DictionaryAPIResponse["meanings"][number]["definitions"][number]
+    definition: DictionaryAPIResponse["meanings"][number]["definitions"][number],
   ) => {
     if (!token) {
       console.error("No token found! User is not authenticated.");
@@ -67,7 +67,6 @@ export const useWordSearch = () => {
 
     try {
       await saveUserWord(formattedData, token);
-      console.log("Word saved successfully!");
     } catch (err) {
       console.error("Error saving word:", err);
     }

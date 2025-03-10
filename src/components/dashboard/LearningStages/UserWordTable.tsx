@@ -24,10 +24,10 @@ export const UserWordTable: FC<UserWordTableProps> = ({ data }) => {
                   {wordData.audio && <SvgButton iconSrc={soundIcon} altText="Play Sound" />}
                 </TableCell>
               </TableRow>
-            ))};
+            ))}
           </TableBody>
         </Table>
       )}
     </TableContainer>
-  );
+  )
 }
