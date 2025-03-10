@@ -1,11 +1,11 @@
 import { Box, Table, TableBody, TableCell, TableHead, TableRow, Typography } from "@mui/material";
 import { useWords } from "@/context/WordContext";
 
-const LearningStatictics = () => {
+const LearningStatistics = () => {
   const { words, } = useWords();
 
   return (
-    <Box sx={{ textAlign: "center"}}>
+    <Box sx={{ textAlign: "center" }}>
       <Typography variant="h5">Learning Statistics</Typography>
       <Table>
         <TableHead>
@@ -26,4 +26,4 @@ const LearningStatictics = () => {
     </Box>
   )
 }
-export default LearningStatictics;
+export default LearningStatistics;

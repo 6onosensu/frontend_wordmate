@@ -22,13 +22,14 @@ export interface FormattedDataType {
   antonyms?: string[];
 }
 
-interface User {
+export interface User {
   id: number;
+  name: string;
   email: string;
   password: string;
-  countryName: string;
-  number: string;
-  pictureUrl: string;
+  countryName?: string;
+  number?: string;
+  pictureUrl?: string;
 }
 
 interface Status {

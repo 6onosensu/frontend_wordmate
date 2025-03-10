@@ -1,7 +1,7 @@
-import { Box, Button, Container } from "@mui/material"
+import { Box, Button, Container} from "@mui/material"
 import { logoutUser } from "@/services/authService";
 import { useNavigate } from "react-router-dom";
-import LearningStatictics from "./LearningStatistics";
+import LearningStatistics from "./LearningStatistics";
 import LearningGoals from "./LearningGoals";
 import UserInfo from "./UserInfo";
 
@@ -13,24 +13,27 @@ const OverviewProfileSection = () => {
     navigate("/");
   };
 
-  const handleSettings = () => {
-    
-  };
-
-  const handleEditProfile = () => {
-
-  };
-
   return (
     <Container className="container-secondary">
-      <UserInfo />
-      <LearningGoals />
-      <LearningStatictics />
-      <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center"}}>
-        <Button variant="contained" color="info" onClick={handleEditProfile}>Edit Profile</Button>
-        <Button variant="contained" color="info"  onClick={handleSettings}>Settings</Button>
-        <Button variant="contained" color="info" onClick={handleLogout}>Logout</Button>
+      <Box>
+        <UserInfo />
+        <Button 
+          variant="contained" 
+          color="secondary" 
+          onClick={handleLogout} 
+          sx={{ margin: "4vh 0 0 0 ", }}
+        >
+          Logout
+        </Button>
       </Box>
+      <LearningGoals />
+      <Box>
+        <LearningStatistics />
+        <Button variant="contained" color="info">Learn!</Button>
+        <Button variant="contained" color="info">Repeat!</Button>
+        <Button variant="contained" color="info">Review!</Button>
+      </Box>
+
     </Container>
   )
 }

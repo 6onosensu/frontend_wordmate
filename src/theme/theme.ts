@@ -1,5 +1,6 @@
 import { createTheme } from "@mui/material/styles";
 import { keyframes } from "@mui/system";
+import '@/theme/font.css'
 
 const glowingAnimation = keyframes`
   0% { background-position: 0 0; }
@@ -69,9 +70,10 @@ const theme = createTheme({
           margin: "0",
         },
         root: {
+          letterSpacing: "0.7px",
           margin: "0.6em",
           padding: "0.6em 2em",
-          borderRadius: "px",
+          borderRadius: "5px",
           textTransform: "none",
           position: "relative",
           userSelect: "none",
@@ -123,7 +125,8 @@ const theme = createTheme({
         },
         containedInfo: {
           backgroundColor: "#DDDDDD",
-          color: "#000",
+          fontFamily: "Omnes-SemiBold, sans-serif",
+          color: "#fff",
           "&:hover": {
             backgroundColor: "#CCCCCC",
           },

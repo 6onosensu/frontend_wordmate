@@ -23,10 +23,10 @@ const Dashboard = () => {
         <OverviewProfileSection />
       </Box>
       <Box>
-        <LearningStages />
+        <WordSearch />
       </Box>
       <Box>
-        <WordSearch />
+        <LearningStages />
       </Box>
     </Stack>
   );
