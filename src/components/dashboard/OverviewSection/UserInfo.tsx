@@ -14,6 +14,10 @@ interface User {
   email?: string;
 }
 
+const size = {
+  fontSize: "0.85rem",
+}
+
 const UserInfo = () => {
   const { token } = useAuth();
   
@@ -33,10 +37,10 @@ const UserInfo = () => {
     <Box sx={{ display: "flex", gap: 2,  }}>
       <Avatar 
         src={user?.pictureUrl || "/default-avatar.png"} 
-        sx={{ width: 74, height: 74, marginTop: "10px" }} 
+        sx={{ width: 74, height: 74, marginTop: "1vh" }} 
       />
       <Box>
-        <Grid2 container spacing={2}>
+        <Grid2 container spacing={1}>
           <Typography variant="h6">
             {user?.name || "Unknown User"}
             </Typography>
@@ -46,13 +50,25 @@ const UserInfo = () => {
             onClick={handleSettingsClick}
           />
         </Grid2>
-        <Typography variant="body1" color="text.secondary">
+        <Typography 
+          variant="body1" 
+          sx={size} 
+          color="text.secondary"
+        >
           Email: {user?.email || "Not specified"}
         </Typography>
-        <Typography variant="body1" color="text.secondary">
+        <Typography 
+          variant="body1" 
+          sx={size} 
+          color="text.secondary"
+        >
           Country: {user?.countryName || "Not specified"}
         </Typography>
-        <Typography variant="body1" color="text.secondary">
+        <Typography 
+          variant="body1" 
+          sx={size} 
+          color="text.secondary"
+        >
           Number: {user?.number || "Not specified"}
         </Typography>
       </Box>
