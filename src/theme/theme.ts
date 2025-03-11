@@ -53,11 +53,11 @@ const theme = createTheme({
       fontFamily: "'Omnes-SemiBold', sans-serif",
     },
     body1: {
-      fontSize: "0.875rem",
+      fontSize: "1rem",
       fontFamily: "'Omnes-Medium', sans-serif",
     },
     body2: {
-      fontSize: "0.875rem",
+      fontSize: "1rem",
       fontFamily: "'Omnes-Light', sans-serif",
     },
   },

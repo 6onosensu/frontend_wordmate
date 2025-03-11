@@ -32,6 +32,10 @@ const Footer: FC = () => {
     const element = document.getElementById(section);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
+      element.classList.add("highlight");
+      setTimeout(() => {
+        element.classList.remove("highlight");
+      }, 10000);
     }
   };
 

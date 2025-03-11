@@ -12,7 +12,7 @@ export const UserWordTable: FC<UserWordTableProps> = ({ data }) => {
   return (
     <TableContainer sx={{ mt: 3 }}>
       {data.length === 0 ? (
-        <Typography variant="h6" align="center">No words to display!</Typography>
+        <Typography variant="body2" align="center">No words to display!</Typography>
       ) : (
         <Table>
           <TableBody>

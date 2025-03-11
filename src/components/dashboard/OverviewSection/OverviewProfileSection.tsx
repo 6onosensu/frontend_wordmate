@@ -13,6 +13,17 @@ const OverviewProfileSection = () => {
     navigate("/");
   };
 
+  const handleNavigate = (section: string) => {
+    const element = document.getElementById(section);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+      element.classList.add("highlight");
+      setTimeout(() => {
+        element.classList.remove("highlight");
+      }, 10000);
+    }
+  };
+
   return (
     <Container className="container-secondary">
       <Box>
@@ -29,9 +40,27 @@ const OverviewProfileSection = () => {
       <LearningGoals />
       <Box>
         <LearningStatistics />
-        <Button variant="contained" color="info">Learn!</Button>
-        <Button variant="contained" color="info">Repeat!</Button>
-        <Button variant="contained" color="info">Review!</Button>
+        <Button 
+          variant="contained" 
+          color="info" 
+          onClick={() => handleNavigate("Explore!")}
+        >
+          Learn!
+        </Button>
+        <Button 
+          variant="contained" 
+          color="info" 
+          onClick={() => handleNavigate("Refresh!")}
+        >
+          Repeat!
+        </Button>
+        <Button 
+          variant="contained" 
+          color="info" 
+          onClick={() => handleNavigate("Review!")}
+        >
+          Review!!
+        </Button>
       </Box>
 
     </Container>

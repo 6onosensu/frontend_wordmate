@@ -33,15 +33,19 @@ export const Stage: FC<StageProps> = ({ stage, title }) => {
   };
 
   return (
-    <Container maxWidth="xs" className="container-primary">
+    <Container maxWidth="xs" id={title} className="container-primary">
       <Box>
         <Typography variant="h3">{stage}</Typography>
       </Box>
-      <Box>
+      <Box >
         <UserWordTable data={formattedWords} />
       </Box>
       <Box>
-        <Button variant="contained" color="primary" onClick={handleClick}>
+        <Button 
+          variant="contained" 
+          color="primary" 
+          onClick={handleClick}
+        >
           {title}
         </Button>
       </Box>
