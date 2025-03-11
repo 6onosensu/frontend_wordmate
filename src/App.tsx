@@ -8,6 +8,7 @@ import { AuthProvider } from "@/context/AuthContext";
 import AppRoutes from "@/routes/AppRoutes";
 import Footer from "@/components/Footer";
 import { Box } from "@mui/material";
+import { WordProvider } from "./context/WordContext";
 
 
 function App() {
@@ -18,22 +19,24 @@ function App() {
       {globalStyles}
 
       <AuthProvider>
-        <BrowserRouter>
-          <Box sx={{
-            display: "flex",
-            flexDirection: "column", 
-            minHeight: "100vh"
-          }}>
-            <Header />
+        <WordProvider>
+          <BrowserRouter>
+            <Box sx={{
+              display: "flex",
+              flexDirection: "column", 
+              minHeight: "100vh"
+            }}>
+              <Header />
 
-            <Box sx={{ flex: 1 }}>
-              <AppRoutes />
+              <Box sx={{ flex: 1 }}>
+                <AppRoutes />
+              </Box>
+              
+              <Footer />
             </Box>
-            
-            <Footer />
-          </Box>
-      
-        </BrowserRouter>
+        
+          </BrowserRouter>
+        </WordProvider>
       </AuthProvider>
     </ThemeProvider>
   )

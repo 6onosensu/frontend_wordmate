@@ -164,14 +164,14 @@ const theme = createTheme({
           },
         },
         containedInfo: {
-          backgroundColor: "#DDDDDD",
+          backgroundColor: "#CCCCCC",
           fontFamily: "Omnes-SemiBold, sans-serif",
-          color: "#fff",
+          color: "#ffffff",
           "&:hover": {
-            backgroundColor: "#CCCCCC",
+            backgroundColor: "#BBBBBB",
           },
           "&:active": {
-            backgroundColor: "#BBBBBB",
+            backgroundColor: "#DDDDDD",
           },
         },
         contained: {

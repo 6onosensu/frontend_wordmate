@@ -13,25 +13,24 @@ export const Stage: FC<StageProps> = ({ stage, title }) => {
   const { words, loadWords } = useWords();
 
   useEffect(() => {
-    loadWords(stage);
+    loadWords([stage]);
   }, [stage]);
   
- const formattedWords: FormattedWord[] = Object.values(words)
-    .flat()
-    .map((userWord: UserWord): FormattedWord => ({
-      id: userWord.id,
-      word: userWord.meaning.word.word ?? "Word is undefined",
-      audio: userWord?.meaning.word.audio ?? null,
-      definition: userWord.meaning.definition ?? "Definition is undefined",
-      partOfSpeech: userWord.meaning.partOfSpeech.title ?? "Part of speech is undefined",
-      synonyms: userWord?.meaning.synonyms ?? [],
-      antonyms: userWord?.meaning.antonyms ?? [],
-      example: userWord?.meaning.example ?? "No example available",
-    }));
+ const formattedWords: FormattedWord[]  = (
+  words[stage] || []).map((userWord: UserWord): FormattedWord => ({
+    id: userWord.id,
+    word: userWord.meaning.word.word ?? "Word is undefined",
+    audio: userWord?.meaning.word.audio ?? null,
+    definition: userWord.meaning.definition ?? "Definition is undefined",
+    partOfSpeech: userWord.meaning.partOfSpeech.title ?? "Part of speech is undefined",
+    synonyms: userWord?.meaning.synonyms ?? [],
+    antonyms: userWord?.meaning.antonyms ?? [],
+    example: userWord?.meaning.example ?? "No example available",
+  }));
 
   const handleClick = () => {
-
-  }
+    
+  };
 
   return (
     <Container maxWidth="xs" className="container-primary">
