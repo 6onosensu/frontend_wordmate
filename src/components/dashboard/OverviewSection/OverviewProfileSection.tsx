@@ -20,7 +20,7 @@ const OverviewProfileSection = () => {
       element.classList.add("highlight");
       setTimeout(() => {
         element.classList.remove("highlight");
-      }, 10000);
+      }, 8000);
     }
   };
 
