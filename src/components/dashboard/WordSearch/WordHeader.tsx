@@ -2,17 +2,13 @@ import { FC } from "react";
 import { Typography, Box } from "@mui/material";
 import soundIcon from "@/assets/sound.svg"; 
 import SvgButton from "@/components/SvgButton";
+import { playAudio } from "@/utils/audioUtils";
 
 interface WordHeaderProps {
   data: any;
 }
 
 const WordHeader: FC<WordHeaderProps> = ({ data }) => {
-  const playAudio = (audioUrl: string) => {
-    const audio = new Audio(audioUrl);
-    audio.play();
-  };
-
   const audioSource = data.phonetics?.find((p: any) => p.audio)?.audio;
 
   return (

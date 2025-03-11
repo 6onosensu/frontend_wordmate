@@ -3,6 +3,7 @@ import { UserWordTable } from "./UserWordTable";
 import { FC, useEffect } from "react";
 import { useWords } from "@/context/WordContext";
 import { FormattedWord, UserWord } from "@/types/wordType";
+import { useNavigate } from "react-router-dom";
 
 interface StageProps {
   stage: string;
@@ -11,6 +12,7 @@ interface StageProps {
 
 export const Stage: FC<StageProps> = ({ stage, title }) => {
   const { words, loadWords } = useWords();
+  const navigate = useNavigate();
 
   useEffect(() => {
     loadWords([stage]);
@@ -28,10 +30,6 @@ export const Stage: FC<StageProps> = ({ stage, title }) => {
     example: userWord?.meaning.example ?? "No example available",
   }));
 
-  const handleClick = () => {
-    
-  };
-
   return (
     <Container maxWidth="xs" id={title} className="container-primary">
       <Box>
@@ -44,7 +42,7 @@ export const Stage: FC<StageProps> = ({ stage, title }) => {
         <Button 
           variant="contained" 
           color="primary" 
-          onClick={handleClick}
+          onClick={() => navigate("/LearningPage", )}
         >
           {title}
         </Button>
