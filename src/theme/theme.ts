@@ -28,6 +28,38 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: "'Omnes-Medium', sans-serif",
+    h1: {
+      fontSize: "2.5rem",
+      fontFamily: "'Omnes-Black', sans-serif",
+    },
+    h2: {
+      fontSize: "2rem",
+      fontFamily: "'Omnes-Bold', sans-serif",
+    },
+    h3: {
+      fontSize: "1.85rem",
+      fontFamily: "'Omnes-Bold', sans-serif",
+    },
+    h4: {
+      fontSize: "1.75rem",
+      fontFamily: "'Omnes-SemiBold', sans-serif",
+    },
+    h5: {
+      fontSize: "1.5rem",
+      fontFamily: "'Omnes-SemiBold', sans-serif",
+    },
+    h6: {
+      fontSize: "1.35rem",
+      fontFamily: "'Omnes-SemiBold', sans-serif",
+    },
+    body1: {
+      fontSize: "0.875rem",
+      fontFamily: "'Omnes-Medium', sans-serif",
+    },
+    body2: {
+      fontSize: "0.875rem",
+      fontFamily: "'Omnes-Light', sans-serif",
+    },
   },
   components: {
     MuiPaper: {
@@ -62,6 +94,14 @@ const theme = createTheme({
           gap: "3vh",
           mt: "2",
         },
+      }
+    },
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          fontSize: "0.975rem",
+          fontFamily: "'Omnes-Medium', sans-serif",
+        }
       }
     },
     MuiButton: {

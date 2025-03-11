@@ -36,7 +36,7 @@ export const Stage: FC<StageProps> = ({ stage, title }) => {
   return (
     <Container maxWidth="xs" className="container-primary">
       <Box>
-        <Typography variant="h4">{stage}</Typography>
+        <Typography variant="h3">{stage}</Typography>
       </Box>
       <Box>
         <UserWordTable data={formattedWords} />

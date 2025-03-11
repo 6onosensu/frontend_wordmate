@@ -8,6 +8,7 @@ export const loginUser = async (email: string, password: string) => {
   });
 
   const data = await response.json();
+  console.log("Login response:", response.status, data);
   if (!response.ok) throw new Error(data.message || "Login failed");
 
   return data.access_token;

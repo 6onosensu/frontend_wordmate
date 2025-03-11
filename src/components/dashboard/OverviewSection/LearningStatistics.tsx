@@ -3,23 +3,28 @@ import { useWords } from "@/context/WordContext";
 
 const LearningStatistics = () => {
   const { words, } = useWords();
-
+  const cellStyle = { 
+    textAlign: "center", 
+    paddingLeft: 0 
+  };
   return (
     <Box sx={{ textAlign: "center" }}>
       <Typography variant="h5">Learning Statistics</Typography>
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell>To Explore</TableCell>
-            <TableCell>To Refresh</TableCell>
-            <TableCell>Retained</TableCell>
+            {["To Explore", "To Refresh", "Retained"].map((header) => (
+              <TableCell key={header} sx={cellStyle}>{header}</TableCell>
+            ))}
           </TableRow>
         </TableHead>
         <TableBody>
           <TableRow>
-            <TableCell>{words["To Explore"]?.length || 0}</TableCell>
-            <TableCell>{words["To Refresh"]?.length || 0}</TableCell>
-            <TableCell>{words["Retained"]?.length || 0}</TableCell>
+            {["To Explore", "To Refresh", "Retained"].map((status) => (
+              <TableCell key={status} sx={cellStyle}>
+                {words[status]?.length || 0}
+              </TableCell>
+            ))}
           </TableRow>
         </TableBody>
       </Table>

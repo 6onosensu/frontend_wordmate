@@ -15,7 +15,7 @@ const globalStyles = (
       ".container-secondary": {
         alignItems: "top",  
         flexDirection: "row",
-      }
+      },
     }}
   />
 );

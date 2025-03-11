@@ -46,13 +46,13 @@ const UserInfo = () => {
             onClick={handleSettingsClick}
           />
         </Grid2>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body1" color="text.secondary">
           Email: {user?.email || "Not specified"}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body1" color="text.secondary">
           Country: {user?.countryName || "Not specified"}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body1" color="text.secondary">
           Number: {user?.number || "Not specified"}
         </Typography>
       </Box>

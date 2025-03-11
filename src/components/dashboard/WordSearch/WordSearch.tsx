@@ -10,7 +10,7 @@ const WordSearch: FC = () => {
   return (
     <Container className="container-primary" id="searchword">
       <Paper elevation={0}>
-        <Typography variant="h4"  sx={{
+        <Typography variant="h2"  sx={{
           overflow: 'hidden',
           textOverflow: 'ellipsis',
           minWidth: '200px',
