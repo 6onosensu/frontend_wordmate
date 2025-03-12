@@ -18,8 +18,9 @@ export const Stage: FC<StageProps> = ({ stage, title }) => {
     loadWords([stage]);
   }, [stage]);
   
- const formattedWords: FormattedWord[]  = (
-  words[stage] || []).map((userWord: UserWord): FormattedWord => ({
+  const formattedWords: FormattedWord[]  = (
+    words[stage] || []
+  ).map((userWord: UserWord): FormattedWord => ({
     id: userWord.id,
     word: userWord.meaning.word.word ?? "Word is undefined",
     audio: userWord?.meaning.word.audio ?? null,
@@ -42,7 +43,7 @@ export const Stage: FC<StageProps> = ({ stage, title }) => {
         <Button 
           variant="contained" 
           color="primary" 
-          onClick={() => navigate("/LearningPage", )}
+          onClick={() => navigate("/LearningPage", { state: { words: formattedWords, title } })}
         >
           {title}
         </Button>

@@ -1,27 +1,30 @@
-import { Button, Container, Stack, Typography } from "@mui/material";
+import { Button, Stack, Typography } from "@mui/material";
+import { useState } from "react";
 import { useLocation } from "react-router-dom";
+import { ReviewPhase } from "@/components/learningPage/ReviewPhase";
+import { FormattedWord } from "@/types/wordType";
 
 const LearningPage = () => {
   const location = useLocation();
-  const words = location.state?.words || []; 
+  const title = location.state?.title;
+  const words: FormattedWord[] = location.state?.words || [];
+  const [showWords, setShowWords] = useState(true);
 
-  const handleNextPhase = () => {
-    
-  }
-
+  const handleStartLearning = () => {
+    setShowWords(false);
+  };
   return (
     <Stack>
-      <Container className="container-primary">
-        <Typography variant="h2">Get to Know!</Typography>
-        
-        <Button
-          variant="contained" 
-          color="primary" 
-          onClick={handleNextPhase}
-        >
-          Let's do it!
-        </Button>
-      </Container>
+      <Typography variant="h2">Review Your Words:</Typography>
+      <ReviewPhase showWords={showWords} words={words}/>
+      
+      <Button
+        variant="contained" 
+        color="primary" 
+        onClick={handleStartLearning}
+      >
+        {title}
+      </Button>
     </Stack>
   );
 };
