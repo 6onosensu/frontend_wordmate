@@ -4,7 +4,7 @@ import { IconButton, Box } from "@mui/material";
 interface SvgButtonProps {
   iconSrc: string;
   altText: string;
-  onClick?: () => void;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   width?: string;
   height?: string;
   zoom?: number; 

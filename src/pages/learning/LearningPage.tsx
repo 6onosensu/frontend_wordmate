@@ -47,7 +47,10 @@ const LearningPage = () => {
                         <SvgButton 
                           iconSrc={Sound}
                           altText="Play Sound!"
-                          onClick={() => playAudio(word.audio)}
+                          onClick={(e) => {
+                            e.stopPropagation(); 
+                            playAudio(word.audio!);
+                          }}
                         />
                       )}
                     </TableCell>

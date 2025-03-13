@@ -13,6 +13,11 @@ interface FlashcardProps {
 export const Flashcard: FC<FlashcardProps> = ({ word, onNext }) => {
   const [flipped, setFlipped] = useState(false);
 
+  const handleNextClick = () => {
+    setFlipped(false);
+    onNext();
+  };
+
   return (
     <Stack sx={{ width: "800px" }}>
       <Typography variant="h6">
@@ -45,7 +50,10 @@ export const Flashcard: FC<FlashcardProps> = ({ word, onNext }) => {
                 <SvgButton 
                   iconSrc={Sound} 
                   altText={"Play Sound!"} 
-                  onClick={() => playAudio(word.audio!)}
+                  onClick={(e) => {
+                    e.stopPropagation(); 
+                    playAudio(word.audio!);
+                  }}
                 />
               )}
             </>
@@ -56,7 +64,7 @@ export const Flashcard: FC<FlashcardProps> = ({ word, onNext }) => {
       <Button 
         variant="contained" 
         color="primary" 
-        onClick={onNext} 
+        onClick={handleNextClick} 
       >
         Next
       </Button>
