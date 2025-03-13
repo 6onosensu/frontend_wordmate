@@ -5,6 +5,9 @@ import SvgButton from "@/components/common/SvgButton";
 import Sound from "@/assets/sound.svg";
 import { FormattedWord } from "@/types/wordType";
 import { Fragment, useState } from "react";
+import { Link as MuiLink } from "@mui/material";
+import { Link as RouterLink } from "react-router-dom";
+
 
 const LearningPage = () => {
   const location = useLocation();
@@ -21,7 +24,7 @@ const LearningPage = () => {
     <Stack>
       <Typography variant="h2">Review Your Words:</Typography>
       <Container className="container-primary">
-        {words.length > 3 ? (
+        {words.length > 2 ? (
           <Table>
             <TableBody>
               {words.slice(0, 10).map((word: FormattedWord, index: number) => (
@@ -75,16 +78,22 @@ const LearningPage = () => {
               ))}
             </TableBody>
           </Table>
-        ) : (
-          <Typography variant="h5">Your word list have less than 3 words! Add more here:.</Typography>
+        ) : ( 
+          <Typography variant="h5">
+            Your word list has 0 or less than 3 words!
+            <MuiLink component={RouterLink} to="/dashboard#search">Add more here</MuiLink>
+          </Typography>
         )}
       </Container>
       <Button
         variant="contained" 
         color="primary" 
-        onClick={() => navigate("/LearningController", { state: { words } })}
+        onClick={
+          () => words.length > 3 ? navigate("/LearningController", 
+          { state: { words } }) : navigate("/dashboard")
+        }
       >
-        {title}
+        {words.length > 2 ? title : "Go Back"}
       </Button>
     </Stack>
   );
