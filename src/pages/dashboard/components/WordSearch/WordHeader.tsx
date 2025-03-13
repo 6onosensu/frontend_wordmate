@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Typography, Box } from "@mui/material";
 import soundIcon from "@/assets/sound.svg"; 
-import SvgButton from "@/components/SvgButton";
+import SvgButton from "@/components/common/SvgButton";
 import { playAudio } from "@/utils/audioUtils";
 
 interface WordHeaderProps {

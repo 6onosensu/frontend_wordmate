@@ -1,10 +1,10 @@
 import { Routes, Route } from "react-router-dom";
-import Login from "@/pages/Login";
-import Register from "@/pages/Register";
-import Dashboard from "@/pages/Dashboard";
+import Login from "@/pages/auth/Login";
+import Register from "@/pages/auth/Register";
+import Dashboard from "@/pages/dashboard/Dashboard";
 import ProtectedRoute from "@/routes/ProtectedRoute";
 import { Search } from "@/pages/Search";
-import LearningPage from "@/pages/LearningPage";
+import LearningPage from "@/pages/learning/LearningPage";
 
 const AppRoutes = () => {
   return (

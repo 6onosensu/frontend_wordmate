@@ -3,7 +3,7 @@ import { useAuth } from "@/context/AuthContext";
 import { useFetch } from "@/hooks/useFetch";
 import { fetchUserData } from "@/services/apiService";
 import { useCallback } from "react";
-import SvgButton from "@/components/SvgButton";
+import SvgButton from "@/components/common/SvgButton";
 import Settings from "@/assets/settings.svg";
 
 interface User {

@@ -4,7 +4,7 @@ import { useAuth } from "@/context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import Logo from "@/assets/BookTwoWords.svg";
 import { logoutUser } from "@/services/authService";
-import SvgButton from "@/components/SvgButton";
+import SvgButton from "@/components/common/SvgButton";
 import CopyEmail from "@/assets/emailCircle.svg";
 import github from "@/assets/githubCircle.svg";
 import linkedin from "@/assets/linkedinCircle.svg";

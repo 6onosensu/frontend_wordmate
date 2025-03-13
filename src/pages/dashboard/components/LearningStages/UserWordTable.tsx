@@ -1,6 +1,6 @@
 import { Table, TableBody, TableCell, TableContainer, TableRow, Typography } from "@mui/material"
 import { FC } from "react"
-import SvgButton from "@/components/SvgButton";
+import SvgButton from "@/components/common/SvgButton";
 import soundIcon from "@/assets/sound.svg";
 import { FormattedWord } from "@/types/wordType";
 import { playAudio } from "@/utils/audioUtils";
