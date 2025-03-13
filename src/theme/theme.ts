@@ -43,6 +43,7 @@ const theme = createTheme({
     h4: {
       fontSize: "1.75rem",
       fontFamily: "'Omnes-SemiBold', sans-serif",
+      margin: "1vh",
     },
     h5: {
       fontSize: "1.5rem",
@@ -67,6 +68,7 @@ const theme = createTheme({
         root: {
           display: "flex", 
           alignItems: "center",
+          justifyContent: "center",
           gap: "3vh",
           backgroundColor: "transparent",
           width: "100%",
@@ -77,6 +79,33 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           alignItems: "center",
+        }
+      }
+    },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          margin: "5vh",
+          padding: "10vh",
+          cursor: "pointer",
+          transition: "0.3s",
+          "&:hover": { backgroundColor: "#f5f5f5" },
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center", 
+          justifyContent: "center", 
+        }
+      }
+    },
+    MuiCardContent: {
+      styleOverrides: {
+        root: {
+          textAlign: "center",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "100%", 
         }
       }
     },

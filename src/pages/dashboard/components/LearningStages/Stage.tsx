@@ -29,6 +29,7 @@ export const Stage: FC<StageProps> = ({ stage, title }) => {
     synonyms: userWord?.meaning.synonyms ?? [],
     antonyms: userWord?.meaning.antonyms ?? [],
     example: userWord?.meaning.example ?? "No example available",
+    repetitionCount: userWord.repetitionCount,
   }));
 
   return (

@@ -80,4 +80,5 @@ export interface FormattedWord {
   synonyms?: number[] | null;
   antonyms?: number[] | null;
   example?: string | null;
+  repetitionCount: number;
 }

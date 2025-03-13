@@ -5,6 +5,7 @@ import Dashboard from "@/pages/dashboard/Dashboard";
 import ProtectedRoute from "@/routes/ProtectedRoute";
 import { Search } from "@/pages/Search";
 import LearningPage from "@/pages/learning/LearningPage";
+import LearningController from "@/pages/learning/LearningController";
 
 const AppRoutes = () => {
   return (
@@ -28,6 +29,16 @@ const AppRoutes = () => {
           <ProtectedRoute>
             <Routes>
               <Route path="" element={<LearningPage />} />
+            </Routes>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/learningController/*"
+        element={
+          <ProtectedRoute>
+            <Routes>
+              <Route path="" element={<LearningController />} />
             </Routes>
           </ProtectedRoute>
         }

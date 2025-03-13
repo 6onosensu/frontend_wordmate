@@ -21,7 +21,7 @@ const LearningPage = () => {
     <Stack>
       <Typography variant="h2">Review Your Words:</Typography>
       <Container className="container-primary">
-        {words ? (
+        {words.length > 3 ? (
           <Table>
             <TableBody>
               {words.slice(0, 10).map((word: FormattedWord, index: number) => (
@@ -76,13 +76,13 @@ const LearningPage = () => {
             </TableBody>
           </Table>
         ) : (
-          <Typography variant="h5">Your word list is empty.</Typography>
+          <Typography variant="h5">Your word list have less than 3 words! Add more here:.</Typography>
         )}
       </Container>
       <Button
         variant="contained" 
         color="primary" 
-        onClick={() => navigate("/FlashCardPage", { state: { words } })}
+        onClick={() => navigate("/LearningController", { state: { words } })}
       >
         {title}
       </Button>
