@@ -7,7 +7,7 @@ import { playAudio } from "@/utils/audioUtils";
 
 interface FlashcardProps {
   word: FormattedWord;
-  onNext: () => void;
+  onNext: (isCorrect: boolean) => void;
 }
 
 export const Flashcard: FC<FlashcardProps> = ({ word, onNext }) => {
@@ -15,7 +15,7 @@ export const Flashcard: FC<FlashcardProps> = ({ word, onNext }) => {
 
   const handleNextClick = () => {
     setFlipped(false);
-    onNext();
+    onNext(true);
   };
 
   return (

@@ -40,3 +40,16 @@ export const saveUserWord = async (
 ) => {
   return fetchWithAuth("/userWords/", token, "POST", wordData);
 };
+
+export const updateUserWordRepetition = async (
+  wordId: number, 
+  repetitionCount: number, 
+  token: string,
+) => {
+  return fetchWithAuth(
+    `/userWords/${wordId}`, 
+    token, 
+    "PATCH", 
+    { repetitionCount }
+  );
+}
