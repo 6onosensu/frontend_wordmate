@@ -9,6 +9,7 @@ import CopyEmail from "@/assets/emailCircle.svg";
 import github from "@/assets/githubCircle.svg";
 import linkedin from "@/assets/linkedinCircle.svg";
 import telegram from "@/assets/telegramCircle.svg";
+import { handleNavigate } from "@/utils/scrollUtils";
 
 const Footer: FC = () => {
   const { token, logout } = useAuth();
@@ -28,17 +29,6 @@ const Footer: FC = () => {
     }
   }
 
-  const handleNavigate = (section: string) => {
-    const element = document.getElementById(section);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      element.classList.add("highlight");
-      setTimeout(() => {
-        element.classList.remove("highlight");
-      }, 10000);
-    }
-  };
-
   const handleCopyEmail = () => {
     const email = "darja.suhhanova@gmail.com";
     navigator.clipboard.writeText(email);
@@ -48,6 +38,10 @@ const Footer: FC = () => {
   const handleLink = (link: string) => {
     window.open(link, "_blank");
   }
+
+  const handleSearchNavigate = () => {
+    handleNavigate("searchword", token ? "/dashboard" : "/", navigate);
+  };
 
   return (
     <AppBar 
@@ -69,15 +63,13 @@ const Footer: FC = () => {
           <Button variant="text" onClick={() => navigate("/privacy")}>
             Privacy Policy
           </Button>
+          <Button variant="text" onClick={() => handleSearchNavigate()}>
+            Search Word
+          </Button>
           {token ? (
-            <>
-              <Button variant="text" onClick={() => handleNavigate("searchword")}>
-                Search Word
-              </Button>
-              <Button variant="text" onClick={handleLogout}>
-                Logout
-              </Button>
-            </>
+            <Button variant="text" onClick={handleLogout}>
+              Logout
+            </Button>
           ) : (
             <Button variant="text" onClick={() => navigate("login")}>
               Login
