@@ -3,10 +3,10 @@ import { useState } from "react";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useNavigate } from "react-router-dom";
 import { logoutUser } from "@/services/authService";
-
-
+import { useVisibility } from "@/context/VisibilityContext";
 
 const Options = () => {
+  const { setIsSettingsVisible, setIsEditUserVisible } = useVisibility(); 
   const [showOptions, setShowOptions] = useState(false);
   const navigate = useNavigate();
   
@@ -15,9 +15,10 @@ const Options = () => {
     navigate("/");
   };
 
+
   const optionsList = [
-    { label: "Edit User", action: () => console.log("Editing profile")},
-    { label: "Settings", action: () => console.log("Opening settings")},
+    { label: "Edit User", action: () => setIsEditUserVisible(prev => !prev)},
+    { label: "Settings", action: () => setIsSettingsVisible(prev => !prev)},
     { label: "Logout", action: handleLogout},
   ];
 

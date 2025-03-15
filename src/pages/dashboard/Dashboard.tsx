@@ -6,8 +6,12 @@ import OverviewProfileSection from "@/pages/dashboard/components/OverviewSection
 import WordSearch from "@/pages/dashboard/components/WordSearch/WordSearch";
 import { LearningStages } from "@/pages/dashboard/components/LearningStages/LearningStages";
 import { useAuth } from "@/context/AuthContext";
+import EditUserSection from "./components/EditUserSection";
+import SettingsSection from "./components/SettingsSection";
+import { useVisibility } from "@/context/VisibilityContext";
 
 const Dashboard = () => {
+  const { isSettingsVisible, isEditUserVisible } = useVisibility()
   const navigate = useNavigate();
   const { token } = useAuth();
 
@@ -22,12 +26,25 @@ const Dashboard = () => {
       <Box>
         <OverviewProfileSection />
       </Box>
+
+      {isEditUserVisible && (
+        <Box>
+          <EditUserSection />
+        </Box>
+      )}
+
+      {isSettingsVisible && (
+        <Box>
+          <SettingsSection />
+        </Box>
+      )}
       <Box>
         <WordSearch />
       </Box>
       <Box>
         <LearningStages />
       </Box>
+
     </Stack>
   );
 };

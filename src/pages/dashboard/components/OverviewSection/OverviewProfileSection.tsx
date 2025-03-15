@@ -1,5 +1,4 @@
 import { Box, Button, Container, Grid2 } from "@mui/material";
-
 import LearningStatistics from "./LearningStatistics";
 import LearningGoals from "./LearningGoals";
 import UserInfo from "./UserInfo";

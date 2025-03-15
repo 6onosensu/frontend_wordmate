@@ -9,6 +9,7 @@ import AppRoutes from "@/routes/AppRoutes";
 import Footer from "@/components/common/Footer";
 import { Box } from "@mui/material";
 import { WordProvider } from "./context/WordContext";
+import { VisibilityProvider } from "./context/VisibilityContext";
 
 
 function App() {
@@ -20,22 +21,24 @@ function App() {
 
       <AuthProvider>
         <WordProvider>
-          <BrowserRouter>
-            <Box sx={{
-              display: "flex",
-              flexDirection: "column", 
-              minHeight: "100vh"
-            }}>
-              <Header />
+          <VisibilityProvider>
+            <BrowserRouter>
+              <Box sx={{
+                display: "flex",
+                flexDirection: "column", 
+                minHeight: "100vh"
+              }}>
+                <Header />
 
-              <Box sx={{ flex: 1 }}>
-                <AppRoutes />
+                <Box sx={{ flex: 1 }}>
+                  <AppRoutes />
+                </Box>
+                
+                <Footer />
               </Box>
-              
-              <Footer />
-            </Box>
-        
-          </BrowserRouter>
+          
+            </BrowserRouter>
+          </VisibilityProvider>
         </WordProvider>
       </AuthProvider>
     </ThemeProvider>
