@@ -22,7 +22,7 @@ const Options = () => {
   ];
 
   return (
-    <Box sx={{ display: "flex", alignItems: "center", gap: "1vh" }}>
+    <Box sx={{ display: "flex", alignItems: "center" }}>
       {!showOptions && (
         <Button 
           variant="contained" 

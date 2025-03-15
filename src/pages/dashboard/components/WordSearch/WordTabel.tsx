@@ -1,5 +1,7 @@
 import { FC, useState } from "react";
 import { 
+  Alert,
+  Snackbar,
   Table, TableBody, TableCell, TableContainer, TableRow, Typography, 
 } from "@mui/material";
 import addIcon from "@/assets/add.svg";
@@ -20,6 +22,7 @@ const WordTable: FC<WordTableProps> = ({ meanings, onAddDefinition }) => {
     meaning: any, 
     definition: any 
   } | null>(null);
+  const [open, setOpen] = useState(false);
 
   const handleRowClick = (meaning: any, definition: any) => {
     setSelectedDefinition((previousSelectedDefinition) => {
@@ -37,8 +40,23 @@ const WordTable: FC<WordTableProps> = ({ meanings, onAddDefinition }) => {
     });
   };
 
+  const handleAddClick = (meaning: any, definition: any) => {
+    onAddDefinition?.(meaning, definition);
+    setOpen(true); 
+  };
+
   return (
     <TableContainer sx={{ mt: 3 }}>
+      <Snackbar 
+        open={open} 
+        autoHideDuration={3000} 
+        onClose={() => setOpen(false)}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      >
+        <Alert onClose={() => setOpen(false)} severity="success" sx={{ width: "100%" }}>
+          Word added successfully!
+        </Alert>
+      </Snackbar>
       <Table>
         <TableBody>
           {meanings.map((meaning, index) => (
@@ -61,8 +79,9 @@ const WordTable: FC<WordTableProps> = ({ meanings, onAddDefinition }) => {
                   <SvgButton
                     iconSrc={addIcon}
                     altText="Add to List"
-                    onClick={() => onAddDefinition?.(meaning, def)}
+                    onClick={() => handleAddClick(meaning, def)}
                   />
+                  
                 </TableCell>
               </TableRow>
             ))
