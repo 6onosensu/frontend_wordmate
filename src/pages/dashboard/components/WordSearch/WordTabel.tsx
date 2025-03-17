@@ -1,13 +1,12 @@
 import { FC, useState } from "react";
 import { 
-  Alert,
-  Snackbar,
   Table, TableBody, TableCell, TableContainer, TableRow, Typography, 
 } from "@mui/material";
 import addIcon from "@/assets/add.svg";
 import SvgButton from "@/components/common/SvgButton";
 import { DictionaryAPIResponse } from "@/types/wordType";
 import DefinitionDetails from "./DefinitionDetails";
+import CustomSnackbar from "@/components/common/CustomSnackbar";
 
 interface WordTableProps {
   meanings: DictionaryAPIResponse["meanings"];
@@ -18,11 +17,11 @@ interface WordTableProps {
 }
 
 const WordTable: FC<WordTableProps> = ({ meanings, onAddDefinition }) => {
+  const [open, setOpen] = useState(false);
   const [selectedDefinition, setSelectedDefinition] = useState<{ 
     meaning: any, 
     definition: any 
   } | null>(null);
-  const [open, setOpen] = useState(false);
 
   const handleRowClick = (meaning: any, definition: any) => {
     setSelectedDefinition((previousSelectedDefinition) => {
@@ -47,16 +46,12 @@ const WordTable: FC<WordTableProps> = ({ meanings, onAddDefinition }) => {
 
   return (
     <TableContainer sx={{ mt: 3 }}>
-      <Snackbar 
+      <CustomSnackbar 
         open={open} 
-        autoHideDuration={3000} 
+        message="Word added successfully!" 
+        severity="success"
         onClose={() => setOpen(false)}
-        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-      >
-        <Alert onClose={() => setOpen(false)} severity="success" sx={{ width: "100%" }}>
-          Word added successfully!
-        </Alert>
-      </Snackbar>
+      />
       <Table>
         <TableBody>
           {meanings.map((meaning, index) => (
