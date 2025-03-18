@@ -6,12 +6,14 @@ import ProtectedRoute from "@/routes/ProtectedRoute";
 import { Search } from "@/pages/Search";
 import LearningPage from "@/pages/learning/LearningPage";
 import LearningController from "@/pages/learning/LearningController";
+import ForgotPassword from "@/pages/auth/ForgotPassword";
 
 const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/" element={<Search />} />
       <Route
         path="/dashboard/*"

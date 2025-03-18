@@ -42,3 +42,23 @@ export const logoutUser = () => {
   localStorage.removeItem("token");
   sessionStorage.removeItem("token");
 };
+
+export const sendPasswordResetEmail = async (email: string) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/forgot-password`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || "Failed to send email.");
+    }
+
+    return data.message;
+  } catch (error: any) {
+    throw new Error(error.message || "Something went wrong.");
+  }
+};
