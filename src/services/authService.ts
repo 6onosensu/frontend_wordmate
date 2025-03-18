@@ -62,3 +62,23 @@ export const sendPasswordResetEmail = async (email: string) => {
     throw new Error(error.message || "Something went wrong.");
   }
 };
+
+export const resetUserPassword = async (email: string, newPassword: string) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/reset-password`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, newPassword }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || "Failed to reset password.");
+    }
+
+    return { success: true, message: data.message };
+  } catch (error: any) {
+    return { success: false, message: error.message || "Something went wrong!" };
+  }
+};

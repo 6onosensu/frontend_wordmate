@@ -7,6 +7,7 @@ import { Search } from "@/pages/Search";
 import LearningPage from "@/pages/learning/LearningPage";
 import LearningController from "@/pages/learning/LearningController";
 import ForgotPassword from "@/pages/auth/ForgotPassword";
+import ResetPassword from "@/pages/auth/ResetPassword";
 
 const AppRoutes = () => {
   return (
@@ -14,6 +15,7 @@ const AppRoutes = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/" element={<Search />} />
       <Route
         path="/dashboard/*"
