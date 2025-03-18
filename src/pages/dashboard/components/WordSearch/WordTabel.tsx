@@ -6,7 +6,7 @@ import addIcon from "@/assets/add.svg";
 import SvgButton from "@/components/common/SvgButton";
 import { DictionaryAPIResponse } from "@/types/wordType";
 import DefinitionDetails from "./DefinitionDetails";
-import CustomSnackbar from "@/components/common/CustomSnackbar";
+import { useSnackbar } from "@/context/SnackbarContext";
 
 interface WordTableProps {
   meanings: DictionaryAPIResponse["meanings"];
@@ -17,7 +17,7 @@ interface WordTableProps {
 }
 
 const WordTable: FC<WordTableProps> = ({ meanings, onAddDefinition }) => {
-  const [open, setOpen] = useState(false);
+  const { showSnackbar } = useSnackbar();
   const [selectedDefinition, setSelectedDefinition] = useState<{ 
     meaning: any, 
     definition: any 
@@ -41,17 +41,11 @@ const WordTable: FC<WordTableProps> = ({ meanings, onAddDefinition }) => {
 
   const handleAddClick = (meaning: any, definition: any) => {
     onAddDefinition?.(meaning, definition);
-    setOpen(true); 
+    showSnackbar("Word added successfully!", "success");
   };
 
   return (
     <TableContainer sx={{ mt: 3 }}>
-      <CustomSnackbar 
-        open={open} 
-        message="Word added successfully!" 
-        severity="success"
-        onClose={() => setOpen(false)}
-      />
       <Table>
         <TableBody>
           {meanings.map((meaning, index) => (

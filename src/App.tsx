@@ -10,6 +10,7 @@ import Footer from "@/components/common/Footer";
 import { Box } from "@mui/material";
 import { WordProvider } from "./context/WordContext";
 import { VisibilityProvider } from "./context/VisibilityContext";
+import { SnackbarProvider } from "./context/SnackbarContext";
 
 
 function App() {
@@ -22,22 +23,24 @@ function App() {
       <AuthProvider>
         <WordProvider>
           <VisibilityProvider>
-            <BrowserRouter>
-              <Box sx={{
-                display: "flex",
-                flexDirection: "column", 
-                minHeight: "100vh"
-              }}>
-                <Header />
+            <SnackbarProvider>
+              <BrowserRouter>
+                <Box sx={{
+                  display: "flex",
+                  flexDirection: "column", 
+                  minHeight: "100vh"
+                }}>
+                  <Header />
 
-                <Box sx={{ flex: 1 }}>
-                  <AppRoutes />
+                  <Box sx={{ flex: 1 }}>
+                    <AppRoutes />
+                  </Box>
+                  
+                  <Footer />
                 </Box>
-                
-                <Footer />
-              </Box>
-          
-            </BrowserRouter>
+            
+              </BrowserRouter>
+            </SnackbarProvider>
           </VisibilityProvider>
         </WordProvider>
       </AuthProvider>
