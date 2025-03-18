@@ -1,16 +1,28 @@
 const API_BASE_URL = "http://localhost:3000/auth";
 
-export const loginUser = async (email: string, password: string) => {
-  const response = await fetch(`${API_BASE_URL}/login`, {
-    method: "POST",
+const apiRequest = async (
+  endpoint: string, 
+  method: "POST" | "GET" | "PUT" | "DELETE" = "POST", 
+  body?: object
+) => {
+  const options: RequestInit = {
+    method,
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password }),
-  });
+    ...(body && { body: JSON.stringify(body) }),
+  };
 
+  const response = await fetch(`${API_BASE_URL}/${endpoint}`, options);
   const data = await response.json();
-  console.log("Login response:", response.status, data);
-  if (!response.ok) throw new Error(data.message || "Login failed");
 
+  if (!response.ok) {
+    throw new Error(data.message || "Request failed");
+  }
+
+  return data;
+};
+
+export const loginUser = async (email: string, password: string) => {
+  const data = await apiRequest("login", "POST", { email, password });
   return data.access_token;
 };
 
@@ -20,22 +32,9 @@ export const registerUser = async (
   name: string,
   phone?: string,
   country?: string,
-  pictureUrl?: string,
+  pictureUrl?: string
 ) => {
-  const requestBody = {
-    email, password, 
-    name, phone, country, pictureUrl
-  };
-
-  const response = await fetch(`${API_BASE_URL}/register`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(requestBody), 
-  });
-
-  const data = await response.json();
-  if (!response.ok) throw new Error(data.message || "Registration failed");
-  return data.access_token;
+  return apiRequest("register", "POST", { email, password, name, phone, country, pictureUrl });
 };
 
 export const logoutUser = () => {
@@ -44,40 +43,17 @@ export const logoutUser = () => {
 };
 
 export const sendPasswordResetEmail = async (email: string) => {
-  try {
-    const response = await fetch(`${API_BASE_URL}/forgot-password`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email }),
-    });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.error || "Failed to send email.");
-    }
-
-    return data.message;
-  } catch (error: any) {
-    throw new Error(error.message || "Something went wrong.");
-  }
-};
+  return handleApiRequest("forgot-password", { email });
+}
 
 export const resetUserPassword = async (token: string, newPassword: string) => {
+  return handleApiRequest("reset-password", { token, newPassword });
+};
+
+const handleApiRequest = async (endpoint: string, body: object) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/reset-password`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ token, newPassword }),
-    });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.error || "Failed to reset password.");
-    }
-
-    return { success: true, message: data.message };
+    const data = await apiRequest(endpoint, "POST", body);
+    return { success: true, message: data.message || "Request successful." };
   } catch (error: any) {
     return { success: false, message: error.message || "Something went wrong!" };
   }

@@ -7,6 +7,7 @@ import { useSnackbar } from "@/context/SnackbarContext";
 const ForgotPassword = () => {
   const { showSnackbar } = useSnackbar();
   const [email, setEmail] = useState("");
+  const [emailSent, setEmailSent] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
@@ -15,11 +16,11 @@ const ForgotPassword = () => {
       return;
     }
 
-    try {
-      const message = await sendPasswordResetEmail(email); 
-      showSnackbar(message, "success");
-    } catch (error: any) {
-      showSnackbar(error.message, "error");
+    const res = await sendPasswordResetEmail(email); 
+    showSnackbar(res.message, res.success ? "success" : "error");
+
+    if (res.success) {
+      setEmailSent(true);
     }
   };
 
@@ -53,6 +54,17 @@ const ForgotPassword = () => {
             Back to Login
           </Button>
         </Stack>
+
+        {emailSent && (
+          <Stack>
+            <Typography variant="body1" sx={{ fontWeight: "bold" }}>
+            Check your email ({email}) for the password reset link.
+            </Typography>
+            <Typography variant="body2" sx={{ color: "gray", fontWeight: "bold"}}>
+              If you don’t see the email, check your Spam or Junk folder.
+            </Typography>
+          </Stack>
+        )}
       </Container>
     </Stack>
   );

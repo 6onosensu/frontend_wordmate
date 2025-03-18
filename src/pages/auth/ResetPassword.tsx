@@ -39,14 +39,14 @@ const ResetPassword = () => {
       return;
     }
 
-    const result = await resetUserPassword(token, password);
+    const res = await resetUserPassword(token, password);
 
     showSnackbar(
-      result.message, 
-      result.success ? "success" : "error"
+      res.message, 
+      res.success ? "success" : "error"
     );
 
-    if (result.success) {
+    if (res.success) {
       setTimeout(() => {
         navigate("/login");
       }, 2000);
