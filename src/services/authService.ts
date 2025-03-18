@@ -63,12 +63,12 @@ export const sendPasswordResetEmail = async (email: string) => {
   }
 };
 
-export const resetUserPassword = async (email: string, newPassword: string) => {
+export const resetUserPassword = async (token: string, newPassword: string) => {
   try {
     const response = await fetch(`${API_BASE_URL}/reset-password`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, newPassword }),
+      body: JSON.stringify({ token, newPassword }),
     });
 
     const data = await response.json();

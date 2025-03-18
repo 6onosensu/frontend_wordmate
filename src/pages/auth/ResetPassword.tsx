@@ -1,20 +1,56 @@
-import CustomSnackbar from "@/components/common/CustomSnackbar";
+import { useSnackbar } from "@/context/SnackbarContext";
+import { resetUserPassword } from "@/services/authService";
 import { Button, TextField, Typography } from "@mui/material";
 import { Container, Stack } from "@mui/system";
 import { useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const ResetPassword = () => {
-  const [snackbar, setSnackbar] = useState({ 
-    open: false, 
-    message: "", 
-    severity: "info" as "success" | "error" | "info" | "warning" 
-  });
-  const [email, setEmail] = useState("");
+  const { showSnackbar } = useSnackbar();
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const token = searchParams.get("token");
+
   const handleSubmit = async () => {
-  
+    if (!token) {
+      showSnackbar(
+        "Invalid or missing reset token.", 
+        "error"
+      );
+      return;
+    }
+
+    if (!password || !confirmPassword) {
+      showSnackbar(
+        "All fields are required!", 
+        "error"
+      );
+      return;
+    }
+    
+    if (password !== confirmPassword) {
+      showSnackbar(
+        "Passwords do not match!", 
+        "error"
+      );
+      return;
+    }
+
+    const result = await resetUserPassword(token, password);
+
+    showSnackbar(
+      result.message, 
+      result.success ? "success" : "error"
+    );
+
+    if (result.success) {
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
+    }
   };
 
   return (
@@ -23,13 +59,6 @@ const ResetPassword = () => {
         <Typography variant="h2">Reset Password</Typography>
         <Typography variant="body1">Enter a new password for your account.</Typography>
 
-        <TextField 
-          label="Email that you have send"
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          fullWidth
-        />
         <TextField 
           label="New Password"
           type="password"
@@ -49,12 +78,6 @@ const ResetPassword = () => {
           Reset Password
         </Button>
       </Container>
-      <CustomSnackbar 
-        open={snackbar.open} 
-        message={snackbar.message} 
-        severity={snackbar.severity} 
-        onClose={() => setSnackbar({ ...snackbar, open: false })} 
-      />
     </Stack>
   )
 }
