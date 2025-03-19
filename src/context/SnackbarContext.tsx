@@ -29,7 +29,7 @@ export const SnackbarProvider = ({ children }: { children: ReactNode }) => {
     setSnackbar({ open: true, message, severity });
     setTimeout(() => setSnackbar(
       (prev) => ({ ...prev, open: false })
-    ), 2000);
+    ), 300000);
   };
 
   return (
