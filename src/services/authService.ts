@@ -59,7 +59,7 @@ export const resetUserPassword = async (token: string, newPassword: string) => {
 };
 
 export const deleteUserAccount = async () => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("token") || sessionStorage.getItem("token");
   if (!token) {
     return { success: false, message: "User not authenticated." }; 
   }
