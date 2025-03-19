@@ -2,12 +2,16 @@ const API_BASE_URL = "http://localhost:3000/auth";
 
 const apiRequest = async (
   endpoint: string, 
-  method: "POST" | "GET" | "PUT" | "DELETE" = "POST", 
-  body?: object
+  method: "POST" | "PATCH" | "DELETE", 
+  body?: object,
+  token?: string
 ) => {
   const options: RequestInit = {
     method,
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      ...(token && { Authorization: `Bearer ${token}` }), 
+    },
     ...(body && { body: JSON.stringify(body) }),
   };
 
@@ -34,7 +38,11 @@ export const registerUser = async (
   country?: string,
   pictureUrl?: string
 ) => {
-  return apiRequest("register", "POST", { email, password, name, phone, country, pictureUrl });
+  return apiRequest(
+    "register", 
+    "POST", 
+    { email, password, name, phone, country, pictureUrl }
+  );
 };
 
 export const logoutUser = () => {
@@ -50,9 +58,32 @@ export const resetUserPassword = async (token: string, newPassword: string) => {
   return handleApiRequest("reset-password", { token, newPassword });
 };
 
-const handleApiRequest = async (endpoint: string, body: object) => {
+export const deleteUserAccount = async () => {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    return { success: false, message: "User not authenticated." }; 
+  }
+
+  return handleApiRequest("delete-account", {}, token, "DELETE"); 
+};
+
+export const updateUserProfile = async (profileData: object) => {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    return { success: false, message: "User not authenticated." }; 
+  }
+
+  return handleApiRequest("update-profile", profileData, token, "PATCH");
+};
+
+const handleApiRequest = async (
+  endpoint: string, 
+  body: object = {}, 
+  token?: string, 
+  method: "POST" | "PATCH" | "DELETE" = "POST"
+) => {
   try {
-    const data = await apiRequest(endpoint, "POST", body);
+    const data = await apiRequest(endpoint, method, body, token);
     return { success: true, message: data.message || "Request successful." };
   } catch (error: any) {
     return { success: false, message: error.message || "Something went wrong!" };
