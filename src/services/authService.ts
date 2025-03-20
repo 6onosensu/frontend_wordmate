@@ -34,14 +34,14 @@ export const registerUser = async (
   email: string,
   password: string,
   name: string,
-  phone?: string,
-  country?: string,
+  number?: string,
+  countryName?: string,
   pictureUrl?: string
 ) => {
   return apiRequest(
     "register", 
     "POST", 
-    { email, password, name, phone, country, pictureUrl }
+    { email, password, name, number, countryName, pictureUrl }
   );
 };
 
@@ -67,13 +67,8 @@ export const deleteUserAccount = async () => {
   return handleApiRequest("delete-account", {}, token, "DELETE"); 
 };
 
-export const updateUserProfile = async (profileData: object) => {
-  const token = localStorage.getItem("token");
-  if (!token) {
-    return { success: false, message: "User not authenticated." }; 
-  }
-
-  return handleApiRequest("update-profile", profileData, token, "PATCH");
+export const updateUserProfile = async (token: string, profileData: object) => {
+  return handleApiRequest("update-account", profileData, token, "PATCH");
 };
 
 const handleApiRequest = async (

@@ -6,12 +6,12 @@ type SetState<T> = (value: T) => void;
 
 interface StepTwoProps {
   name: string;
-  phone: string;
-  country: string;
+  number: string;
+  countryName: string;
   pictureUrl: string;
   setName: SetState<string>;
-  setPhone: SetState<string>;
-  setCountry: SetState<string>;
+  setNumber: SetState<string>;
+  setCountryName: SetState<string>;
   setPictureUrl: SetState<string>;
   prevStep: () => void;
   handleRegister: (e: React.FormEvent) => void;
@@ -20,12 +20,12 @@ interface StepTwoProps {
 
 const StepTwo = ({
   name, 
-  phone, 
-  country, 
+  number, 
+  countryName, 
   pictureUrl, 
   setName, 
-  setPhone, 
-  setCountry, 
+  setNumber, 
+  setCountryName, 
   setPictureUrl,
   prevStep, 
   handleRegister, 
@@ -35,6 +35,7 @@ const StepTwo = ({
   const handleUrlChange = (e: ChangeEvent<HTMLInputElement>) => {
     setPictureUrl(e.target.value);
   };
+
 
   return (
     <form onSubmit={handleRegister} style={{ width: "100%" }}>
@@ -52,16 +53,16 @@ const StepTwo = ({
         type="tel" 
         fullWidth 
         margin="normal" 
-        value={phone} 
-        onChange={(e) => setPhone(e.target.value)} 
+        value={number} 
+        onChange={(e) => setNumber(e.target.value)} 
       />
       <TextField 
         select 
         label="Country" 
         fullWidth 
         margin="normal" 
-        value={country} 
-        onChange={(e) => setCountry(e.target.value)}
+        value={countryName} 
+        onChange={(e) => setCountryName(e.target.value)}
       >
         {countries.map((option) => (
           <MenuItem key={option} value={option}>

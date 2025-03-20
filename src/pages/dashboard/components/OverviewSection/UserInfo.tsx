@@ -48,14 +48,14 @@ const UserInfo = () => {
           sx={size} 
           color="text.secondary"
         >
-          Country: {user?.countryName || "Not specified"}
+          Country: {user?.countryName || ""}
         </Typography>
         <Typography 
           variant="body1" 
           sx={size} 
           color="text.secondary"
         >
-          Number: {user?.number || "Not specified"}
+          Number: {user?.number || ""}
         </Typography>
       </Box>
     </Box>

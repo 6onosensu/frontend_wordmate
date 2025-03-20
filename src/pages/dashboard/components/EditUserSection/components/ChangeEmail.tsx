@@ -1,23 +1,50 @@
 import { Button, IconButton, InputAdornment, TextField, Tooltip } from "@mui/material"
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
-import { FC, useState } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
+import { ChangeProps } from "../EditUserSection";
+import { fetchUserData } from "@/services/apiService";
+import { useAuth } from "@/context/AuthContext";
+import { useFetch } from "@/hooks/useFetch";
+import { User } from "@/types/wordType";
+import { useSnackbar } from "@/context/SnackbarContext";
+import { updateUserProfile } from "@/services/authService";
 
-interface ChangeEmailProps {
-  onSuccess: () => void;
-}
+const ChangeEmail: FC<ChangeProps> = ({ onSuccess }) => {
+  const [email, setEmail] = useState("");
+  const { token } = useAuth();
+  const { showSnackbar } = useSnackbar();
 
-const ChangeEmail: FC<ChangeEmailProps> = ({ onSuccess }) => {
-  const [newEmail, setNewEmail] = useState("");
-  const [loading, setLoading] = useState(false);
+  const authToken = token || "";
+  
+  const fetchUser = useCallback(() => fetchUserData(token!), [token]);
+  const { data: user, loading } = useFetch<User>(fetchUser);
+  
+  useEffect(() => {
+    if (user?.email) {
+      setEmail(user.email);
+    }
+  }, [user]);
 
-  const handleChangeEmail = () => {
-    if (!newEmail) return;
-    setLoading(true);
+  const handleChangeEmail = async () => {
+    if (!email || email === user?.email) {
+      showSnackbar("Please enter a new email address!", "warning");
+      return;
+    }
 
-    setTimeout(() => {
-      setLoading(false);
-      onSuccess();
-    }, 1500);
+    try {
+      const res = await updateUserProfile(authToken, { email });
+
+      showSnackbar(
+        res.message, 
+        res.success ? "success" : "error"
+      );
+
+      if (res.success) {
+        onSuccess();
+      }
+    } catch (error: any) {
+      showSnackbar(error.message || "Failed to update email!", "error");
+    }
   };
 
   return (
@@ -25,24 +52,26 @@ const ChangeEmail: FC<ChangeEmailProps> = ({ onSuccess }) => {
       <TextField 
         label="New Email" 
         type="email" 
-        value={newEmail} 
-        onChange={(e) => setNewEmail(e.target.value)}
+        value={email} 
+        onChange={(e) => setEmail(e.target.value)}
         fullWidth 
         autoComplete="email"
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <Tooltip 
-                title="Email must be a unique!" 
-                arrow
-                placement="bottom-end"
-              >
-                <IconButton>
-                  <InfoOutlinedIcon />
-                </IconButton>
-              </Tooltip>
-            </InputAdornment>
-          ),
+        slotProps={{
+          input: {
+            endAdornment: (
+              <InputAdornment position="end">
+                <Tooltip 
+                  title="Email must be a unique!" 
+                  arrow
+                  placement="bottom-end"
+                >
+                  <IconButton>
+                    <InfoOutlinedIcon />
+                  </IconButton>
+                </Tooltip>
+              </InputAdornment>
+            ),
+          }
         }}
       />
       <Button 
@@ -51,7 +80,7 @@ const ChangeEmail: FC<ChangeEmailProps> = ({ onSuccess }) => {
         onClick={handleChangeEmail}
         disabled={loading}
       >
-        {loading ? "Updating..." : "Update Email"}
+        {loading ? "Loading..." : "Update Email"}
       </Button>
     </>
   )

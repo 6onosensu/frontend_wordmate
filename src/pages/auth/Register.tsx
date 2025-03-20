@@ -15,10 +15,9 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [country, setCountry] = useState("");
+  const [countryName, setCountryName] = useState("");
   const [pictureUrl, setPictureUrl] = useState("");
-
+  const [number, setNumber] = useState("");
   const navigate = useNavigate();
 
   const nextStep = () => {
@@ -42,7 +41,7 @@ const Register = () => {
     setLoading(true);
     setError("");
     try {
-      await registerUser(email, password, name, phone, country, pictureUrl);
+      await registerUser(email, password, name, number, countryName, pictureUrl);
       navigate("/");
     } catch (error: any) {
       setError(error.message);
@@ -68,12 +67,12 @@ const Register = () => {
     content = (
       <StepTwo 
         name={name} 
-        phone={phone} 
-        country={country} 
+        number={number} 
+        countryName={countryName} 
         pictureUrl={pictureUrl} 
         setName={setName} 
-        setPhone={setPhone} 
-        setCountry={setCountry} 
+        setNumber={setNumber} 
+        setCountryName={setCountryName} 
         setPictureUrl={setPictureUrl}
         prevStep={prevStep} 
         handleRegister={handleRegister} 
