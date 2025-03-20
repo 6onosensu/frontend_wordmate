@@ -6,7 +6,7 @@ import OverviewProfileSection from "@/pages/dashboard/components/OverviewSection
 import WordSearch from "@/pages/dashboard/components/WordSearch/WordSearch";
 import { LearningStages } from "@/pages/dashboard/components/LearningStages/LearningStages";
 import { useAuth } from "@/context/AuthContext";
-import EditUserSection from "./components/EditUserSection";
+import EditUserSection from "./components/EditUserSection/EditUserSection";
 import SettingsSection from "./components/SettingsSection";
 import { useVisibility } from "@/context/VisibilityContext";
 
