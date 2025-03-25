@@ -29,7 +29,7 @@ export const fetchUserData = (token: string) => fetchWithAuth("/users/me", token
 export const fetchUserWordsByStatus = (status: string, token: string) => {
   const encodedStatus = encodeURIComponent(status)
   return fetchWithAuth(
-    `/userWords/status/filter?status=${encodedStatus}&due=false`, 
+    `/userWords/status/filter?status=${encodedStatus}&due=true`, 
     token
   );
 }

@@ -19,11 +19,16 @@ export const Flashcard: FC<FlashcardProps> = ({ word, onNext }) => {
   };
 
   return (
-    <Stack sx={{ width: "800px" }}>
+    <Stack>
       <Typography variant="h6">
         Try to recall the word's meaning before flipping!
       </Typography>
       <Card
+        sx={{ 
+          width: "100vh", height: "60vh",
+          px: 10, py: 5, m: 5, 
+          textAlign: "center" 
+        }}
         onClick={() => setFlipped(!flipped)}
       >
         <CardContent>
@@ -42,7 +47,7 @@ export const Flashcard: FC<FlashcardProps> = ({ word, onNext }) => {
                 </Typography>}
             </Box>
           ) : (
-            <>
+            <Box>
               <Typography variant="h3">
                 {word.word}
               </Typography>
@@ -56,7 +61,7 @@ export const Flashcard: FC<FlashcardProps> = ({ word, onNext }) => {
                   }}
                 />
               )}
-            </>
+            </Box>
           )}
         </CardContent>
       </Card>

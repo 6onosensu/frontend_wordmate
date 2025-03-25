@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Flashcard } from "./components/Flashcard";
 import { useAuth } from "@/context/AuthContext";
 import { updateUserWordRepetition } from "@/services/apiService";
+import ListenAndType from "./components/ListenAndType";
 
 const LearningController = () => {
   const location = useLocation();
@@ -64,7 +65,7 @@ const LearningController = () => {
       case 0:
         return <Flashcard word={currentWord} onNext={() => handleNext(true)} />;
       case 1:
-        return <Typography variant="body1">Next learning phase coming soon...</Typography>;
+        return <ListenAndType word={currentWord} />;
       default:
         return null;
     }

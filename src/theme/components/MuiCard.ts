@@ -10,6 +10,8 @@ const MuiCard = {
       flexDirection: "column",
       alignItems: "center", 
       justifyContent: "center", 
+      
+      gap: "20px",
     }
   }
 }
