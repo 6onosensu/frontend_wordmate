@@ -1,6 +1,6 @@
-import { TextField, MenuItem, Box, Typography, Button } from "@mui/material";
-import { countries } from "@/utils/countries";
+import { TextField, Box, Typography, Button } from "@mui/material";
 import InfoTextField from "@/components/common/InfoTextField";
+import CountrySelectPhoneInput from "@/components/common/CountrySelectPhoneInput";
 
 type SetState<T> = (value: T) => void;
 
@@ -42,29 +42,13 @@ const StepTwo = ({
         onChange={(e) => setName(e.target.value)} 
         required 
       />
-      <InfoTextField
-        label="Phone Number"
-        value={number}
-        onChange={(e) => setNumber(e.target.value)}
-        title={
-          "Enter your phone number including country code"
-        }
-        autoComplete="tel"
+      
+      <CountrySelectPhoneInput
+        country={countryName}
+        phone={number}
+        setCountry={setCountryName}
+        setPhone={setNumber}
       />
-      <TextField 
-        select 
-        label="Country" 
-        fullWidth 
-        margin="normal" 
-        value={countryName} 
-        onChange={(e) => setCountryName(e.target.value)}
-      >
-        {countries.map((option) => (
-          <MenuItem key={option} value={option}>
-            {option}
-          </MenuItem>
-        ))}
-      </TextField>
 
       <InfoTextField
         label="Profile Picture URL"

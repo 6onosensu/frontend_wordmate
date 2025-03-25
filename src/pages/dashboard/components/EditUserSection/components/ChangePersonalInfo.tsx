@@ -9,6 +9,7 @@ import { useSnackbar } from "@/context/SnackbarContext";
 import { updateUserProfile } from "@/services/authService";
 import InfoTextField from "@/components/common/InfoTextField";
 import { useUser } from "@/context/UserContext";
+import CountrySelectPhoneInput from "@/components/common/CountrySelectPhoneInput";
 
 const ChangePersonalInfo: FC<ChangeProps> = ({ onSuccess }) => {
   const [name, setName] = useState("");
@@ -74,18 +75,11 @@ const ChangePersonalInfo: FC<ChangeProps> = ({ onSuccess }) => {
           "To get a picture URL, right-click any image on the internet and choose 'Copy Image Address' or 'Copy Image URL'."
         }
       />
-      <TextField 
-        label="Country" 
-        value={countryName} 
-        onChange={(e) => setCountryName(e.target.value)}
-        fullWidth 
-      />
-      <InfoTextField
-        label="Phone Number"
-        value={number}
-        onChange={(e) => setNumber(e.target.value)}
-        title={"Enter your phone number including country code"}
-        autoComplete="tel"
+      <CountrySelectPhoneInput
+        country={countryName}
+        phone={number}
+        setCountry={setCountryName}
+        setPhone={setNumber}
       />
       <Button 
         variant="contained" 
