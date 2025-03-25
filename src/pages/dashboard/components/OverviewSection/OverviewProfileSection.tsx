@@ -11,50 +11,68 @@ const OverviewProfileSection = () => {
   return (
     <Container className="container-primary">
       <Box px={1.1}>
-      <Grid2 
-        container 
-        spacing={3}
-      >
-        <Grid2 size={3.6}>
-          <UserInfo />
-        </Grid2>
+        <Grid2 
+          container 
+          spacing={3}
+        >
+          <Grid2 size={3.6}>
+            <UserInfo />
+          </Grid2>
 
-        <Grid2 size={3.5}>
-          <LearningGoals />
-        </Grid2>
+          <Grid2 size={3.5}>
+            <LearningGoals />
+          </Grid2>
 
-        <Grid2 size={4.8}>
-          <LearningStatistics />
-        </Grid2>
+          <Grid2 size={4.8}>
+            <LearningStatistics />
+          </Grid2>
 
-        <Grid2 size={7.15}>
-          <Options />
-        </Grid2>
+          <Grid2 size={7.15}>
+            <Options />
+          </Grid2>
 
-        <Grid2 size={4.8}>
-          <Button 
-            variant="contained" 
-            color="info" 
-            onClick={() => handleNavigate("Explore!", "/dashboard", navigate)}
-          >
-            Learn!
-          </Button>
-          <Button 
-            variant="contained" 
-            color="info" 
-            onClick={() => handleNavigate("Refresh!", "/dashboard", navigate)}
-          >
-            Repeat!
-          </Button>
-          <Button 
-            variant="contained" 
-            color="info" 
-            onClick={() => handleNavigate("Review!", "/dashboard", navigate)}
-          >
-            Review!!
-          </Button>
+          <Grid2 size={4.8}>
+            <Button 
+              variant="contained" 
+              color="info" 
+              onClick={
+                () => handleNavigate(
+                  "Explore!", 
+                  "/dashboard", 
+                  navigate
+                )
+              }
+            >
+              Learn!
+            </Button>
+            <Button 
+              variant="contained" 
+              color="info" 
+              onClick={
+                () => handleNavigate(
+                  "Refresh!", 
+                  "/dashboard", 
+                  navigate
+                )
+              }
+            >
+              Repeat!
+            </Button>
+            <Button 
+              variant="contained" 
+              color="info" 
+              onClick={
+                () => handleNavigate(
+                  "Review!", 
+                  "/dashboard", 
+                  navigate
+                )
+              }
+            >
+              Review!!
+            </Button>
+          </Grid2>
         </Grid2>
-      </Grid2>
       </Box>
     </Container>
   )

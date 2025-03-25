@@ -4,8 +4,11 @@ import { Box, Container, Stack } from "@mui/system";
 import { useState } from "react";
 import { deleteUserAccount } from "@/services/authService";
 import { useNavigate } from "react-router-dom";
+import CollapseButton from "@/components/common/CollapseButton";
+import { useVisibility } from "@/context/VisibilityContext";
 
 const SettingsSection = () => {
+  const { setIsSettingsVisible } = useVisibility();
   const { showSnackbar } = useSnackbar();
   const navigate = useNavigate();
   const [isDeleting, setIsDeleting] = useState(false);
@@ -36,7 +39,8 @@ const SettingsSection = () => {
   };
   
   return (
-    <Container className="container-primary">
+    <Container className="container-primary" id="settings-section">
+      <CollapseButton onClick={() => setIsSettingsVisible(false)} />
       <Typography variant="h2">Settings</Typography>
 
       <Stack spacing={3} sx={{ my: 3, width: "100%" }}>

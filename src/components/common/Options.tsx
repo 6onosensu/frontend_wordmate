@@ -4,6 +4,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useNavigate } from "react-router-dom";
 import { logoutUser } from "@/services/authService";
 import { useVisibility } from "@/context/VisibilityContext";
+import { handleNavigate } from "@/utils/scrollUtils";
 
 const Options = () => {
   const { setIsSettingsVisible, setIsEditUserVisible } = useVisibility(); 
@@ -15,11 +16,20 @@ const Options = () => {
     navigate("/");
   };
 
-
+  const handleEditUserClick = () => {
+    setIsEditUserVisible(true);
+    handleNavigate("edit-user-section", "/dashboard", navigate);
+  };
+  
+  const handleSettingsClick = () => {
+    setIsSettingsVisible(true);
+    handleNavigate("settings-section", "/dashboard", navigate);
+  };
+  
   const optionsList = [
-    { label: "Edit User", action: () => setIsEditUserVisible(prev => !prev)},
-    { label: "Settings", action: () => setIsSettingsVisible(prev => !prev)},
-    { label: "Logout", action: handleLogout},
+    { label: "Edit User", action: handleEditUserClick },
+    { label: "Settings", action: handleSettingsClick },
+    { label: "Logout", action: handleLogout },
   ];
 
   return (

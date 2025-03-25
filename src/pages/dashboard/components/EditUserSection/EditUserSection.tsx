@@ -4,12 +4,15 @@ import ChangePassword from "./components/ChangePassword";
 import ChangeEmail from "./components/ChangeEmail";
 import ChangePersonalInfo from "./components/ChangePersonalInfo";
 import { useState } from "react";
+import CollapseButton from "@/components/common/CollapseButton";
+import { useVisibility } from "@/context/VisibilityContext";
 
 export interface ChangeProps {
   onSuccess: () => void;
 }
 
 const EditUserSection = () => {
+  const { setIsEditUserVisible } = useVisibility();
   const [showChangePassword, setShowChangePassword] = useState(false);
   const [showChangeEmail, setShowChangeEmail] = useState(false);
   const [showChangePersonalInfo, setShowChangePersonalInfo] = useState(false);
@@ -27,7 +30,8 @@ const EditUserSection = () => {
   };
 
   return (
-    <Container className="container-primary">
+    <Container className="container-primary" id="edit-user-section">
+      <CollapseButton onClick={() => setIsEditUserVisible(false)} />
       <Typography variant="h2">Account Update</Typography>
 
       <Grid 
