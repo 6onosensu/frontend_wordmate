@@ -1,6 +1,6 @@
 import { TextField, MenuItem, Box, Typography, Button } from "@mui/material";
 import { countries } from "@/utils/countries";
-import { ChangeEvent } from "react";
+import InfoTextField from "@/components/common/InfoTextField";
 
 type SetState<T> = (value: T) => void;
 
@@ -31,12 +31,6 @@ const StepTwo = ({
   handleRegister, 
   loading
 } : StepTwoProps) => {
-
-  const handleUrlChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setPictureUrl(e.target.value);
-  };
-
-
   return (
     <form onSubmit={handleRegister} style={{ width: "100%" }}>
       <TextField 
@@ -48,13 +42,14 @@ const StepTwo = ({
         onChange={(e) => setName(e.target.value)} 
         required 
       />
-      <TextField 
-        label="Phone Number" 
-        type="tel" 
-        fullWidth 
-        margin="normal" 
-        value={number} 
-        onChange={(e) => setNumber(e.target.value)} 
+      <InfoTextField
+        label="Phone Number"
+        value={number}
+        onChange={(e) => setNumber(e.target.value)}
+        title={
+          "Enter your phone number including country code"
+        }
+        autoComplete="tel"
       />
       <TextField 
         select 
@@ -71,13 +66,13 @@ const StepTwo = ({
         ))}
       </TextField>
 
-      <TextField
-        label="Image URL"
-        type="text"
-        fullWidth
-        margin="normal"
-        value={pictureUrl}
-        onChange={handleUrlChange}
+      <InfoTextField
+        label="Profile Picture URL"
+        value={pictureUrl} 
+        onChange={(e) => setPictureUrl(e.target.value)}
+        title={
+          "To get a picture URL, right-click any image on the internet and choose 'Copy Image Address' or 'Copy Image URL'."
+        }
       />
 
       {pictureUrl && (

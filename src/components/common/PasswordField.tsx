@@ -17,16 +17,19 @@ const PasswordField = ({ label, value, onChange }: {
       label={label}
       value={value}
       onChange={onChange}
-      margin="normal"
       fullWidth
+      margin="normal" 
       required
       slotProps={{
         input: {
           endAdornment: (
             <InputAdornment position="end">
               <IconButton 
-                onClick={() => setShowPassword(!showPassword)} 
+                onClick={
+                  () => setShowPassword(!showPassword)
+                } 
                 edge="end"
+                sx={{ mr: 0 }}
               >
                 {showPassword ? <VisibilityOff /> : <Visibility />}
               </IconButton>

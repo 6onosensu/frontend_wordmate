@@ -1,5 +1,4 @@
-import { Button, IconButton, InputAdornment, TextField, Tooltip } from "@mui/material"
-import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import { Button, } from "@mui/material"
 import { FC, useCallback, useEffect, useState } from "react";
 import { ChangeProps } from "../EditUserSection";
 import { fetchUserData } from "@/services/apiService";
@@ -8,6 +7,7 @@ import { useFetch } from "@/hooks/useFetch";
 import { User } from "@/types/wordType";
 import { useSnackbar } from "@/context/SnackbarContext";
 import { updateUserProfile } from "@/services/authService";
+import InfoTextField from "@/components/common/InfoTextField";
 
 const ChangeEmail: FC<ChangeProps> = ({ onSuccess }) => {
   const [email, setEmail] = useState("");
@@ -49,30 +49,13 @@ const ChangeEmail: FC<ChangeProps> = ({ onSuccess }) => {
 
   return (
     <>
-      <TextField 
-        label="New Email" 
-        type="email" 
-        value={email} 
+      <InfoTextField
+        label={"New Email"}
+        type={"email"}
+        value={email}
         onChange={(e) => setEmail(e.target.value)}
-        fullWidth 
+        title={"Email must be unique!"}
         autoComplete="email"
-        slotProps={{
-          input: {
-            endAdornment: (
-              <InputAdornment position="end">
-                <Tooltip 
-                  title="Email must be a unique!" 
-                  arrow
-                  placement="bottom-end"
-                >
-                  <IconButton>
-                    <InfoOutlinedIcon />
-                  </IconButton>
-                </Tooltip>
-              </InputAdornment>
-            ),
-          }
-        }}
       />
       <Button 
         variant="contained" 

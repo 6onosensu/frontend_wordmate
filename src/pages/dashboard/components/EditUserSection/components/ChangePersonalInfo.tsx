@@ -1,5 +1,4 @@
-import { Tooltip, Button, TextField, InputAdornment, IconButton } from "@mui/material";
-import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import { Button, TextField } from "@mui/material";
 import { FC, useCallback, useEffect, useState } from "react";
 import { ChangeProps } from "../EditUserSection";
 import { useAuth } from "@/context/AuthContext";
@@ -8,6 +7,7 @@ import { useFetch } from "@/hooks/useFetch";
 import { User } from "@/types/wordType";
 import { useSnackbar } from "@/context/SnackbarContext";
 import { updateUserProfile } from "@/services/authService";
+import InfoTextField from "@/components/common/InfoTextField";
 
 const ChangePersonalInfo: FC<ChangeProps> = ({ onSuccess }) => {
   const [name, setName] = useState("");
@@ -61,27 +61,15 @@ const ChangePersonalInfo: FC<ChangeProps> = ({ onSuccess }) => {
         value={name} 
         onChange={(e) => setName(e.target.value)}
         fullWidth 
+        required
       />
-      <TextField 
-        label="Profile Picture URL" 
+      <InfoTextField
+        label="Profile Picture URL"
         value={pictureUrl} 
         onChange={(e) => setPictureUrl(e.target.value)}
-        fullWidth 
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <Tooltip 
-                title="To get a picture URL, right-click any image on the internet and choose 'Copy Image Address' or 'Copy Image URL'." 
-                arrow
-                placement="bottom-end"
-              >
-                <IconButton>
-                  <InfoOutlinedIcon />
-                </IconButton>
-              </Tooltip>
-            </InputAdornment>
-          ),
-        }}
+        title={
+          "To get a picture URL, right-click any image on the internet and choose 'Copy Image Address' or 'Copy Image URL'."
+        }
       />
       <TextField 
         label="Country" 
@@ -89,27 +77,12 @@ const ChangePersonalInfo: FC<ChangeProps> = ({ onSuccess }) => {
         onChange={(e) => setCountryName(e.target.value)}
         fullWidth 
       />
-      <TextField 
-        label="Phone Number" 
-        value={number} 
+      <InfoTextField
+        label="Phone Number"
+        value={number}
         onChange={(e) => setNumber(e.target.value)}
-        fullWidth 
+        title={"Enter your phone number including country code"}
         autoComplete="tel"
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <Tooltip 
-                title="Enter your phone number including country code" 
-                arrow
-                placement="bottom-end"
-              >
-                <IconButton>
-                  <InfoOutlinedIcon />
-                </IconButton>
-              </Tooltip>
-            </InputAdornment>
-          ),
-        }}
       />
       <Button 
         variant="contained" 
