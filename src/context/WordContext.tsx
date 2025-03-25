@@ -14,46 +14,48 @@ interface WordContextProps {
 export const WordContext = createContext<WordContextProps | undefined>(undefined);
 
 export const WordProvider: FC<{ children: ReactNode }> = ({ children }) => {
-  const { token } = useAuth();
   const [words, setWords] = useState<Record<string, UserWord[]>>({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const { token } = useAuth();
 
-  const defaultStages = ["To Explore", "To Refresh", "Retained"];
+  const defaultStatuses = ["To Explore", "To Refresh", "Retained"];
 
-  const loadWords = useCallback(async (statuses: string[] = defaultStages) => {
-    if (!token) return;
-    setLoading(true);
-    setError("");
+  const loadWords = useCallback(
+    async (statuses: string[] = defaultStatuses) => {
+      if (!token) return;
 
-    try {
-      const results = await Promise.all(
-        statuses.map(async (status) => {
-          const data = await fetchUserWordsByStatus(status, token);
-          return { status, data };
-        })
-      );
-      
-      const updatedWords: Record<string, UserWord[]> = {};
-      results.forEach(({ status, data }) => {
-        updatedWords[status] = data || [];
-      });
+      setLoading(true);
+      setError("");
 
-      setWords(updatedWords);
-    } catch (err) {
-      setError("Failed to load words");
-    } finally {
-      setLoading(false);
-    }
-  }, [token]);
+      try {
+        const results = await Promise.all(
+          statuses.map(async (status) => {
+            const data = await fetchUserWordsByStatus(status, token);
+            return { status, data };
+          })
+        );
+
+        const updated: Record<string, UserWord[]> = {};
+        results.forEach(({ status, data }) => {
+          updated[status] = data || [];
+        });
+
+        setWords(updated);
+      } catch {
+        setError("Failed to load words");
+      } finally {
+        setLoading(false);
+      }
+    },
+    [token]
+  );
 
   useEffect(() => {
-    if (token) {
-      loadWords();
-    }
-  }, [token]);
+    if (token) loadWords();
+  }, [token, loadWords]);
 
-  const refreshWords = () => loadWords(); 
+  const refreshWords = () => loadWords();
 
   return (
     <WordContext.Provider value={{ words, loadWords, refreshWords, loading, error }}>
