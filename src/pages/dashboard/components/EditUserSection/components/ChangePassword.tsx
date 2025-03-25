@@ -1,9 +1,10 @@
-import { Button, TextField } from "@mui/material";
+import { Button } from "@mui/material";
 import { FC, useState } from "react";
 import { ChangeProps } from "../EditUserSection";
 import { useSnackbar } from "@/context/SnackbarContext";
 import { useAuth } from "@/context/AuthContext";
 import { resetUserPassword } from "@/services/authService";
+import PasswordField from "@/components/common/PasswordField";
 
 const ChangePassword: FC<ChangeProps> = ({ onSuccess }) => {
   const { showSnackbar } = useSnackbar();
@@ -49,19 +50,19 @@ const ChangePassword: FC<ChangeProps> = ({ onSuccess }) => {
 
   return (
     <>
-      <TextField 
-        label="New Password" 
-        type="password" 
+      <PasswordField 
+        label={"New Password"} 
         value={newPassword} 
-        onChange={(e) => setNewPassword(e.target.value)}
-        fullWidth 
+        onChange={
+          (e) => setNewPassword(e.target.value)
+        }
       />
-      <TextField 
-        label="Confirm New Password" 
-        type="password" 
+      <PasswordField 
+        label={"Confirm New Password"} 
         value={confirmNewPassword} 
-        onChange={(e) => setConfirmNewPassword(e.target.value)}
-        fullWidth 
+        onChange={
+          (e) => setConfirmNewPassword(e.target.value)
+        }
       />
       <Button 
         variant="contained" 

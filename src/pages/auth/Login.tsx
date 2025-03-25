@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
 import { loginUser } from "@/services/authService";
 import { Welcome } from "@/components/Welcome";
+import PasswordField from "@/components/common/PasswordField";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -73,14 +74,12 @@ const Login = () => {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-          <TextField 
-            label="Password" 
-            type="password" 
-            fullWidth
-            margin="normal"
+          <PasswordField 
+            label={"Password"} 
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
+            onChange={
+              (e) => setPassword(e.target.value)
+            }
           />
 
           <FormControlLabel

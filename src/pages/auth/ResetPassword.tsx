@@ -1,6 +1,7 @@
+import PasswordField from "@/components/common/PasswordField";
 import { useSnackbar } from "@/context/SnackbarContext";
 import { resetUserPassword } from "@/services/authService";
-import { Button, TextField, Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { Container, Stack } from "@mui/system";
 import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -58,20 +59,20 @@ const ResetPassword = () => {
       <Container className="container-primary">
         <Typography variant="h2">Reset Password</Typography>
         <Typography variant="body1">Enter a new password for your account.</Typography>
-
-        <TextField 
-          label="New Password"
-          type="password"
+        
+        <PasswordField 
+          label={"New Password"} 
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          fullWidth
+          onChange={
+            (e) => setPassword(e.target.value)
+          }
         />
-        <TextField
-          label="Confirm Password"
-          type="password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          fullWidth
+        <PasswordField 
+          label={"Confirm New Password"} 
+          value={confirmPassword} 
+          onChange={
+            (e) => setConfirmPassword(e.target.value)
+          }
         />
         
         <Button variant="contained" color="primary" onClick={handleSubmit}>

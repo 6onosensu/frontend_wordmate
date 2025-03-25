@@ -1,3 +1,4 @@
+import PasswordField from "@/components/common/PasswordField";
 import { TextField, Box, Button } from "@mui/material";
 
 type SetState<T> = (value: T) => void;
@@ -35,23 +36,19 @@ const StepOne = ({
         onChange={(e) => setEmail(e.target.value)} 
         required 
       />
-      <TextField 
-        label="Password" 
-        type="password" 
-        fullWidth
-        margin="normal" 
-        value={password} 
-        onChange={(e) => setPassword(e.target.value)} 
-        required 
+      <PasswordField 
+        label={"Password"} 
+        value={password}
+        onChange={
+          (e) => setPassword(e.target.value)
+        }
       />
-      <TextField 
-        label="Confirm Password" 
-        type="password" 
-        fullWidth 
-        margin="normal" 
-        value={confirmPassword} 
-        onChange={(e) => setConfirmPassword(e.target.value)} 
-        required 
+      <PasswordField 
+        label={"Confirm Password"} 
+        value={confirmPassword}
+        onChange={
+          (e) => setConfirmPassword(e.target.value)
+        }
       />
 
       <Box sx={{ mt: 2, display: "flex", justifyContent: "center" }}>
