@@ -8,11 +8,13 @@ import { User } from "@/types/wordType";
 import { useSnackbar } from "@/context/SnackbarContext";
 import { updateUserProfile } from "@/services/authService";
 import InfoTextField from "@/components/common/InfoTextField";
+import { useUser } from "@/context/UserContext";
 
 const ChangeEmail: FC<ChangeProps> = ({ onSuccess }) => {
   const [email, setEmail] = useState("");
   const { token } = useAuth();
   const { showSnackbar } = useSnackbar();
+  const { refreshUser } = useUser();
 
   const authToken = token || "";
   
@@ -40,6 +42,7 @@ const ChangeEmail: FC<ChangeProps> = ({ onSuccess }) => {
       );
 
       if (res.success) {
+        await refreshUser();
         onSuccess();
       }
     } catch (error: any) {

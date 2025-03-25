@@ -9,6 +9,7 @@ import { useAuth } from "@/context/AuthContext";
 import EditUserSection from "./components/EditUserSection/EditUserSection";
 import SettingsSection from "./components/SettingsSection";
 import { useVisibility } from "@/context/VisibilityContext";
+import { UserProvider } from "@/context/UserContext";
 
 const Dashboard = () => {
   const { isSettingsVisible, isEditUserVisible } = useVisibility()
@@ -23,15 +24,17 @@ const Dashboard = () => {
 
   return (
     <Stack>
-      <Box>
-        <OverviewProfileSection />
-      </Box>
-
-      {isEditUserVisible && (
+      <UserProvider>
         <Box>
-          <EditUserSection />
+          <OverviewProfileSection />
         </Box>
-      )}
+
+        {isEditUserVisible && (
+          <Box>
+            <EditUserSection />
+          </Box>
+        )}
+      </UserProvider>
 
       {isSettingsVisible && (
         <Box>

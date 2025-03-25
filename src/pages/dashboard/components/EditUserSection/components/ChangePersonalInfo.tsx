@@ -8,6 +8,7 @@ import { User } from "@/types/wordType";
 import { useSnackbar } from "@/context/SnackbarContext";
 import { updateUserProfile } from "@/services/authService";
 import InfoTextField from "@/components/common/InfoTextField";
+import { useUser } from "@/context/UserContext";
 
 const ChangePersonalInfo: FC<ChangeProps> = ({ onSuccess }) => {
   const [name, setName] = useState("");
@@ -17,7 +18,8 @@ const ChangePersonalInfo: FC<ChangeProps> = ({ onSuccess }) => {
 
   const { token } = useAuth();
   const { showSnackbar } = useSnackbar();
-  
+  const { refreshUser } = useUser();
+
   const fetchUser = useCallback(() => fetchUserData(token!), [token]);
   const { data: user, loading } = useFetch<User>(fetchUser);
   
@@ -47,6 +49,7 @@ const ChangePersonalInfo: FC<ChangeProps> = ({ onSuccess }) => {
       );
 
       if (res.success) {
+        await refreshUser();
         onSuccess();
       }
     } catch (error: any) {
