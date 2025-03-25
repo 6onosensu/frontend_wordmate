@@ -6,6 +6,7 @@ import { Flashcard } from "./components/Flashcard";
 import { useAuth } from "@/context/AuthContext";
 import { updateUserWordRepetition } from "@/services/apiService";
 import ListenAndType from "./components/ListenAndType";
+import MeaningToWord from "./components/MeaningToWord";
 
 const LearningController = () => {
   const location = useLocation();
@@ -66,6 +67,8 @@ const LearningController = () => {
         return <Flashcard word={currentWord} onNext={() => handleNext(true)} />;
       case 1:
         return <ListenAndType word={currentWord} />;
+      case 2:
+        return <MeaningToWord word={currentWord} />;
       default:
         return null;
     }
