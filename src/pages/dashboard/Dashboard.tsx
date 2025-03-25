@@ -8,20 +8,26 @@ import { LearningStages } from "@/pages/dashboard/components/LearningStages/Lear
 import { useAuth } from "@/context/AuthContext";
 import EditUserSection from "./components/EditUserSection/EditUserSection";
 import SettingsSection from "./components/SettingsSection";
-import { useVisibility } from "@/context/VisibilityContext";
+import { useVisibility, VisibilityProvider } from "@/context/VisibilityContext";
 import { UserProvider } from "@/context/UserContext";
 
 const Dashboard = () => {
-  const { isSettingsVisible, isEditUserVisible } = useVisibility()
-  const navigate = useNavigate();
   const { token } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (!token) {
-      navigate("/");
-    }
+    if (!token) navigate("/");
   }, [navigate, token]);
 
+  return (
+    <VisibilityProvider>
+      <ActualDashboard />
+    </VisibilityProvider>
+  );
+};
+
+const ActualDashboard = () => {
+  const { isSettingsVisible, isEditUserVisible } = useVisibility();
   return (
     <Stack>
       <UserProvider>
@@ -47,7 +53,6 @@ const Dashboard = () => {
       <Box>
         <LearningStages />
       </Box>
-
     </Stack>
   );
 };

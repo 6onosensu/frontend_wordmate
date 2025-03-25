@@ -9,41 +9,35 @@ import AppRoutes from "@/routes/AppRoutes";
 import Footer from "@/components/common/Footer";
 import { Box } from "@mui/material";
 import { WordProvider } from "./context/WordContext";
-import { VisibilityProvider } from "./context/VisibilityContext";
 import { SnackbarProvider } from "./context/SnackbarContext";
 
-
 function App() {
-
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       {globalStyles}
+      
+      <BrowserRouter>
+        <SnackbarProvider>
+          <AuthProvider>
+            <WordProvider>
+              <Box sx={{
+                display: "flex",
+                flexDirection: "column", 
+                minHeight: "100vh"
+              }}>
+                <Header />
 
-      <AuthProvider>
-        <WordProvider>
-          <VisibilityProvider>
-            <SnackbarProvider>
-              <BrowserRouter>
-                <Box sx={{
-                  display: "flex",
-                  flexDirection: "column", 
-                  minHeight: "100vh"
-                }}>
-                  <Header />
-
-                  <Box sx={{ flex: 1 }}>
-                    <AppRoutes />
-                  </Box>
-                  
-                  <Footer />
+                <Box sx={{ flex: 1 }}>
+                  <AppRoutes />
                 </Box>
-            
-              </BrowserRouter>
-            </SnackbarProvider>
-          </VisibilityProvider>
-        </WordProvider>
-      </AuthProvider>
+                
+                <Footer />
+              </Box>
+            </WordProvider>
+          </AuthProvider>
+        </SnackbarProvider>
+      </BrowserRouter>
     </ThemeProvider>
   )
 }
