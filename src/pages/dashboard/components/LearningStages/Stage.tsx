@@ -1,9 +1,9 @@
 import { Box, Button, Container, Typography } from "@mui/material"
 import { UserWordTable } from "./UserWordTable";
-import { FC, useEffect } from "react";
+import { FC, useEffect, useMemo } from "react";
 import { useWords } from "@/context/WordContext";
-import { FormattedWord, UserWord } from "@/types/wordType";
 import { useNavigate } from "react-router-dom";
+import { formatUserWords } from "@/utils/formatUserWords";
 
 interface StageProps {
   stage: string;
@@ -13,42 +13,41 @@ interface StageProps {
 export const Stage: FC<StageProps> = ({ stage, title }) => {
   const { words, loadWords } = useWords();
   const navigate = useNavigate();
-
+  
   useEffect(() => {
     loadWords([stage]);
   }, [stage]);
   
-  const formattedWords: FormattedWord[]  = (
-    words[stage] || []
-  ).map((userWord: UserWord): FormattedWord => ({
-    id: userWord.id,
-    word: userWord.meaning.word.word ?? "Word is undefined",
-    audio: userWord?.meaning.word.audio ?? null,
-    definition: userWord.meaning.definition ?? "Definition is undefined",
-    partOfSpeech: userWord.meaning.partOfSpeech.title ?? "Part of speech is undefined",
-    synonyms: userWord?.meaning.synonyms ?? [],
-    antonyms: userWord?.meaning.antonyms ?? [],
-    example: userWord?.meaning.example ?? "No example available",
-    repetitionCount: userWord.repetitionCount,
-  }));
+  const formattedWords = useMemo(() => {
+    return formatUserWords(words[stage] || []);
+  }, [words, stage]);
 
   return (
-    <Container maxWidth="xs" id={title} className="container-primary">
-      <Box>
-        <Typography variant="h3">{stage}</Typography>
-      </Box>
-      <Box >
-        <UserWordTable data={formattedWords} />
-      </Box>
-      <Box>
-        <Button 
-          variant="contained" 
-          color="primary" 
-          onClick={() => navigate("/LearningPage", { state: { words: formattedWords, title } })}
-        >
-          {title}
-        </Button>
-      </Box>
-    </Container>
+    <Box sx={{ display: "flex" }}>
+      <Container maxWidth="xs" id={title} className="container-primary">
+        <Box>
+          <Typography variant="h3">{stage}</Typography>
+        </Box>
+        <Box >
+          <UserWordTable data={formattedWords} />
+        </Box>
+        <Box>
+          <Button 
+            variant="contained" 
+            color="primary" 
+            onClick={
+              () => navigate(
+                "/LearningPage", 
+                { 
+                  state: { words: formattedWords, title } 
+                }
+              )
+            }
+          >
+            {title}
+          </Button>
+        </Box>
+      </Container>
+    </Box>
   )
 }

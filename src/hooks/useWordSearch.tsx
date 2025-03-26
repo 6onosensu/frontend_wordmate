@@ -19,11 +19,11 @@ export const useWordSearch = () => {
     setData(null);
 
     try {
-      const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
-      if (!response.ok) {
+      const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
+      if (!res.ok) {
         throw new Error("Word not found");
       }
-      const result: DictionaryAPIResponse[] = await response.json();
+      const result: DictionaryAPIResponse[] = await res.json();
       setData(result[0]);
     } catch (err) {
       setError("Word not found, try another one.");
@@ -36,12 +36,7 @@ export const useWordSearch = () => {
     meaning: DictionaryAPIResponse["meanings"][number],
     definition: DictionaryAPIResponse["meanings"][number]["definitions"][number],
   ) => {
-    if (!token) {
-      console.error("No token found! User is not authenticated.");
-      return;
-    }
-
-    if (!data) return;
+    if (!token || !data) return;
 
     const word = data.word;
 
@@ -74,3 +69,4 @@ export const useWordSearch = () => {
 
   return { word, setWord, data, error, loading, handleSearch, handleAddDefinition };
 };
+
