@@ -1,10 +1,7 @@
 import { Button, } from "@mui/material"
-import { FC, useCallback, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { ChangeProps } from "../EditUserSection";
-import { fetchUserData } from "@/services/apiService";
 import { useAuth } from "@/context/AuthContext";
-import { useFetch } from "@/hooks/useFetch";
-import { User } from "@/types/wordType";
 import { useSnackbar } from "@/context/SnackbarContext";
 import { updateUserProfile } from "@/services/authService";
 import InfoTextField from "@/components/common/InfoTextField";
@@ -14,12 +11,7 @@ const ChangeEmail: FC<ChangeProps> = ({ onSuccess }) => {
   const [email, setEmail] = useState("");
   const { token } = useAuth();
   const { showSnackbar } = useSnackbar();
-  const { refreshUser } = useUser();
-
-  const authToken = token || "";
-  
-  const fetchUser = useCallback(() => fetchUserData(token!), [token]);
-  const { data: user, loading } = useFetch<User>(fetchUser);
+  const { user, refreshUser } = useUser();
   
   useEffect(() => {
     if (user?.email) {
@@ -34,7 +26,7 @@ const ChangeEmail: FC<ChangeProps> = ({ onSuccess }) => {
     }
 
     try {
-      const res = await updateUserProfile(authToken, { email });
+      const res = await updateUserProfile(token!, { email });
 
       showSnackbar(
         res.message, 
@@ -64,9 +56,8 @@ const ChangeEmail: FC<ChangeProps> = ({ onSuccess }) => {
         variant="contained" 
         color="secondary" 
         onClick={handleChangeEmail}
-        disabled={loading}
       >
-        {loading ? "Loading..." : "Update Email"}
+        Update Email
       </Button>
     </>
   )

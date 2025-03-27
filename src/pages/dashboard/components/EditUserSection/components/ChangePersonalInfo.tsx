@@ -1,10 +1,7 @@
 import { Button, TextField } from "@mui/material";
-import { FC, useCallback, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { ChangeProps } from "../EditUserSection";
 import { useAuth } from "@/context/AuthContext";
-import { fetchUserData } from "@/services/apiService";
-import { useFetch } from "@/hooks/useFetch";
-import { User } from "@/types/wordType";
 import { useSnackbar } from "@/context/SnackbarContext";
 import { updateUserProfile } from "@/services/authService";
 import InfoTextField from "@/components/common/InfoTextField";
@@ -19,10 +16,7 @@ const ChangePersonalInfo: FC<ChangeProps> = ({ onSuccess }) => {
 
   const { token } = useAuth();
   const { showSnackbar } = useSnackbar();
-  const { refreshUser } = useUser();
-
-  const fetchUser = useCallback(() => fetchUserData(token!), [token]);
-  const { data: user, loading } = useFetch<User>(fetchUser);
+  const { user, refreshUser } = useUser();
   
   useEffect(() => {
     if (user?.name || user?.pictureUrl || user?.countryName || user?.number) {
@@ -85,9 +79,8 @@ const ChangePersonalInfo: FC<ChangeProps> = ({ onSuccess }) => {
         variant="contained" 
         color="secondary" 
         onClick={handleProfileUpdate}
-        disabled={loading}
       >
-        {loading ? "Updating..." : "Update Profile"}
+        Update Profile
       </Button>
     </>
   )
