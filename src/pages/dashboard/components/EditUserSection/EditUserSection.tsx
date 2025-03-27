@@ -6,27 +6,38 @@ import ChangePersonalInfo from "./components/ChangePersonalInfo";
 import { useState } from "react";
 import CollapseButton from "@/components/common/CollapseButton";
 import { useVisibility } from "@/context/VisibilityContext";
-
-export interface ChangeProps {
-  onSuccess: () => void;
-}
+import { useEditProfile } from "@/hooks/useEditProfile";
 
 const EditUserSection = () => {
-  const { setIsEditUserVisible } = useVisibility();
   const [showChangePassword, setShowChangePassword] = useState(false);
   const [showChangeEmail, setShowChangeEmail] = useState(false);
   const [showChangePersonalInfo, setShowChangePersonalInfo] = useState(false);
+  
+  const { setIsEditUserVisible } = useVisibility();
+  const {
+    email, setEmail, updateEmail,
+    name, setName,
+    pictureUrl, setPictureUrl,
+    countryName, setCountryName,
+    number, setNumber,
+    newPassword, setNewPassword,
+    confirmPassword, setConfirmPassword,
+    updatePassword, updateUserInfo
+  } = useEditProfile();
 
-  const handleProfileUpdateSuccess = () => {
-    setShowChangePersonalInfo(false);
+  const handleEmailSubmit = async () => {
+    const success = await updateEmail();
+    if (success) setShowChangeEmail(false);
   };
 
-  const handlePasswordChangeSuccess = () => {
-    setShowChangePassword(false);
+  const handleInfoSubmit = async () => {
+    const success = await updateUserInfo();
+    if (success) setShowChangePersonalInfo(false);
   };
 
-  const handleEmailChangeSuccess = () => {
-    setShowChangeEmail(false);
+  const handlePasswordSubmit = async () => {
+    const success = await updatePassword();
+    if (success) setShowChangePassword(false);
   };
 
   return (
@@ -51,7 +62,17 @@ const EditUserSection = () => {
                 Change
               </Button>
             ) : (
-              <ChangePersonalInfo onSuccess={handleProfileUpdateSuccess} />
+              <ChangePersonalInfo 
+                name={name}
+                pictureUrl={pictureUrl}
+                country={countryName}
+                phone={number}
+                setName={setName}
+                setPictureUrl={setPictureUrl}
+                setCountry={setCountryName}
+                setPhone={setNumber}
+                onSubmit={handleInfoSubmit} 
+              />
             )}
           </Stack>
         </Grid>
@@ -68,7 +89,13 @@ const EditUserSection = () => {
                 Change
               </Button>
             ) : (
-              <ChangePassword onSuccess={handlePasswordChangeSuccess} />
+              <ChangePassword 
+                newPassword={newPassword}
+                confirmPassword={confirmPassword}
+                setNewPassword={setNewPassword}
+                setConfirmPassword={setConfirmPassword}
+                onSubmit={handlePasswordSubmit}
+              />
             )}
           </Stack>
         </Grid>
@@ -86,7 +113,11 @@ const EditUserSection = () => {
               </Button>
             ) : (
               <>
-                <ChangeEmail onSuccess={handleEmailChangeSuccess} />
+                <ChangeEmail 
+                  email={email}
+                  setEmail={setEmail}
+                  onSubmit={handleEmailSubmit}
+                />
                 <Typography variant="body2">
                   If you change your email, you will need to use the new email for future logins.
                 </Typography>
