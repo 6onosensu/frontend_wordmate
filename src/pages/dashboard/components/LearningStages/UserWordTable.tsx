@@ -1,4 +1,4 @@
-import { Table, TableBody, TableCell, TableContainer, TableRow, Typography } from "@mui/material"
+import { Box, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from "@mui/material"
 import { FC } from "react"
 import SvgButton from "@/components/common/SvgButton";
 import soundIcon from "@/assets/sound.svg";
@@ -16,7 +16,9 @@ export const UserWordTable: FC<UserWordTableProps> = ({ data }) => {
   return (
     <TableContainer sx={{ mt: 3 }}>
       {data.length === 0 ? (
-        <Typography variant="body2" align="center">No words to display!</Typography>
+        <Typography variant="body2" align="center">
+          No words to display!
+        </Typography>
       ) : (
         <Table>
           <TableBody>
@@ -35,13 +37,13 @@ export const UserWordTable: FC<UserWordTableProps> = ({ data }) => {
                 </TableCell>
               </TableRow>
             ))}
-            {hasMore && (
-              <TableRow>
-                <TableCell colSpan={3} align="center">. . .</TableCell>
-              </TableRow>
-            )}
           </TableBody>
         </Table>
+      )}
+      {hasMore && (
+        <Box sx={{ textAlign: "center" }}>
+          <Typography variant="h3">. . .</Typography>
+        </Box>
       )}
     </TableContainer>
   )

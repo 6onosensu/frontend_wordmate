@@ -8,15 +8,21 @@ import { playAudio } from "@/utils/audioUtils";
 interface FlashcardProps {
   word: FormattedWord;
   onNext: (isCorrect: boolean) => void;
+  onPrev: () => void;
 }
 
-export const Flashcard: FC<FlashcardProps> = ({ word, onNext }) => {
+export const Flashcard: FC<FlashcardProps> = ({ word, onNext, onPrev }) => {
   const [flipped, setFlipped] = useState(false);
 
   const handleNextClick = () => {
     setFlipped(false);
     onNext(true);
   };
+
+  const handlePrevClick = () => {
+    setFlipped(false);
+    onPrev();
+  }
 
   return (
     <Stack>
@@ -65,14 +71,22 @@ export const Flashcard: FC<FlashcardProps> = ({ word, onNext }) => {
           )}
         </CardContent>
       </Card>
-      
-      <Button 
-        variant="contained" 
-        color="primary" 
-        onClick={handleNextClick} 
-      >
-        Next
-      </Button>
+      <Stack direction="row" spacing={2} justifyContent="center">
+        <Button 
+          variant="contained" 
+          color="secondary" 
+          onClick={handlePrevClick} 
+        >
+          Back
+        </Button>
+        <Button 
+          variant="contained" 
+          color="primary" 
+          onClick={handleNextClick} 
+        >
+          Next
+        </Button>
+      </Stack>
     </Stack>
   )
 }
