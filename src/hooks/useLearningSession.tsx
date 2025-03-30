@@ -2,8 +2,8 @@ import { useAuth } from "@/context/AuthContext";
 import { Flashcard } from "@/pages/learning/components/Flashcard";
 import ListenAndType from "@/pages/learning/components/ListenAndType";
 import MeaningToWord from "@/pages/learning/components/MeaningToWord";
-import { updateUserWordRepetition } from "@/services/apiService";
 import { FormattedWord } from "@/types/wordType";
+import { moveToNextWordOrExit, updateRepetitionIfCorrect } from "@/utils/learningSession";
 import { Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom"
@@ -45,27 +45,16 @@ const useLearningSession = () => {
   const handleNext = async (isCorrect?: boolean) => {
     if (!currentWord || words.length === 0) return;
 
-    const updatedWords = [...words];
+    await updateRepetitionIfCorrect(
+      Boolean(isCorrect),
+      currentWord,
+      currentIndex,
+      words,
+      token!,
+      setWords
+    );
 
-    if (isCorrect && token) {
-      const updatedCount = currentWord.repetitionCount + 1;
-      try {
-        await updateUserWordRepetition(currentWord.id, updatedCount, token);
-        updatedWords[currentIndex] = {
-          ...currentWord,
-          repetitionCount: updatedCount,
-        };
-        setWords(updatedWords);
-      } catch (error) {
-        console.error("Error updating repetitionCount:", error);
-      }
-    }
-
-    if (currentIndex < words.length - 1) {
-      setCurrentIndex((prev) => prev + 1);
-    } else {
-      navigate("/dashboard");
-    }
+    moveToNextWordOrExit(currentIndex, words, setCurrentIndex, navigate);
   };
 
   const renderPhase = () => {
