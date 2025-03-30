@@ -83,9 +83,19 @@ const useLearningSession = () => {
           />
         );
       case 1:
-        return <ListenAndType word={currentWord}/>;
+        return (
+          <ListenAndType 
+            word={currentWord}
+            onNext={() => handleNext(true)}
+          />
+        );
       case 2:
-        return <MeaningToWord word={currentWord}/>;
+        return (
+          <MeaningToWord 
+            word={currentWord}
+            onNext={() => handleNext(true)}
+          />
+        );
       default:
         return null;
     }

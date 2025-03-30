@@ -2,19 +2,23 @@ import SvgButton from "@/components/common/SvgButton";
 import { FormattedWord } from "@/types/wordType";
 import { playAudio } from "@/utils/audioUtils";
 import { Button, TextField, Typography } from "@mui/material";
-import { FC, useState } from "react";
+import { FC } from "react";
 import Sound from "@assets/sound.svg";
 import { Container } from "@mui/system";
+import useListenAndType from "@/hooks/useListenAndType";
 
 interface ListenAndTypeProps {
   word: FormattedWord;
+  onNext: (isCorrect: boolean) => void;
 }
 
-const ListenAndType: FC<ListenAndTypeProps> = ({ word }) => {
-  const [input, setInput] = useState("");
-
-  const handleSubmit = () => {
-  };
+const ListenAndType: FC<ListenAndTypeProps> = ({ word, onNext }) => {
+  const {
+    input,
+    feedback,
+    handleInputChange,
+    handleSubmit
+  } = useListenAndType(word, onNext);
 
   return (
     <Container className="container-primary">
@@ -34,9 +38,20 @@ const ListenAndType: FC<ListenAndTypeProps> = ({ word }) => {
       <TextField
         label="Your Answer"
         value={input}
-        onChange={(e) => setInput(e.target.value)}
+        onChange={handleInputChange}
         sx={{ width: "35%"}}
       />
+
+      {feedback === "correct" && (
+        <Typography variant="h6" color="success.main" sx={{ mt: 1 }}>
+          Correct!
+        </Typography>
+      )}
+      {feedback === "incorrect" && (
+        <Typography variant="h6" color="error.main" sx={{ mt: 1 }}>
+          Incorrect. Try again.
+        </Typography>
+      )}      
       
       <Button 
         variant="contained" 
