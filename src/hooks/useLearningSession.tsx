@@ -2,6 +2,7 @@ import { useAuth } from "@/context/AuthContext";
 import { Flashcard } from "@/pages/learning/components/Flashcard";
 import ListenAndType from "@/pages/learning/components/ListenAndType";
 import MeaningToWord from "@/pages/learning/components/MeaningToWord";
+import WordToAudio from "@/pages/learning/components/WordToAudio";
 import { FormattedWord } from "@/types/wordType";
 import { moveToNextWordOrExit, updateRepetitionIfCorrect } from "@/utils/learningSession";
 import { Typography } from "@mui/material";
@@ -85,6 +86,15 @@ const useLearningSession = () => {
             onNext={() => handleNext(true)}
           />
         );
+      case 3:
+        return (
+          <WordToAudio 
+            word={currentWord}
+            onNext={() => handleNext(true)}
+          />
+        );
+      case 4:
+        return;
       default:
         return null;
     }

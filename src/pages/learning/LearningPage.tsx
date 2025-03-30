@@ -24,7 +24,7 @@ const LearningPage = () => {
     <Stack>
       <Typography variant="h2">Review Your Words:</Typography>
       <Container className="container-primary">
-        {words.length > 2 ? (
+        {words.length > 0 ? (
           <Table>
             <TableBody>
               {words.slice(0, 10).map((word: FormattedWord, index: number) => (
@@ -83,7 +83,7 @@ const LearningPage = () => {
           </Table>
         ) : ( 
           <Typography variant="h5">
-            Your word list has 0 or less than 3 words!
+            Your word list has 0 words!
             <MuiLink component={RouterLink} to="/dashboard#search">Add more here</MuiLink>
           </Typography>
         )}
@@ -92,11 +92,11 @@ const LearningPage = () => {
         variant="contained" 
         color="primary" 
         onClick={
-          () => words.length > 3 ? navigate("/LearningController", 
+          () => words.length > 0 ? navigate("/LearningController", 
           { state: { words } }) : navigate("/dashboard")
         }
       >
-        {words.length > 2 ? title : "Go Back"}
+        {words.length > 0 ? title : "Go Back"}
       </Button>
     </Stack>
   );
