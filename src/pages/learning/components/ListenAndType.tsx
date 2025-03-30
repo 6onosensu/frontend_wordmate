@@ -4,8 +4,8 @@ import { Button, TextField, Typography } from "@mui/material";
 import { FC } from "react";
 import Sound from "@assets/sound.svg";
 import { Container } from "@mui/system";
-import useListenAndType from "@/hooks/useListenAndType";
 import { ListenAndTypeProps } from "@/types/learningComponentsProps";
+import useCheckInputAnswer from "@/hooks/useCheckInputAnswer";
 
 const ListenAndType: FC<ListenAndTypeProps> = ({ word, onNext }) => {
   const {
@@ -13,7 +13,7 @@ const ListenAndType: FC<ListenAndTypeProps> = ({ word, onNext }) => {
     feedback,
     handleInputChange,
     handleSubmit
-  } = useListenAndType(word, onNext);
+  } = useCheckInputAnswer(word, onNext);
 
   return (
     <Container className="container-primary">

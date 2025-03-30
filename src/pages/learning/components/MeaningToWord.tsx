@@ -10,7 +10,7 @@ const MeaningToWord: FC<MeaningToWordProps> = ({ word, onNext }) => {
     feedback, 
     handleInputChange, 
     handleSubmit 
-  } = useCheckInputAnswer(word.word, onNext);
+  } = useCheckInputAnswer(word, onNext);
 
   return (
     <Container className="container-primary">

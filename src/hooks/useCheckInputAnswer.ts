@@ -2,7 +2,7 @@ import { ChangeEvent, useState } from "react";
 import { FormattedWord } from "@/types/wordType";
 import { checkAnswer } from "@/utils/checkAnswer";
 
-const useMeaningToWord = (
+const useCheckInputAnswer = (
   word: FormattedWord,
   onNext: (isCorrect: boolean) => void
 ) => {
@@ -23,7 +23,7 @@ const useMeaningToWord = (
         setInput("");
         setFeedback(null);
         onNext(true);
-      }, 2000);
+      }, 1000);
     } else {
       setFeedback("incorrect");
     }
@@ -37,4 +37,4 @@ const useMeaningToWord = (
   };
 };
 
-export default useMeaningToWord;
+export default useCheckInputAnswer;
