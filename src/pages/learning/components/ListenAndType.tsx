@@ -1,16 +1,11 @@
 import SvgButton from "@/components/common/SvgButton";
-import { FormattedWord } from "@/types/wordType";
 import { playAudio } from "@/utils/audioUtils";
 import { Button, TextField, Typography } from "@mui/material";
 import { FC } from "react";
 import Sound from "@assets/sound.svg";
 import { Container } from "@mui/system";
 import useListenAndType from "@/hooks/useListenAndType";
-
-interface ListenAndTypeProps {
-  word: FormattedWord;
-  onNext: (isCorrect: boolean) => void;
-}
+import { ListenAndTypeProps } from "@/types/learningComponentsProps";
 
 const ListenAndType: FC<ListenAndTypeProps> = ({ word, onNext }) => {
   const {

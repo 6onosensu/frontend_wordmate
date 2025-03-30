@@ -1,16 +1,13 @@
-import { FormattedWord } from "@/types/wordType";
 import { Button, TextField, Typography } from "@mui/material";
 import { FC, useState } from "react";
 import { Container } from "@mui/system";
+import { MeaningToWordProps } from "@/types/learningComponentsProps";
 
-interface MeaningToWordProps {
-  word: FormattedWord;
-}
-
-const MeaningToWord: FC<MeaningToWordProps> = ({ word }) => {
+const MeaningToWord: FC<MeaningToWordProps> = ({ word, onNext }) => {
   const [input, setInput] = useState("");
 
   const handleSubmit = () => {
+    onNext(true);
   };
 
   return (

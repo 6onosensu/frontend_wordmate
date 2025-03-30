@@ -1,15 +1,9 @@
 import SvgButton from "@/components/common/SvgButton";
-import { FormattedWord } from "@/types/wordType";
 import { Box, Button, Card, CardContent, Stack, Typography } from "@mui/material";
 import { FC, useState } from "react";
 import Sound from "@assets/sound.svg";
 import { playAudio } from "@/utils/audioUtils";
-
-interface FlashcardProps {
-  word: FormattedWord;
-  onNext: (isCorrect: boolean) => void;
-  onPrev: () => void;
-}
+import { FlashcardProps } from "@/types/learningComponentsProps";
 
 export const Flashcard: FC<FlashcardProps> = ({ word, onNext, onPrev }) => {
   const [flipped, setFlipped] = useState(false);
