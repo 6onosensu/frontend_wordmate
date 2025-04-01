@@ -1,24 +1,22 @@
 import { Button, Stack, Typography, Container, Table, TableRow, TableCell, TableBody  } from "@mui/material";
-import { useLocation, useNavigate } from "react-router-dom";
 import { playAudio } from "@/utils/audioUtils";
 import SvgButton from "@/components/common/SvgButton";
 import Sound from "@/assets/sound.svg";
 import { FormattedWord } from "@/types/wordType";
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { Link as MuiLink } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
+import useLearningPage from "@/hooks/useLearningPage";
 
 
 const LearningPage = () => {
-  const location = useLocation();
-  const title = location.state?.title;
-  const words: FormattedWord[] = location.state?.words || [];
-  const navigate = useNavigate();
-  const [expandedRow, setExpandedRow] = useState<number | null>(null);
-
-  const handleRowClick = (index: number) => {
-    setExpandedRow(expandedRow === index ? null : index);
-  };
+  const {
+    words,
+    title,
+    expandedRow,
+    handleRowClick,
+    handleNavigate,
+  } = useLearningPage();
 
   return (
     <Stack>
@@ -91,10 +89,7 @@ const LearningPage = () => {
       <Button
         variant="contained" 
         color="primary" 
-        onClick={
-          () => words.length > 0 ? navigate("/LearningController", 
-          { state: { words } }) : navigate("/dashboard")
-        }
+        onClick={handleNavigate}
       >
         {words.length > 0 ? title : "Go Back"}
       </Button>
