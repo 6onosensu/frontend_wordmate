@@ -42,13 +42,13 @@ interface PartOfSpeech {
   title: string;
 }
 
-interface Word {
+export interface Word {
   id: number;
   word: string;
   audio?: string | null;
 }
 
-interface Meaning {
+export interface Meaning {
   id: number;
   definition: string;
   example?: string | null;

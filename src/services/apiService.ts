@@ -53,3 +53,13 @@ export const updateUserWordRepetition = async (
     { repetitionCount }
   );
 }
+
+export const getRandomWords = async (
+  count: number,
+  token: string,
+): Promise<[]> => {
+  return fetchWithAuth(
+    `/meanings/random?count=${count}`, 
+    token
+  );
+}

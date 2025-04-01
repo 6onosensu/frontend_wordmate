@@ -10,6 +10,7 @@ import Footer from "@/components/common/Footer";
 import { Box } from "@mui/material";
 import { WordProvider } from "./context/WordContext";
 import { SnackbarProvider } from "./context/SnackbarContext";
+import { RandomWordsProvider } from "./context/RandomWordsContext";
 
 function App() {
   return (
@@ -21,19 +22,21 @@ function App() {
         <SnackbarProvider>
           <AuthProvider>
             <WordProvider>
-              <Box sx={{
-                display: "flex",
-                flexDirection: "column", 
-                minHeight: "100vh"
-              }}>
-                <Header />
+              <RandomWordsProvider>
+                <Box sx={{
+                  display: "flex",
+                  flexDirection: "column", 
+                  minHeight: "100vh"
+                }}>
+                  <Header />
 
-                <Box sx={{ flex: 1 }}>
-                  <AppRoutes />
+                  <Box sx={{ flex: 1 }}>
+                    <AppRoutes />
+                  </Box>
+                  
+                  <Footer />
                 </Box>
-                
-                <Footer />
-              </Box>
+              </RandomWordsProvider>
             </WordProvider>
           </AuthProvider>
         </SnackbarProvider>
