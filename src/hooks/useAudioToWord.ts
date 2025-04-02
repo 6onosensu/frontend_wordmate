@@ -1,33 +1,35 @@
 import { FormattedWord } from "@/types/wordType";
-import { useChoiceAnswer } from "./useChoiceAnswer";
 import { useRandomWords } from "@/context/RandomWordsContext";
-import { getValidRandomAudio } from "@/utils/random/getValidRandomAudio";
+import { useChoiceAnswer } from "./useChoiceAnswer";
+import { getValidRandomWords } from "@/utils/random/getValidRandomWords";
 import useGenerateOptions from "./useGenerateOptions";
 
-const useWordToAudio = (
+const useAudioToWord = (
   word: FormattedWord,
   onNext: (isCorrect: boolean) => void
 ) => {
   const { randomWords } = useRandomWords();
 
-  const { 
-    options, 
-    correctIndex 
-  } = useGenerateOptions( 
-    word, randomWords,
-    getValidRandomAudio, 3
+  const { options, correctIndex } = useGenerateOptions(
+    word,
+    randomWords,
+    getValidRandomWords,
+    3
   );
-  
+
   const { 
     selectedIndex, 
-    handleChoice 
+    handleChoice, 
+    resetChoice 
   } = useChoiceAnswer(correctIndex, onNext);
 
   return {
     options,
+    selectedIndex,
+    correctIndex,
     handleSelect: handleChoice,
-    selectedIndex
+    resetChoice,
   };
 };
 
-export default useWordToAudio;
+export default useAudioToWord;

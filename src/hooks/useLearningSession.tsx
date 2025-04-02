@@ -1,4 +1,5 @@
 import { useAuth } from "@/context/AuthContext";
+import AudioToWord from "@/pages/learning/components/AudioToWord";
 import { Flashcard } from "@/pages/learning/components/Flashcard";
 import ListenAndType from "@/pages/learning/components/ListenAndType";
 import MeaningToWord from "@/pages/learning/components/MeaningToWord";
@@ -94,7 +95,12 @@ const useLearningSession = () => {
           />
         );
       case 4:
-        return;
+        return (
+          <AudioToWord
+            word={currentWord}
+            onNext={() => handleNext(true)}
+          />
+        );
       default:
         return null;
     }

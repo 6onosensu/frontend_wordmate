@@ -1,5 +1,5 @@
 import { Box, MenuItem, TextField } from "@mui/material";
-import { countries } from "@/utils/countries";
+import { countries } from "@/utils/data/countries";
 import InfoTextField from "./InfoTextField";
 import { ChangeEvent } from "react";
 

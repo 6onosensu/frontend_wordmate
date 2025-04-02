@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState, ReactNode } from "react
 import { FormattedWord } from "@/types/wordType";
 import { getRandomWords } from "@/services/apiService";
 import { useAuth } from "./AuthContext";
-import { formatMeanings } from "@/utils/formatMeanings";
+import { formatMeanings } from "@/utils/format/formatMeanings";
 
 interface RandomWordsContextType {
   randomWords: FormattedWord[];

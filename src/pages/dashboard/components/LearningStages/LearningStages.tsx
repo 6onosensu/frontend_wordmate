@@ -1,6 +1,6 @@
 import { Box } from "@mui/material"
 import { Stage } from "./Stage"
-import { stages } from "@/utils/stages"
+import { stages } from "@/utils/data/stages"
 
 export const LearningStages = () => {
   return (

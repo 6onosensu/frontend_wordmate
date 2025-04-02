@@ -7,13 +7,25 @@ export const useChoiceAnswer = (
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
   const handleChoice = (index: number) => {
+    if (selectedIndex !== null) return;
     setSelectedIndex(index);
     const isCorrect = index === correctIndex;
-    console.log(isCorrect);
-    setTimeout(() => {
-      onNext(isCorrect);
-    }, 1000);
+    if (isCorrect) {
+      setTimeout(() => {
+        onNext(true);
+        setSelectedIndex(null);
+      }, 700);
+    }
   };
 
-  return { selectedIndex, handleChoice };
+  const resetChoice = () => {
+    setSelectedIndex(null);
+    onNext(false);
+  };
+
+  return { 
+    selectedIndex, 
+    handleChoice,
+    resetChoice, 
+  };
 };

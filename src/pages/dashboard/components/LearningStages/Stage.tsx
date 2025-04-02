@@ -3,7 +3,7 @@ import { UserWordTable } from "./UserWordTable";
 import { FC, useEffect, useMemo } from "react";
 import { useWords } from "@/context/WordContext";
 import { useNavigate } from "react-router-dom";
-import { formatUserWords } from "@/utils/formatUserWords";
+import { formatUserWords } from "@/utils/format/formatUserWords";
 
 interface StageProps {
   stage: string;
