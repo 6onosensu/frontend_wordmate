@@ -1,4 +1,4 @@
-import useLearningSession from "@/hooks/useLearningSession";
+import useLearningSession from "@/hooks/learning/useLearningSession";
 import { Button, Stack, Typography } from "@mui/material";
 
 const LearningController = () => {

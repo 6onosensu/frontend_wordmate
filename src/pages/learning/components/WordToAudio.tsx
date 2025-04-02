@@ -4,7 +4,7 @@ import SvgButton from "@/components/common/SvgButton";
 import SoundIcon from "@/assets/sound.svg";
 import { WordToAudioProps } from "@/types/learningComponentsProps";
 import { playAudio } from "@/utils/audioUtils";
-import useWordToAudio from "@/hooks/useWordToAudio";
+import useWordToAudio from "@/hooks/learning/useWordToAudio";
 
 const WordToAudio: FC<WordToAudioProps> = ({ word, onNext }) => {
   const { options, handleSelect } = useWordToAudio(word, onNext);

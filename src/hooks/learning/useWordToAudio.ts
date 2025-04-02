@@ -1,8 +1,8 @@
 import { FormattedWord } from "@/types/wordType";
-import { useChoiceAnswer } from "./useChoiceAnswer";
+import { useChoiceAnswer } from "@hooks/learning/logic/useChoiceAnswer";
 import { useRandomWords } from "@/context/RandomWordsContext";
 import { getValidRandomAudio } from "@/utils/random/getValidRandomAudio";
-import useGenerateOptions from "./useGenerateOptions";
+import useGenerateOptions from "@/hooks/learning/logic/useGenerateOptions";
 
 const useWordToAudio = (
   word: FormattedWord,

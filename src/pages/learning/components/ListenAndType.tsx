@@ -5,7 +5,7 @@ import { FC } from "react";
 import Sound from "@assets/sound.svg";
 import { Container } from "@mui/system";
 import { ListenAndTypeProps } from "@/types/learningComponentsProps";
-import useCheckInputAnswer from "@/hooks/useCheckInputAnswer";
+import useCheckInputAnswer from "@/hooks/learning/logic/useCheckInputAnswer";
 
 const ListenAndType: FC<ListenAndTypeProps> = ({ word, onNext }) => {
   const {
