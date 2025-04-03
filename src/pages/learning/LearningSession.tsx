@@ -1,7 +1,7 @@
 import useLearningSession from "@/hooks/learning/useLearningSession";
 import { Button, Stack, Typography } from "@mui/material";
 
-const LearningController = () => {
+const LearningSession = () => {
   const { words, content, handleExit } = useLearningSession();
 
   return (
@@ -37,4 +37,4 @@ const LearningController = () => {
   )
 }
 
-export default LearningController;
+export default LearningSession;

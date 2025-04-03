@@ -4,7 +4,7 @@ import Register from "@/pages/auth/Register";
 import Dashboard from "@/pages/dashboard/Dashboard";
 import { Search } from "@/pages/Search";
 import LearningPage from "@/pages/learning/LearningPage";
-import LearningController from "@/pages/learning/LearningController";
+import LearningSession from "@/pages/learning/LearningSession";
 import ForgotPassword from "@/pages/auth/ForgotPassword";
 import ResetPassword from "@/pages/auth/ResetPassword";
 import ProtectedRouteWrapper from "./ProtectedRouteWrapper";
@@ -21,7 +21,7 @@ const AppRoutes = () => {
       <Route element={<ProtectedRouteWrapper />}>
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/learningPage" element={<LearningPage />} />
-        <Route path="/learningController" element={<LearningController />} />
+        <Route path="/learningSession" element={<LearningSession />} />
       </Route>
     </Routes>
   );

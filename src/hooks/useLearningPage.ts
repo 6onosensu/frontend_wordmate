@@ -19,7 +19,7 @@ const useLearningPage = () => {
 
   const handleNavigate = () => {
     if (words.length > 0) {
-      navigate("/LearningController", { 
+      navigate("/LearningSession", { 
         state: { words } 
       });
     } else {
