@@ -12,7 +12,6 @@ export interface MeaningBase {
   antonyms?: string[] | null;
 }
 
-
 export interface FormattedWord extends BaseWord, MeaningBase {
   id: number;
   partOfSpeech: string;
@@ -32,7 +31,6 @@ export interface Meaning extends MeaningBase {
   partOfSpeech: PartOfSpeech;
   word: Word; 
 }
-
 
 interface Status {
   id: number;
