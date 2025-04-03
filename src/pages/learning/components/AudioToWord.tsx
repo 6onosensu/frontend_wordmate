@@ -3,11 +3,11 @@ import { Container, Typography, Button, Stack, Card } from "@mui/material";
 import SvgButton from "@/components/common/SvgButton";
 import SoundIcon from "@/assets/sound.svg";
 import { playAudio } from "@/utils/audioUtils";
-import { AudioToWordProps } from "@/types/learningComponentsProps";
+import { LearningBaseProps } from "@/types/learningComponentsProps";
 import useAudioToWord from "@/hooks/learning/useAudioToWord";
 import { getFeedbackColor } from "@/utils/getFeedbackColor";
 
-const AudioToWord: FC<AudioToWordProps> = ({ word, onNext }) => {
+const AudioToWord: FC<LearningBaseProps> = ({ word, onNext }) => {
   const {
     options,
     selectedIndex,
@@ -52,14 +52,14 @@ const AudioToWord: FC<AudioToWordProps> = ({ word, onNext }) => {
             </Card>
         ))}
       </Stack>
-        <Button
-          variant="contained"
-          color="secondary"
-          sx={{ mt: 5 }}
-          onClick={resetChoice}
-        >
-          Skip
-        </Button>
+      <Button
+        variant="contained"
+        color="secondary"
+        sx={{ mt: 5 }}
+        onClick={resetChoice}
+      >
+        Skip
+      </Button>
     </Container>
   );
 };

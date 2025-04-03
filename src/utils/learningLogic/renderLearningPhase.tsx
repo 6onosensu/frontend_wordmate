@@ -6,9 +6,10 @@ import AudioToWord from "@/pages/learning/components/AudioToWord";
 import { Typography } from "@mui/material";
 import { FormattedWord } from "@/types/wordType";
 import { isAudioTaskWithoutAudio } from "@/utils/learningLogic/audioTaskUtils";
+import WordToMeaning from "@/pages/learning/components/WordToMeaning";
 
 export const renderLearningPhase = (
-  word: FormattedWord | undefined,
+  word: FormattedWord,
   handlePrev: () => void,
   handleNext: (isCorrect?: boolean) => void
 ) => {
@@ -32,33 +33,38 @@ export const renderLearningPhase = (
       );
     case 1:
       return (
-        <ListenAndType 
+        <WordToAudio 
           word={word} 
           onNext={() => handleNext(true)} 
         />
       );
     case 2:
       return (
-        <MeaningToWord 
+        <AudioToWord 
           word={word} 
           onNext={() => handleNext(true)} 
         />
       );
     case 3:
       return (
-        <WordToAudio 
+        <MeaningToWord 
           word={word} 
           onNext={() => handleNext(true)} 
         />
       );
     case 4:
       return (
-        <AudioToWord 
+        <ListenAndType 
           word={word} 
           onNext={() => handleNext(true)} 
         />
       );
-    default:
-      return null;
+    case 5:
+      return (
+        <WordToMeaning 
+          word={word} 
+          onNext={() => handleNext(true)} 
+        />
+      );
   }
 };

@@ -27,7 +27,7 @@ const LearningSession = () => {
             variant="contained" 
             color="info" 
             onClick={handleExit}
-            sx={{ mt: 2 }}
+            sx={{ mt: 5 }}
           >
             Exit
           </Button>
