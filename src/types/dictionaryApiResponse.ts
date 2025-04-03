@@ -12,5 +12,7 @@ export interface DictionaryAPIResponse {
       synonyms: string[];
       antonyms: string[];
     }[];
+    synonyms: string[];
+    antonyms: string[];
   }[];
 }

@@ -20,12 +20,10 @@ export const useWordSearch = () => {
 
     try {
       const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
-      if (!res.ok) {
-        throw new Error("Word not found");
-      }
+      if (!res.ok) throw new Error("Word not found");
       const result: DictionaryAPIResponse[] = await res.json();
       setData(result[0]);
-    } catch (err) {
+    } catch {
       setError("Word not found, try another one.");
     } finally {
       setLoading(false);
@@ -38,8 +36,6 @@ export const useWordSearch = () => {
   ) => {
     if (!token || !data) return;
 
-    const word = data.word;
-
     let audio = null;
     if (data.phonetics) {
       for (const phonetic of data.phonetics) {
@@ -51,15 +47,22 @@ export const useWordSearch = () => {
     }
     
     const formattedData = {
-      word: word,
-      audio: audio,
+      word: data.word,
+      audio,
       partOfSpeech: meaning.partOfSpeech, 
       definition: definition.definition, 
       example: definition.example || null,
-      synonyms: definition.synonyms || [],
-      antonyms: definition.antonyms || []
+      synonyms: Array.from(new Set([
+        ...(definition.synonyms || []),
+        ...(meaning.synonyms || [])
+      ])),
+      antonyms: Array.from(new Set([
+        ...(definition.antonyms || []),
+        ...(meaning.antonyms || [])
+      ])),
+      
     };
-
+    console.info(formattedData.synonyms, "Antonyms: ", formattedData.antonyms);
     try {
       await saveUserWord(formattedData, token);
     } catch (err) {
@@ -67,6 +70,14 @@ export const useWordSearch = () => {
     }
   };
 
-  return { word, setWord, data, error, loading, handleSearch, handleAddDefinition };
+  return { 
+    word, 
+    setWord, 
+    data, 
+    error, 
+    loading, 
+    handleSearch, 
+    handleAddDefinition 
+  };
 };
 
