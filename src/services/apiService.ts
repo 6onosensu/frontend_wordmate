@@ -1,4 +1,4 @@
-import { FormattedDataType } from "@/types/wordType";
+import { saveNewWordType } from "@/types/wordType";
 
 const API_BASE_URL = "http://localhost:3000";
 
@@ -35,7 +35,7 @@ export const fetchUserWordsByStatus = (status: string, token: string) => {
 }
 
 export const saveUserWord = async (
-  wordData: FormattedDataType, 
+  wordData: saveNewWordType, 
   token: string
 ) => {
   return fetchWithAuth("/userWords/", token, "POST", wordData);

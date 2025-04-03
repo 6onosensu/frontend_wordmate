@@ -1,6 +1,6 @@
 import { useAuth } from "@/context/AuthContext";
 import { saveUserWord } from "@/services/apiService";
-import { DictionaryAPIResponse } from "@/types/wordType";
+import { DictionaryAPIResponse } from "@/types/dictionaryApiResponse";
 import { useState } from "react";
 
 export const useWordSearch = () => {

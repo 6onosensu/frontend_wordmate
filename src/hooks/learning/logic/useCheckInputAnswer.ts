@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from "react";
 import { FormattedWord } from "@/types/wordType";
-import { checkAnswer } from "@/utils/checkAnswer";
+import { checkAnswer } from "@/utils/learningLogic/checkAnswer";
 
 const useCheckInputAnswer = (
   word: FormattedWord,

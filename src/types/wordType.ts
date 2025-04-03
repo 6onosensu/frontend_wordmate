@@ -1,36 +1,38 @@
-export interface DictionaryAPIResponse {
-  word: string;
-  phonetics: { text?: string; audio?: string }[];
-  meanings: {
-    partOfSpeech: string;
-    definitions: {
-      definition: string;
-      example?: string;
-      synonyms: string[];
-      antonyms: string[];
-    }[];
-  }[];
-}
+import { User } from "./userType";
 
-export interface FormattedDataType {
+export interface BaseWord {
   word: string;
   audio?: string | null;
-  partOfSpeech: string;
-  definition: string;
-  example?: string | null;
-  synonyms?: string[];
-  antonyms?: string[];
 }
 
-export interface User {
-  id: number;
-  name: string;
-  email: string;
-  password: string;
-  countryName?: string;
-  number?: string;
-  pictureUrl?: string;
+export interface MeaningBase {
+  definition: string;
+  example?: string | null;
+  synonyms?: string[] | null;
+  antonyms?: string[] | null;
 }
+
+
+export interface FormattedWord extends BaseWord, MeaningBase {
+  id: number;
+  partOfSpeech: string;
+  repetitionCount: number;
+}
+
+export interface saveNewWordType extends BaseWord, MeaningBase {
+  partOfSpeech: string;
+}
+
+export interface Word extends BaseWord {
+  id: number;
+}
+
+export interface Meaning extends MeaningBase {
+  id: number;
+  partOfSpeech: PartOfSpeech;
+  word: Word; 
+}
+
 
 interface Status {
   id: number;
@@ -40,22 +42,6 @@ interface Status {
 interface PartOfSpeech {
   id: number;
   title: string;
-}
-
-export interface Word {
-  id: number;
-  word: string;
-  audio?: string | null;
-}
-
-export interface Meaning {
-  id: number;
-  definition: string;
-  example?: string | null;
-  synonyms?: number[] | null;
-  antonyms?: number[] | null;
-  partOfSpeech: PartOfSpeech;
-  word: Word; 
 }
 
 export interface UserWord {
@@ -69,16 +55,4 @@ export interface UserWord {
   meaning: Meaning; 
   status: Status;
   user: User;
-}
-
-export interface FormattedWord {
-  id: number;
-  word: string;
-  audio?: string | null;
-  definition: string;
-  partOfSpeech: string;
-  synonyms?: number[] | null;
-  antonyms?: number[] | null;
-  example?: string | null;
-  repetitionCount: number;
 }

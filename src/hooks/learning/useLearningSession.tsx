@@ -5,7 +5,8 @@ import ListenAndType from "@/pages/learning/components/ListenAndType";
 import MeaningToWord from "@/pages/learning/components/MeaningToWord";
 import WordToAudio from "@/pages/learning/components/WordToAudio";
 import { FormattedWord } from "@/types/wordType";
-import { moveToNextWordOrExit, updateRepetitionIfCorrect } from "@/utils/learningSession";
+import { isAudioTaskWithoutAudio } from "@/utils/learningLogic/audioTaskUtils";
+import { moveToNextWordOrExit, updateRepetitionIfCorrect } from "@/utils/learningLogic/learningSession";
 import { Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom"
@@ -63,6 +64,12 @@ const useLearningSession = () => {
     if (!currentWord) {
       return <Typography variant="h5">Word not found</Typography>;
     }
+
+    if (isAudioTaskWithoutAudio(currentWord)) {
+      handleNext(true);
+      return null;
+    }
+  
 
     switch (currentWord.repetitionCount) {
       case 0:
