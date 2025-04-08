@@ -23,7 +23,7 @@ const useCheckInputAnswer = (
         setInput("");
         setFeedback(null);
         onNext(true);
-      }, 1000);
+      }, 700);
     } else {
       setFeedback("incorrect");
     }

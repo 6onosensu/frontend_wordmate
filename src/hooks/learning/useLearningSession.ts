@@ -27,41 +27,32 @@ const useLearningSession = () => {
 
   const currentWord = words[currentIndex];
 
-  
   const handleExit = () => {
     if (window.confirm("Are you sure you want to exit?")) {
       navigate("/dashboard");
     }
   }
 
-  const handlePrev = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex((prev) => prev - 1);
-    }
-  }
-
   const handleNext = async (isCorrect?: boolean) => {
+    if (!token) return;
     if (!currentWord || words.length === 0) return;
 
     await updateRepetitionIfCorrect(
       Boolean(isCorrect),
-      currentWord,
-      currentIndex,
-      words,
-      token!,
+      currentWord, currentIndex, words, token,
       setWords
     );
 
-    moveToNextWordOrExit(currentIndex, words, setCurrentIndex, navigate);
+    moveToNextWordOrExit(
+      currentIndex, words, 
+      setCurrentIndex, navigate
+    );
   };
 
   return {
-    words,
-    currentWord,
-    handlePrev,
-    handleNext,
-    handleExit,
-    content: renderLearningPhase(currentWord, handlePrev, handleNext)
+    words, currentWord,
+    handleNext, handleExit,
+    content: renderLearningPhase(currentWord, handleNext)
   };
 }
 export default useLearningSession;

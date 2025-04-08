@@ -1,19 +1,20 @@
 import { FC } from "react";
-import { Container, Typography, Button, Stack, Card } from "@mui/material";
+import { Container, Typography, Button, Card } from "@mui/material";
 import SvgButton from "@/components/common/SvgButton";
 import SoundIcon from "@/assets/sound.svg";
 import { playAudio } from "@/utils/audioUtils";
 import { LearningBaseProps } from "@/types/learningComponentsProps";
-import useAudioToWord from "@/hooks/learning/useAudioToWord";
+import useAudioToWord from "@/hooks/learning/options/useAudioToWord";
 import { getFeedbackColor } from "@/utils/getFeedbackColor";
+import Grid from "@mui/system/Grid/Grid";
 
 const AudioToWord: FC<LearningBaseProps> = ({ word, onNext }) => {
   const {
     options,
     selectedIndex,
     correctIndex,
+    disabled,
     handleSelect,
-    resetChoice,
   } = useAudioToWord(word, onNext);
 
   return (
@@ -28,35 +29,36 @@ const AudioToWord: FC<LearningBaseProps> = ({ word, onNext }) => {
         onClick={() => { playAudio(word.audio) }}
       />
 
-      <Stack spacing={2} direction={"row"} mt={3}>
+      <Grid container spacing={3} sx={{ mx: 5, my: 3}}>
         {options.map((option, index) => (
+          <Grid key={index} size={6}>
             <Card
+              variant="outlined"
               key={index}
               sx={{ 
-                px: 8, 
-                py: 1.5, 
-                width: "100%",
                 backgroundColor: getFeedbackColor(
                   selectedIndex, 
                   correctIndex, 
                   index
                 ),
-                cursor: "pointer",
-                transition: "0.3s",
-               }}
-              onClick={() => handleSelect(index)}
+                cursor: disabled ? "not-allowed" : "pointer",
+                opacity: disabled ? 0.6 : 1,
+                }}
+              onClick={() => !disabled && handleSelect(index)}
             >
               <Typography variant="h2">
                 {option.word}
               </Typography>
             </Card>
+          </Grid>
         ))}
-      </Stack>
+      </Grid>
+      
       <Button
         variant="contained"
         color="secondary"
         sx={{ mt: 5 }}
-        onClick={resetChoice}
+        onClick={() => onNext(false)}
       >
         Skip
       </Button>

@@ -1,7 +1,7 @@
 import { useRandomWords } from "@/context/RandomWordsContext";
 import { FormattedWord } from "@/types/wordType";
-import { useChoiceAnswer } from "./logic/useChoiceAnswer";
-import useGenerateOptions from "./logic/useGenerateOptions";
+import { useChoiceAnswer } from "../logic/useChoiceAnswer";
+import useGenerateOptions from "./useGenerateOptions";
 import getValidRandomMeaning from "@/utils/random/getValidRandomMeaning";
 
 const useWordToMeaning = (
@@ -10,26 +10,18 @@ const useWordToMeaning = (
 ) => {
   const { randomWords } = useRandomWords();
 
-  const { 
-    options, 
-    correctIndex 
-  } = useGenerateOptions( 
+  const { options, correctIndex } = useGenerateOptions( 
     word, randomWords,
     getValidRandomMeaning, 3
   );
   
   const { 
-    selectedIndex, 
-    handleChoice,
-    resetChoice 
+    selectedIndex, disabled, handleChoice,
   } = useChoiceAnswer(correctIndex, onNext);
 
   return {
-    options,
-    selectedIndex,
-    correctIndex,
+    options, selectedIndex, correctIndex, disabled,
     handleSelect: handleChoice,
-    resetChoice,
   }; 
 }
 export default useWordToMeaning;

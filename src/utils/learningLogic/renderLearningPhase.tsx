@@ -10,7 +10,6 @@ import WordToMeaning from "@/pages/learning/components/WordToMeaning";
 
 export const renderLearningPhase = (
   word: FormattedWord,
-  handlePrev: () => void,
   handleNext: (isCorrect?: boolean) => void
 ) => {
   if (!word) {
@@ -27,7 +26,6 @@ export const renderLearningPhase = (
       return (
         <Flashcard 
           word={word} 
-          onPrev={handlePrev} 
           onNext={() => handleNext(true)} 
         />
       );
@@ -65,6 +63,10 @@ export const renderLearningPhase = (
           word={word} 
           onNext={() => handleNext(true)} 
         />
+      );
+    case 6:
+      return (
+        <></>
       );
   }
 };

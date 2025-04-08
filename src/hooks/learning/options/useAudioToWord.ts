@@ -2,7 +2,7 @@ import { FormattedWord } from "@/types/wordType";
 import { useRandomWords } from "@/context/RandomWordsContext";
 import { useChoiceAnswer } from "@hooks/learning/logic/useChoiceAnswer";
 import { getValidRandomWords } from "@/utils/random/getValidRandomWords";
-import useGenerateOptions from "@/hooks/learning/logic/useGenerateOptions";
+import useGenerateOptions from "@/hooks/learning/options/useGenerateOptions";
 
 const useAudioToWord = (
   word: FormattedWord,
@@ -11,24 +11,17 @@ const useAudioToWord = (
   const { randomWords } = useRandomWords();
 
   const { options, correctIndex } = useGenerateOptions(
-    word,
-    randomWords,
-    getValidRandomWords,
-    3
+    word, randomWords,
+    getValidRandomWords, 3
   );
 
   const { 
-    selectedIndex, 
-    handleChoice, 
-    resetChoice 
+    selectedIndex, disabled, handleChoice, 
   } = useChoiceAnswer(correctIndex, onNext);
 
   return {
-    options,
-    selectedIndex,
-    correctIndex,
+    options, selectedIndex, correctIndex, disabled,
     handleSelect: handleChoice,
-    resetChoice,
   };
 };
 

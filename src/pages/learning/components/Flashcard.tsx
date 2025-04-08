@@ -3,20 +3,15 @@ import { Box, Button, Card, CardContent, Stack, Typography } from "@mui/material
 import { FC, useState } from "react";
 import Sound from "@assets/sound.svg";
 import { playAudio } from "@/utils/audioUtils";
-import { FlashcardProps } from "@/types/learningComponentsProps";
+import { LearningBaseProps } from "@/types/learningComponentsProps";
 
-export const Flashcard: FC<FlashcardProps> = ({ word, onNext, onPrev }) => {
+export const Flashcard: FC<LearningBaseProps> = ({ word, onNext }) => {
   const [flipped, setFlipped] = useState(false);
 
   const handleNextClick = () => {
     setFlipped(false);
     onNext(true);
   };
-
-  const handlePrevClick = () => {
-    setFlipped(false);
-    onPrev();
-  }
 
   return (
     <Stack>
@@ -66,13 +61,6 @@ export const Flashcard: FC<FlashcardProps> = ({ word, onNext, onPrev }) => {
         </CardContent>
       </Card>
       <Stack direction="row" spacing={2} justifyContent="center">
-        <Button 
-          variant="contained" 
-          color="secondary" 
-          onClick={handlePrevClick} 
-        >
-          Back
-        </Button>
         <Button 
           variant="contained" 
           color="primary" 
