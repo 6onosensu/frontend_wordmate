@@ -4,10 +4,10 @@ import { Button, TextField, Typography } from "@mui/material";
 import { FC } from "react";
 import Sound from "@assets/sound.svg";
 import { Container } from "@mui/system";
-import { ListenAndTypeProps } from "@/types/learningComponentsProps";
+import { LearningBaseProps } from "@/types/learningComponentsProps";
 import useCheckInputAnswer from "@/hooks/learning/logic/useCheckInputAnswer";
 
-const ListenAndType: FC<ListenAndTypeProps> = ({ word, onNext }) => {
+const ListenAndType: FC<LearningBaseProps> = ({ word, onNext }) => {
   const {
     input,
     feedback,

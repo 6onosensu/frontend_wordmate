@@ -2,11 +2,11 @@ import { FC } from "react";
 import { Container, Typography, Button, Stack, Card } from "@mui/material";
 import SvgButton from "@/components/common/SvgButton";
 import SoundIcon from "@/assets/sound.svg";
-import { WordToAudioProps } from "@/types/learningComponentsProps";
+import { LearningBaseProps } from "@/types/learningComponentsProps";
 import { playAudio } from "@/utils/audioUtils";
 import useWordToAudio from "@/hooks/learning/useWordToAudio";
 
-const WordToAudio: FC<WordToAudioProps> = ({ word, onNext }) => {
+const WordToAudio: FC<LearningBaseProps> = ({ word, onNext }) => {
   const { options, handleSelect } = useWordToAudio(word, onNext);
 
   return (

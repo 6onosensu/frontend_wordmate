@@ -10,6 +10,3 @@ interface WithPrevProps {
 }
 
 export type FlashcardProps = LearningBaseProps & WithPrevProps;
-export type ListenAndTypeProps = LearningBaseProps;
-export type MeaningToWordProps = LearningBaseProps;
-export type WordToAudioProps = LearningBaseProps;

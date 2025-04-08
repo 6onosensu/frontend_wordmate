@@ -1,10 +1,10 @@
 import { Button, TextField, Typography } from "@mui/material";
 import { FC } from "react";
 import { Container } from "@mui/system";
-import { MeaningToWordProps } from "@/types/learningComponentsProps";
+import { LearningBaseProps } from "@/types/learningComponentsProps";
 import useCheckInputAnswer from "@/hooks/learning/logic/useCheckInputAnswer";
 
-const MeaningToWord: FC<MeaningToWordProps> = ({ word, onNext }) => {
+const MeaningToWord: FC<LearningBaseProps> = ({ word, onNext }) => {
   const { 
     input, 
     feedback, 
