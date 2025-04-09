@@ -4,7 +4,7 @@ import { Container } from "@mui/system";
 import { LearningBaseProps } from "@/types/learningComponentsProps";
 import useCheckInputAnswer from "@/hooks/learning/logic/useCheckInputAnswer";
 
-const MeaningToWord: FC<LearningBaseProps> = ({ word, onNext }) => {
+const MeaningAndTypeWord: FC<LearningBaseProps> = ({ word, onNext }) => {
   const { 
     input, 
     feedback, 
@@ -46,4 +46,4 @@ const MeaningToWord: FC<LearningBaseProps> = ({ word, onNext }) => {
   );
 };
 
-export default MeaningToWord;
+export default MeaningAndTypeWord;

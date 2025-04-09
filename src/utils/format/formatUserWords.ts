@@ -11,5 +11,6 @@ export const formatUserWords = (rawWords: UserWord[]): FormattedWord[] => {
     antonyms: word.meaning.antonyms ?? [],
     example: word.meaning.example ?? "-",
     repetitionCount: word.repetitionCount,
+    status: word.status.status,
   }));
 };

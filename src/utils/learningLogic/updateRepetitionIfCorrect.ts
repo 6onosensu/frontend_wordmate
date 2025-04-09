@@ -11,7 +11,6 @@ export const updateRepetitionIfCorrect = async (
 ) => {
   if (!isCorrect || !token) return;
   const updatedCount = currentWord.repetitionCount + 1;
-  console.info(updatedCount);
 
   try {
     await updateUserWordRepetition(currentWord.id, updatedCount, token);

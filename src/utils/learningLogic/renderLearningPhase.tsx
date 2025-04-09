@@ -1,6 +1,6 @@
 import { Flashcard } from "@/pages/learning/components/Flashcard";
 import ListenAndType from "@/pages/learning/components/ListenAndType";
-import MeaningToWord from "@/pages/learning/components/MeaningToWord";
+import MeaningAndTypeWord from "@/pages/learning/components/MeaningAndTypeWord";
 import WordToAudio from "@/pages/learning/components/WordToAudio";
 import AudioToWord from "@/pages/learning/components/AudioToWord";
 import { Typography } from "@mui/material";
@@ -16,12 +16,22 @@ export const renderLearningPhase = (
     return <Typography variant="h5">Word not found</Typography>;
   }
 
+  const { repetitionCount, status } = word;
+  const statusTitle = status?.toLowerCase();
+  const isLimitedFlow = statusTitle === "to refresh";
+  const skipPhases = [0, 1, 2];
+  
+  if (isLimitedFlow && skipPhases.includes(repetitionCount)) {
+    handleNext(true);
+    return null;
+  }
+
   if (isAudioTaskWithoutAudio(word)) {
     handleNext(true);
     return null;
   }
 
-  switch (word.repetitionCount) {
+  switch (repetitionCount) {
     case 0:
       return (
         <Flashcard 
@@ -45,7 +55,7 @@ export const renderLearningPhase = (
       );
     case 3:
       return (
-        <MeaningToWord 
+        <MeaningAndTypeWord 
           word={word} 
           onNext={() => handleNext(true)} 
         />
@@ -68,5 +78,7 @@ export const renderLearningPhase = (
       return (
         <></>
       );
+    default:
+      return null;
   }
 };
