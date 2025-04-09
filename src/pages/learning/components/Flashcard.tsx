@@ -5,7 +5,7 @@ import Sound from "@assets/sound.svg";
 import { playAudio } from "@/utils/audioUtils";
 import { LearningBaseProps } from "@/types/learningComponentsProps";
 
-export const Flashcard: FC<LearningBaseProps> = ({ word, onNext }) => {
+const Flashcard: FC<LearningBaseProps> = ({ word, onNext }) => {
   const [flipped, setFlipped] = useState(false);
 
   const handleNextClick = () => {
@@ -72,3 +72,4 @@ export const Flashcard: FC<LearningBaseProps> = ({ word, onNext }) => {
     </Stack>
   )
 }
+export default Flashcard;
