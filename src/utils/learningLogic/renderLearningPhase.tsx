@@ -11,7 +11,7 @@ export const renderLearningPhase = (
   word: FormattedWord,
   handleNext: (isCorrect?: boolean) => void
 ) => {
-  if (!word) return <Typography variant="h5">Word not found</Typography>;
+  if (!word) return <Typography variant="h6">Word not found</Typography>;
 
   const { repetitionCount, status } = word;
   const statusTitle = status?.toLowerCase();

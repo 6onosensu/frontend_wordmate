@@ -23,7 +23,7 @@ const useLearningSession = () => {
       );
       setWords(shuffled);
     }
-  }, [location.state?.words])
+  }, [location.state])
 
   const currentWord = words[currentIndex];
 
