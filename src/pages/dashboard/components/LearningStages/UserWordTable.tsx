@@ -14,19 +14,15 @@ export const UserWordTable: FC<UserWordTableProps> = ({ data }) => {
   const hasMore = data.length > 10;
 
   return (
-    <TableContainer sx={{ mt: 3 }}>
-      {data.length === 0 ? (
-        <Typography variant="body2" align="center">
-          No words to display!
-        </Typography>
-      ) : (
+    <Box sx={{ width: "100%", transition: "width 0.3s ease" }}>
+      <TableContainer sx={{ mt: 3, overflow: "visible", maxHeight: "none" }}>
         <Table>
           <TableBody>
             {displayedWords.map((wordData, index) => (
               <TableRow key={index}>
-                <TableCell>{wordData.word}</TableCell> 
-                <TableCell>{wordData.definition}</TableCell>
-                <TableCell>
+                <TableCell sx={{ width: "25%" }}>{wordData.word}</TableCell> 
+                <TableCell sx={{ width: "65%" }}>{wordData.definition}</TableCell>
+                <TableCell sx={{ width: "10%" }}>
                   {wordData.audio && 
                     <SvgButton 
                       iconSrc={soundIcon}
@@ -39,12 +35,12 @@ export const UserWordTable: FC<UserWordTableProps> = ({ data }) => {
             ))}
           </TableBody>
         </Table>
-      )}
-      {hasMore && (
-        <Box sx={{ textAlign: "center" }}>
-          <Typography variant="h3">. . .</Typography>
-        </Box>
-      )}
-    </TableContainer>
+        {hasMore && (
+          <Box sx={{ textAlign: "center" }}>
+            <Typography variant="h3">. . .</Typography>
+          </Box>
+        )}
+      </TableContainer>
+    </Box>
   )
 }

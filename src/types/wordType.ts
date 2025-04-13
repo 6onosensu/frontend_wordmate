@@ -16,7 +16,6 @@ export interface FormattedWord extends BaseWord, MeaningBase {
   id: number;
   partOfSpeech: string;
   repetitionCount: number;
-  status: string;
 }
 
 export interface saveNewWordType extends BaseWord, MeaningBase {

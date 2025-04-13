@@ -1,4 +1,5 @@
 import { useAuth } from "@/context/AuthContext";
+import { useWords } from "@/context/WordContext";
 import { saveUserWord } from "@/services/apiService";
 import { DictionaryAPIResponse } from "@/types/dictionaryApiResponse";
 import { useState } from "react";
@@ -8,7 +9,8 @@ export const useWordSearch = () => {
   const [data, setData] = useState<DictionaryAPIResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  
+
+  const { refreshWords } = useWords();
   const { token } = useAuth();
 
   const handleSearch = async () => {
@@ -19,7 +21,9 @@ export const useWordSearch = () => {
     setData(null);
 
     try {
-      const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
+      const res = await fetch(
+        `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
+      );
       if (!res.ok) throw new Error("Word not found");
       const result: DictionaryAPIResponse[] = await res.json();
       setData(result[0]);
@@ -62,9 +66,10 @@ export const useWordSearch = () => {
       ])),
       
     };
-    console.info(formattedData.synonyms, "Antonyms: ", formattedData.antonyms);
+    
     try {
       await saveUserWord(formattedData, token);
+      await refreshWords("To Explore");
     } catch (err) {
       console.error("Error saving word:", err);
     }
@@ -80,4 +85,3 @@ export const useWordSearch = () => {
     handleAddDefinition 
   };
 };
-

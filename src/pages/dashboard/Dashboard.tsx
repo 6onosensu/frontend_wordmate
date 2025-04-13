@@ -2,7 +2,6 @@ import { Box } from "@mui/material";
 import Stack from '@mui/material/Stack';
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import OverviewProfileSection from "@/pages/dashboard/components/OverviewSection/OverviewProfileSection";
 import WordSearch from "@/pages/dashboard/components/WordSearch/WordSearch";
 import { LearningStages } from "@/pages/dashboard/components/LearningStages/LearningStages";
 import { useAuth } from "@/context/AuthContext";
@@ -10,6 +9,7 @@ import EditUserSection from "./components/EditUserSection/EditUserSection";
 import SettingsSection from "./components/SettingsSection";
 import { useVisibility, VisibilityProvider } from "@/context/VisibilityContext";
 import { UserProvider } from "@/context/UserContext";
+import OverviewProfileSection from "./components/OverviewSection/OverviewProfileSection";
 
 const Dashboard = () => {
   const { token } = useAuth();
@@ -28,6 +28,7 @@ const Dashboard = () => {
 
 const ActualDashboard = () => {
   const { isSettingsVisible, isEditUserVisible } = useVisibility();
+
   return (
     <Stack>
       <UserProvider>
