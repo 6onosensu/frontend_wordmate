@@ -7,8 +7,10 @@ export const LearningStages = () => {
     <Box 
       display="flex" 
       gap={1} 
-      justifyContent="center" 
-      alignItems="flex-start"
+      alignItems="start"
+      justifyContent="center"
+      width="100%"
+      flexWrap="nowrap"
     >
       {stages.map(({ key, title }) => (
         <Stage key={key} stageKey={key} title={title} />

@@ -3,9 +3,15 @@ export const getContainerWidth = (
   totalStagesWithWords: number,
   maxLength: number
 ): string => {
-  if (currentLength === 0) return "22%";
-  if (currentLength === maxLength) return "45%";
-  if (totalStagesWithWords <= 1) return "35%";
-  if (totalStagesWithWords === 2) return "30%";
+  const isEmpty = currentLength === 0;
+  if (isEmpty) return "22%";
+
+  const isMax = currentLength === maxLength;
+  if (isMax && totalStagesWithWords === 3) return "45%";
+  if (!isMax && totalStagesWithWords === 3) return "33%";
+
+  if (totalStagesWithWords === 2) return isMax ? "40%" : "30%";
+  if (totalStagesWithWords === 1) return "52%";
+
   return "33%";
 };

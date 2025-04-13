@@ -16,7 +16,7 @@ export const Stage: FC<StageProps> = ({ stageKey, title }) => {
     containerWidth, 
     loading 
   } = useStageData(stageKey);
-  
+
   return (
     <Container 
       className="container-primary"
@@ -24,6 +24,7 @@ export const Stage: FC<StageProps> = ({ stageKey, title }) => {
       sx={{
         height: "auto", 
         width: containerWidth,
+        minWidth: "100px",
         transition: "width 0.3s ease"
       }} 
     >
