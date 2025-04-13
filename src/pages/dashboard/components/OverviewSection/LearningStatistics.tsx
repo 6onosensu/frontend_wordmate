@@ -1,16 +1,10 @@
 import { Box, CircularProgress, Table, TableBody, TableCell, TableHead, TableRow, Typography } from "@mui/material";
 import { useWords } from "@/context/WordContext";
-import { useEffect } from "react";
-
-const stages = ["To Explore", "To Refresh", "Retained"];
+import { stages } from "@/utils/data/stages";
 
 const LearningStatistics = () => {
-  const { words, loadWords, loading } = useWords();
+  const { words, loading } = useWords();
   const cellStyle = { textAlign: "center", paddingLeft: 0 };
-
-  useEffect(() => {
-    loadWords();
-  }, [words]); 
 
   return (
     <Box sx={{ textAlign: "center" }}>
@@ -18,8 +12,8 @@ const LearningStatistics = () => {
       <Table>
         <TableHead>
           <TableRow>
-            {stages.map((header) => (
-              <TableCell key={header} sx={cellStyle}>{header}</TableCell>
+            {stages.map((stage) => (
+              <TableCell key={stage.key} sx={cellStyle}>{stage.key}</TableCell>
             ))}
           </TableRow>
         </TableHead>
@@ -32,9 +26,9 @@ const LearningStatistics = () => {
             </TableRow>
           ) : (
             <TableRow>
-              {stages.map((status) => (
-                <TableCell key={status} sx={cellStyle}>
-                  {words?.[status]?.length ?? 0}
+              {stages.map((stage) => (
+                <TableCell key={stage.key} sx={cellStyle}>
+                  {words?.[stage.key]?.length ?? 0}
                 </TableCell>
               ))}
             </TableRow>
