@@ -39,10 +39,7 @@ const WordToAudio: FC<LearningBaseProps> = ({ word, onNext }) => {
                   correctIndex, 
                   index
                 ),
-                cursor: disabled ? "not-allowed" : "pointer",
-                opacity: disabled ? 0.6 : 1,
-                }}
-              onClick={() => !disabled && handleSelect(index)}
+              }}
             >
               <SvgButton
                 iconSrc={SoundIcon}

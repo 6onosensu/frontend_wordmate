@@ -17,7 +17,7 @@ const LearningPage = () => {
     handleRowClick,
     handleNavigate,
   } = useLearningPage();
-
+  console.table(words)
   return (
     <Stack>
       <Typography variant="h2">Review Your Words:</Typography>
@@ -59,19 +59,34 @@ const LearningPage = () => {
                       <TableCell colSpan={4}>
                         {word.example && (
                           <Typography variant="body2">
-                            <strong>Example:</strong> {word.example}
+                            <strong>Example: </strong> 
+                            "{word.example}"
                           </Typography>
                         )}
-                        {word.synonyms?.length ? (
+
+                        {(word.synonyms ?? [])?.length > 0 && (
                           <Typography variant="body2">
-                            <strong>Synonyms:</strong> {word.synonyms.join(", ")}
+                            <strong>Synonyms: </strong>
+                            {(word.synonyms ?? []).map((syn, i) => (
+                              <span key={i}>
+                                {syn}
+                                {i < (word.synonyms?.length ?? 0) - 1 ? ", " : ""}
+                              </span>
+                            ))}
                           </Typography>
-                        ) : null}
-                        {word.antonyms?.length ? (
+                        )}
+
+                        {(word.antonyms ?? [])?.length > 0 && (
                           <Typography variant="body2">
-                            <strong>Antonyms:</strong> {word.antonyms.join(", ")}
+                            <strong>Antonyms: </strong> 
+                            {(word.antonyms ?? []).map((ant, i) => (
+                              <span key={i}>
+                                {ant}
+                                {i < (word.antonyms?.length ?? 0) - 1 ? ", " : ""}
+                              </span>
+                            ))}
                           </Typography>
-                        ) : null}
+                        )}
                       </TableCell>
                     </TableRow>
                   )}

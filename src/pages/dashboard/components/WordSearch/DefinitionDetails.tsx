@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Box, Typography, Divider } from "@mui/material";
-import { DictionaryAPIResponse } from "@/types/wordType";
+import { DictionaryAPIResponse } from "@/types/dictionaryApiResponse";
 
 interface DefinitionDetailsProps {
   meaning: DictionaryAPIResponse["meanings"][number];

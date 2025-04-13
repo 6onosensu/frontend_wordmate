@@ -4,7 +4,7 @@ import {
 } from "@mui/material";
 import addIcon from "@/assets/add.svg";
 import SvgButton from "@/components/common/SvgButton";
-import { DictionaryAPIResponse } from "@/types/wordType";
+import { DictionaryAPIResponse } from "@/types/dictionaryApiResponse";
 import DefinitionDetails from "./DefinitionDetails";
 import { useSnackbar } from "@/context/SnackbarContext";
 

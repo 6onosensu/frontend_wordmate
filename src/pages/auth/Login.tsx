@@ -23,7 +23,6 @@ const Login = () => {
 
     try {
       const token = await loginUser(email, password);
-      console.log("Token received:", token);
       login(token, rememberMe);
       navigate("/dashboard");
     }
