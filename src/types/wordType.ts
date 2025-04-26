@@ -29,18 +29,14 @@ export interface Word extends BaseWord {
 
 export interface Meaning extends MeaningBase {
   id: number;
-  partOfSpeech: PartOfSpeech;
-  word: Word; 
+  partOfSpeech: string;
+  word: string; 
+  audio?: string | null;
 }
 
 interface Status {
   id: number;
   status: string;
-}
-
-interface PartOfSpeech {
-  id: number;
-  title: string;
 }
 
 export interface UserWord {

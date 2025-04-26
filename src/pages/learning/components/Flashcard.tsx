@@ -21,7 +21,7 @@ const Flashcard: FC<LearningBaseProps> = ({ word, onNext }) => {
       <Card
         sx={{ 
           width: "100vh", height: "60vh",
-          px: 10, py: 5, m: 5, 
+          px: 5, py: 5, m: 5, 
           textAlign: "center" 
         }}
         onClick={() => setFlipped(!flipped)}

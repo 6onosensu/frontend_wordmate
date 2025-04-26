@@ -6,7 +6,6 @@ import {
   WordToMeaning, WordToAudio, AudioToWord,
 } from "@/pages/learning/components/index";
 
-
 export const renderLearningPhase = (
   word: FormattedWord,
   handleNext: (isCorrect?: boolean) => void
@@ -16,7 +15,7 @@ export const renderLearningPhase = (
   const { repetitionCount, status } = word;
   const statusTitle = status?.toLowerCase();
   const isLimitedFlow = statusTitle === "to refresh";
-  const skipPhases = [0, 1, 2];
+  const skipPhases = [1, 2];
 
   if (isLimitedFlow && skipPhases.includes(repetitionCount)) {
     handleNext(true);
@@ -70,10 +69,6 @@ export const renderLearningPhase = (
           word={word} 
           onNext={() => handleNext(true)} 
         />
-      );
-    case 6:
-      return (
-        <></>
       );
     default:
       return null;

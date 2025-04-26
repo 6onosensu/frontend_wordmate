@@ -17,7 +17,6 @@ const LearningPage = () => {
     handleRowClick,
     handleNavigate,
   } = useLearningPage();
-  console.table(words)
   return (
     <Stack>
       <Typography variant="h2">Review Your Words:</Typography>
