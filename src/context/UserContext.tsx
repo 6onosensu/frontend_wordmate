@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { fetchUserData } from "@/services/apiService";
 import { useAuth } from "./AuthContext";
-import { User } from "@/types/wordType";
+import { User } from "@/types/userType";
 import { useSnackbar } from "./SnackbarContext";
 
 interface UserContextType {
